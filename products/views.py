@@ -3,6 +3,8 @@ from .models import Category, SubCategory, Product
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
+    all_categories = Category.objects.all()
+    all_subcategories = SubCategory.objects.all()
     category = None
     subcategory = None
     if category_slug != None:
@@ -20,6 +22,8 @@ def all_products(request, category_slug=None, subcategory_slug=None):
         "products": products_list,
         "subcategory": subcategory,
         "category": category,
+        "categories": all_categories,
+        "subcategories": all_subcategories,
     }
     return render(request, "products/products.html", context)
 

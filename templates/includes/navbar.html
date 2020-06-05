@@ -18,7 +18,7 @@
       class="navbar-burger burger"
       aria-label="menu"
       aria-expanded="false"
-      data-target="navbarBasicExample"
+      data-target="navbar"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -29,7 +29,7 @@
   <div
     x-bind:class="{ 'is-active': open }"
     @click.away="open = false"
-    id="navbarBasicExample"
+    id="navbar"
     class="navbar-menu"
   >
     <div class="navbar-start">
@@ -50,92 +50,19 @@
         >
           <div class="container is-fluid">
             <div class="columns">
-              <div class="column">
-                <h1 class="title is-6 is-mega-menu-title">Drones</h1>
-                <hr class="navbar-divider" />
-                <a class="navbar-item" href="#">
-                  Complete DIY kits
-                </a>
-                <a class="navbar-item" href="#">
-                  Fixed Wing
-                </a>
-                <a class="navbar-item" href="#">
-                  <p>Pre-built Quadcopters</p>
-                </a>
-              </div>
-              <div class="column">
-                <h1 class="title is-6 is-mega-menu-title">FPV equipment</h1>
-                <hr class="navbar-divider" />
-                <a class="navbar-item" href="#">
-                  Cameras
-                </a>
-                <a class="navbar-item" href="#">
-                  Displays & goggles
-                </a>
-                <a class="navbar-item" href="#">
-                  Transmitters and recievers
-                </a>
-                <a class="navbar-item" href="#">
-                  Accesories
-                </a>
-              </div>
-              <div class="column">
-                <h1 class="title is-6 is-mega-menu-title">RC equipment</h1>
-                <hr class="navbar-divider" />
-                <a class="navbar-item" href="#">
-                  <div class="navbar-content">
-                    Transmitters
-                  </div>
-                </a>
-                <a class="navbar-item" href="#">
-                  <div class="navbar-content">
-                    Receivers
-                  </div>
-                </a>
-                <a class="navbar-item" href="#">
-                  <div class="navbar-content">
-                    Accessories
-                  </div>
-                </a>
-              </div>
-              <div class="column">
-                <h1 class="title is-6 is-mega-menu-title">Quadcopter Parts</h1>
-                <hr class="navbar-divider" />
-                <a class="navbar-item" href="#">
-                  Motors
-                </a>
-                <a class="navbar-item" href="#">
-                  ESC
-                </a>
-                <a class="navbar-item" href="#">
-                  Flight Controllers
-                </a>
-                <a class="navbar-item" href="#">
-                  Batteries
-                </a>
-                <a class="navbar-item" href="#">
-                  Props
-                </a>
-                <a class="navbar-item" href="#">
-                  Accesories
-                </a>
-              </div>
-              <div class="column">
-                <h1 class="title is-6 is-mega-menu-title">Frames</h1>
-                <hr class="navbar-divider" />
-                <a class="navbar-item" href="#">
-                  Freestyle
-                </a>
-                <a class="navbar-item" href="#">
-                  Racing
-                </a>
-                <a class="navbar-item" href="#">
-                  Multirotor
-                </a>
-                <a class="navbar-item" href="#">
-                  Beginner
-                </a>
-              </div>
+              {% for category in categories %}
+                <div class="column">
+                  <a class="navbar-item" href="{{category.slug}}"><h1 class="title is-6 is-mega-menu-title">{{category.name}}</h1></a>
+                  <hr class="navbar-divider" />
+                  {% for subcategory in subcategories %}
+                  {% if subcategory.category == category %}
+                    <a class="navbar-item" href="{{category.slug}}/{{subcategory.slug}}">
+                      {{subcategory.name}}
+                    </a>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+              {% endfor %}
             </div>
           </div>
 
