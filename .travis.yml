@@ -1,0 +1,11 @@
+language: python
+before_install:
+  - pip install --upgrade pip
+  - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+  - export PATH="$HOME/.poetry/bin:$PATH"
+  - poetry export --without-hashes --format=requirements.txt > requirements.txt
+script:
+  - coverage run --source='.' manage.py test .
+  - coverage report
+after_success:
+  - codecov
