@@ -1,0 +1,222 @@
+{% load static %}
+
+<nav
+  x-data="{ open: false, openItem:false}"
+  class="navbar is-fixed-top"
+  role="navigation"
+  aria-label="main navigation"
+>
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <strong>FPVision</strong>
+    </a>
+
+    <a
+      x-bind:class="{ 'is-active': open }"
+      @click="open = true"
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div
+    x-bind:class="{ 'is-active': open }"
+    @click.away="open = false"
+    id="navbarBasicExample"
+    class="navbar-menu"
+  >
+    <div class="navbar-start">
+      <!--Products-->
+      <div
+        class="navbar-item has-dropdown is-hoverable is-mega"
+        x-bind:class="{ 'is-active': openItem }"
+        @click="openItem =!openItem"
+        x-data="{ openItem:false}"
+      >
+        <div class="navbar-link">
+          Products
+        </div>
+        <div
+          id="productsDropdown"
+          class="navbar-dropdown"
+          data-style="width: 18rem;"
+        >
+          <div class="container is-fluid">
+            <div class="columns">
+              <div class="column">
+                <h1 class="title is-6 is-mega-menu-title">Drones</h1>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="#">
+                  Complete DIY kits
+                </a>
+                <a class="navbar-item" href="#">
+                  Fixed Wing
+                </a>
+                <a class="navbar-item" href="#">
+                  <p>Pre-built Quadcopters</p>
+                </a>
+              </div>
+              <div class="column">
+                <h1 class="title is-6 is-mega-menu-title">FPV equipment</h1>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="#">
+                  Cameras
+                </a>
+                <a class="navbar-item" href="#">
+                  Displays & goggles
+                </a>
+                <a class="navbar-item" href="#">
+                  Transmitters and recievers
+                </a>
+                <a class="navbar-item" href="#">
+                  Accesories
+                </a>
+              </div>
+              <div class="column">
+                <h1 class="title is-6 is-mega-menu-title">RC equipment</h1>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="#">
+                  <div class="navbar-content">
+                    Transmitters
+                  </div>
+                </a>
+                <a class="navbar-item" href="#">
+                  <div class="navbar-content">
+                    Receivers
+                  </div>
+                </a>
+                <a class="navbar-item" href="#">
+                  <div class="navbar-content">
+                    Accessories
+                  </div>
+                </a>
+              </div>
+              <div class="column">
+                <h1 class="title is-6 is-mega-menu-title">Quadcopter Parts</h1>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="#">
+                  Motors
+                </a>
+                <a class="navbar-item" href="#">
+                  ESC
+                </a>
+                <a class="navbar-item" href="#">
+                  Flight Controllers
+                </a>
+                <a class="navbar-item" href="#">
+                  Batteries
+                </a>
+                <a class="navbar-item" href="#">
+                  Props
+                </a>
+                <a class="navbar-item" href="#">
+                  Accesories
+                </a>
+              </div>
+              <div class="column">
+                <h1 class="title is-6 is-mega-menu-title">Frames</h1>
+                <hr class="navbar-divider" />
+                <a class="navbar-item" href="#">
+                  Freestyle
+                </a>
+                <a class="navbar-item" href="#">
+                  Racing
+                </a>
+                <a class="navbar-item" href="#">
+                  Multirotor
+                </a>
+                <a class="navbar-item" href="#">
+                  Beginner
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <hr class="navbar-divider" />
+          <div class="navbar-item">
+            <div class="navbar-content">
+              <div class="level is-mobile">
+                <div class="level-left">
+                  <div class="level-item">
+                    <strong
+                      >Stay up to date with all the latest FPVision news. Join
+                      our mailing list.</strong
+                    >
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="level-item">
+                    <a
+                      class="button bd-is-rss is-small"
+                      href="http://bulma.io/atom.xml"
+                    >
+                      <span class="icon is-small">
+                        <i class="fa fa-rss"></i>
+                      </span>
+                      <span>Subscribe</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Blog-->
+      <div
+        class="navbar-item has-dropdown is-hoverable"
+        x-bind:class="{ 'is-active': openItem }"
+        @click="openItem =!openItem"
+        x-data="{ openItem:false}"
+      >
+        <div class="navbar-link">
+          Blog
+        </div>
+        <div id="blogDropdown" class="navbar-dropdown">
+          <a class="navbar-item" href="#">
+            <div class="navbar-content">
+              <p>
+                <small class="has-text-info">03 Aug 2019</small>
+              </p>
+              <p>Blog entry</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="navbar-item field">
+        <div class="control has-icons-right">
+          <input class="input" type="search" placeholder="Search" />
+          <span class="icon is-right">
+            <a href="">
+              <i class="fas fa-search"></i>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-light">
+            <span class="icon">
+              <i class="far fa-user-circle"></i>
+            </span>
+          </a>
+          <a class="button is-light">
+            <span class="icon">
+              <i class="fas fa-shopping-basket"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

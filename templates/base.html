@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/main.css' %}"
+    />
+    
+    {% block extracss %}
+
+    {% endblock extracss %}
+      
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <script src="https://kit.fontawesome.com/51d7063a93.js" crossorigin="anonymous"></script>
+      
+    <title>FPVision |{% block extra_title %} {% endblock extra_title %}</title>
+  </head>
+  <body class="has-navbar-fixed-top">
+    {% include 'includes/navbar.html' %}
+    
+    {% block content %}
+        
+    {% endblock content %}
+    
+    
+    {% block postloadjs %}
+      
+    {% endblock postloadjs %}
+      
+  </body>
+</html>
