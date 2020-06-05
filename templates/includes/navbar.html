@@ -50,14 +50,14 @@
         >
           <div class="container is-fluid">
             <div class="columns">
-              {% for category in categories %}
+              {% for c in all_categories %}
                 <div class="column">
-                  <a class="navbar-item" href="{{category.slug}}"><h1 class="title is-6 is-mega-menu-title">{{category.name}}</h1></a>
+                  <a class="navbar-item" href="{% url 'products_by_category' c.slug %}"><h1 class="title is-6 is-mega-menu-title">{{c.name}}</h1></a>
                   <hr class="navbar-divider" />
-                  {% for subcategory in subcategories %}
-                  {% if subcategory.category == category %}
-                    <a class="navbar-item" href="{{category.slug}}/{{subcategory.slug}}">
-                      {{subcategory.name}}
+                  {% for sc in all_subcategories %}
+                  {% if sc.category == c %}
+                    <a class="navbar-item" href="{% url 'products_by_subcategory' c.slug sc.slug %}">
+                      {{sc.name}}
                     </a>
                   {% endif %}
                   {% endfor %}

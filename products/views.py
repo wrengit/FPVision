@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category, SubCategory, Product
 
 
-def all_products(request, category_slug=None, subcategory_slug=None):
-    all_categories = Category.objects.all()
-    all_subcategories = SubCategory.objects.all()
+def all_products(request, **kwargs):
+    category_slug = None
+    subcategory_slug = None
     category = None
     subcategory = None
+    all_categories = Category.objects.all()
+    all_subcategories = SubCategory.objects.all()
     if category_slug != None:
         if subcategory_slug != None:
             category = Category.objects.get(slug=category_slug)
@@ -22,8 +24,8 @@ def all_products(request, category_slug=None, subcategory_slug=None):
         "products": products_list,
         "subcategory": subcategory,
         "category": category,
-        "categories": all_categories,
-        "subcategories": all_subcategories,
+        "all_categories": all_categories,
+        "all_subcategories": all_subcategories,
     }
     return render(request, "products/products.html", context)
 
