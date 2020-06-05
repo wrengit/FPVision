@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.urls import reverse
 from .models import Category, SubCategory, Product
 
 
@@ -26,7 +25,6 @@ class TestViews(TestCase):
         )
 
         response = self.client.get("/products/test-category/test-subcategory/")
-        print(response)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "products/products.html")
 
