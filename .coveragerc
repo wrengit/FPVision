@@ -1,0 +1,9 @@
+[run]
+omit =
+    fpvision/*
+    *__init__*
+    *test*
+    *apps*
+    *admin*
+    manage.py
+    *migrations*
