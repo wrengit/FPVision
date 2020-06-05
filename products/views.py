@@ -33,10 +33,18 @@ def all_products(request, **kwargs):
 def product_details(request, category_slug, subcategory_slug, product_slug):
     category = Category.objects.get(slug=category_slug)
     subcategory = SubCategory.objects.get(slug=subcategory_slug)
+    all_categories = Category.objects.all()
+    all_subcategories = SubCategory.objects.all()
     product = Product.objects.get(
         category__slug=category_slug,
         sub_category__slug=subcategory_slug,
         slug=product_slug,
     )
-    context = {"product": product, "subcategory": subcategory, "category": category}
+    context = {
+        "product": product,
+        "subcategory": subcategory,
+        "category": category,
+        "all_categories": all_categories,
+        "all_subcategories": all_subcategories,
+    }
     return render(request, "products/product_details.html", context)
