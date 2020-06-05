@@ -1,6 +1,6 @@
 [run]
 omit =
-    fpvision/*
+    FPVision/*
     *__init__*
     *test*
     *apps*
