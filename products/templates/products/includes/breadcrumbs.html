@@ -1,0 +1,16 @@
+<nav class="breadcrumb">
+    <ul>
+      <li><a href="{% url 'all_products' %}">All Products</a></li>
+      {% if category %}
+        <li><a href="{{category.get_url}}">{{category.name}}</a></li>
+      {% endif %}
+      {% if subcategory %}
+        <li><a href="{{subcategory.get_url}}">{{subcategory.name}}</a></li>
+      {% endif %}
+      
+      {% if product %}
+        <li><a href="{{product.get_url}}">{{product.name}}</a></li>
+      {% endif %}
+        
+    </ul>
+  </nav>
