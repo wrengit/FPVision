@@ -33,4 +33,4 @@ def product_details(request, category_slug, subcategory_slug, product_slug):
         slug=product_slug,
     )
     context = {"product": product, "subcategory": subcategory, "category": category}
-    return render(request, "products/product_detail.html", context)
+    return render(request, "products/product_details.html", context)
