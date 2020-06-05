@@ -2,6 +2,8 @@
 omit =
     FPVision/*
     *__init__*
+    *wsgi*
+    *asgi*
     *test*
     *apps*
     *admin*
