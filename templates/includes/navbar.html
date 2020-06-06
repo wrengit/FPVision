@@ -117,32 +117,66 @@
           </a>
         </div>
       </div>
+      <!--Search-->
       <div class="navbar-item field">
-        <div class="control has-icons-right">
-          <input class="input" type="search" placeholder="Search" />
+        <form class="control has-icons-right" action="{% url 'search_result' %}" method="GET">
+          <input class="input" type="search" placeholder="Search" aria-label="Search" name="q"/>
           <span class="icon is-right">
             <a href="">
               <i class="fas fa-search"></i>
             </a>
           </span>
-        </div>
+        </form>
       </div>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-light">
-            <span class="icon">
-              <i class="far fa-user-circle"></i>
-            </span>
-          </a>
-          <a class="button is-light">
+        <div>
+          {% if user.is_authenticated %}
+          <div class="dropdown is-hoverable is-right">
+            <div class="dropdown-trigger">
+              <button class="button is-primary is-outlined">
+                <span>{{user.username | title}}</span>
+                <span class="icon">
+                  <i class="far fa-user-circle"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item">Account</a>
+                <hr class="dropdown-divider">
+                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+              </div>
+            </div>
+          </div>
+          
+          {% else %}
+          <div class="dropdown is-hoverable is-right">
+            <div class="dropdown-trigger">
+              <button class="button is-outlined">
+                <span class="icon">
+                  <i class="far fa-user-circle"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-content">
+                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                <hr class="dropdown-divider">
+                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+              </div>
+            </div>
+          </div>
+
+          {% endif %}
+            
+          <a class="button is-primary is-outlined">
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
           </a>
-        </div>
       </div>
     </div>
   </div>
