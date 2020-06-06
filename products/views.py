@@ -3,7 +3,6 @@ from .models import Category, SubCategory, Product
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
-
     category = None
     subcategory = None
     all_categories = Category.objects.all()
