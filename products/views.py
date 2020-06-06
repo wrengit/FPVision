@@ -2,9 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category, SubCategory, Product
 
 
-def all_products(request, **kwargs):
-    category_slug = None
-    subcategory_slug = None
+def all_products(request, category_slug=None, subcategory_slug=None):
+
     category = None
     subcategory = None
     all_categories = Category.objects.all()
