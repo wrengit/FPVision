@@ -11,7 +11,10 @@ def search_result(request):
     if "q" in request.GET:
         query = request.GET.get("q")
         products = Product.objects.all().filter(
-            Q(name__contains=query) | Q(description__contains=query)
+            Q(name__contains=query)
+            | Q(description__contains=query)
+            | Q(category__name__contains=query)
+            | Q(sub_category__name__contains=query)
         )
     context = {
         "query": query,
@@ -20,4 +23,3 @@ def search_result(request):
         "all_subcategories": all_subcategories,
     }
     return render(request, "search/search.html", context)
-
