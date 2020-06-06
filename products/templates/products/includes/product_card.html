@@ -1,0 +1,20 @@
+{% for product in products %}
+<div class="column is-one-quarter-desktop is-one-third-tablet">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <a href="{{product.get_url}}">
+          <img src="{{product.image.url}}" alt="{{product.name}}" />
+        </a>
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="content">
+        <p class="title is-5">{{product.name}}</p>
+        <p class="subtitle is-7">{{product.category.name | title}} / {{product.sub_category.name | title}}</p>
+        <small>£{{product.price}}</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
