@@ -4,7 +4,9 @@
 {% block content %}
 <section>
   <div class="container">
-    {% include 'products/includes/breadcrumbs.html' %}
+    <div>
+      <span>Showing {{products.count}} results for " {{query}} "</span>
+    </div>
     <div class="columns is-multiline">
       {% for product in products %}
       <div class="column is-one-quarter-desktop is-one-third-tablet">
