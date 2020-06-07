@@ -39,7 +39,10 @@ class SubCategory(models.Model):
         verbose_name_plural = "Sub Categories"
 
     def __str__(self):
-        return self.name
+        name =self.name
+        parent_name = [self.category.name]
+        parent_name.append(name)
+        return " --> ".join(parent_name)
 
     def get_url(self):
         return reverse("products_by_subcategory", args=[self.category.slug, self.slug])
@@ -47,10 +50,10 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(
-        "Category", null=True, blank=True, on_delete=models.CASCADE
+        "Category", null=True, blank=True, on_delete=models.CASCADE, to_field="name"
     )
     sub_category = models.ForeignKey(
-        "SubCategory", null=True, blank=True, on_delete=models.CASCADE
+        "SubCategory", null=True, blank=True, on_delete=models.CASCADE, to_field="name"
     )
     sku = models.CharField(max_length=10, unique=True, blank=True, default=create_sku())
     name = models.CharField(max_length=254, unique=True)
