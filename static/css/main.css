@@ -11911,6 +11911,10 @@ label.panel-block:hover {
           transform: scale(1.1);
 }
 
+.js-search {
+  width: 50vw;
+}
+
 .navbar-item .navbar-dropdown {
   display: none;
 }
