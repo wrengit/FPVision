@@ -18,6 +18,26 @@
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    <script>
+      function Search() {
+        return {
+          open: false,
+          q: "",
+          products: null,
+          image_src: "/media/",
+          if(q = false){
+            console.log(q)
+          },
+          fetchProducts() {
+            fetch(`http://localhost:8000/search/js_search/?q=${this.q}`)
+              .then((res) => res.json())
+              .then((data) => {
+                this.products = data;
+              });
+          },
+        };
+      }
+    </script>
     <script src="https://kit.fontawesome.com/51d7063a93.js" crossorigin="anonymous"></script>
       
     <title>FPVision |{% block extra_title %} {% endblock extra_title %}</title>
@@ -34,5 +54,6 @@
       
     {% endblock postloadjs %}
       
+    
   </body>
 </html>

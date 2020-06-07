@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav
-  x-data="{ open: false, openItem:false}"
+  x-data="{ open: false}"
   class="navbar is-fixed-top"
   role="navigation"
   aria-label="main navigation"
@@ -38,7 +38,7 @@
         class="navbar-item has-dropdown is-hoverable is-mega"
         x-bind:class="{ 'is-active': openItem }"
         @click="openItem =!openItem"
-        x-data="{ openItem:false}"
+        x-data="{ openItem: false }"
       >
         <div class="navbar-link">
           Products
@@ -119,14 +119,65 @@
       </div>
       <!--Search-->
       <div class="navbar-item field">
-        <form class="control has-icons-right" action="{% url 'search_result' %}" method="GET">
-          <input class="input" type="search" placeholder="Search" aria-label="Search" name="q"/>
-          <span class="icon is-right">
-            <a href="">
-              <i class="fas fa-search"></i>
-            </a>
-          </span>
-        </form>
+        <div x-data="Search()" x-bind:class="{ 'is-active': open }" class="dropdown">
+          <form class="control has-icons-right" action="{% url 'search_result' %}" method="GET">
+            <input 
+              x-on:keyup="fetchProducts()" 
+              x-model="q" 
+              @click="open = true" 
+              @click.away="open = false" 
+              autocomplete="off" 
+              class="input" 
+              type="search" 
+              placeholder="Search" 
+              aria-label="Search" 
+              name="q"
+            />
+            <span class="icon is-right">
+              <a href="">
+                <i class="fas fa-search"></i>
+              </a>
+            </span>
+          </form>
+          <div class="dropdown-menu">
+            <div class="dropdown-content js-search">
+              <div class="dropdown-item">
+                <p class="title is-6">Products</p>
+                <hr class="navbar-divider" />
+                <template x-if="products">
+                  <template x-for="product in products" :key="product.id">
+                    <div class="column is-one-quarter-desktop is-one-third-tablet">
+                      <a
+                        x-bind:href="'products/'
+                        +product.category.toLowerCase()
+                        +'/'+product.sub_category.toLowerCase()
+                        +'/'+product.slug"
+                      >
+                        <div class="card">
+                          <div class="card-content">
+                            <div class="card-image">
+                              <figure class="image is-4by3">
+                                <img
+                                  :src="image_src + product.image"
+                                  :alt="product.name"
+                                />
+                              </figure>
+                            </div>
+                            <div class="content">
+                              <p class="title is-5" x-text="product.name"></p>
+                              <p x-text="product.category" class="subtitle is-7"></p>
+                              <small>£</small><small x-text="product.price"></small>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </template>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
