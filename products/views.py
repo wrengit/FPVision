@@ -11,10 +11,10 @@ def all_products(request, category_slug=None, subcategory_slug=None):
         if subcategory_slug != None:
             category = Category.objects.get(slug=category_slug)
             subcategory = SubCategory.objects.get(slug=subcategory_slug)
-            products_list = Product.objects.filter(sub_category=subcategory.id)
+            products_list = Product.objects.filter(sub_category=subcategory.name)
         else:
             category = Category.objects.get(slug=category_slug)
-            products_list = Product.objects.filter(category=category.id)
+            products_list = Product.objects.filter(category=category.name)
     else:
         products_list = Product.objects.filter(available=True)
 
