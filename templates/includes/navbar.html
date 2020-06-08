@@ -120,7 +120,11 @@
       <!--Search-->
       <div class="navbar-item field">
         <div x-data="Search()" x-bind:class="{ 'is-active': open }" class="dropdown">
-          <form class="control has-icons-right" action="{% url 'search_result' %}" method="GET">
+          <form 
+            class="control has-icons-right" 
+            action="{% url 'search_result' %}" 
+            method="GET"
+          >
             <input 
               x-on:keyup="fetchProducts()" 
               x-model="q" 
@@ -142,12 +146,15 @@
           <div class="dropdown-menu">
             <div class="dropdown-content js-search">
               <div class="dropdown-item">
-                <p class="title is-6">Products</p>
+                <p class="title is-4">Products</p>
+                <template x-if="products.length > 3">
+                  <p>Showing 3 of&nbsp;<span x-text="products.length"></span></p>
+                </template>
                 <hr class="navbar-divider" />
-                <div class="columns is-multiline">
+                <div class="columns is-centered is-multiline">
                   <template x-if="products">
-                    <template x-for="product in products" :key="product.id">
-                      <div class="column is-flex is-4">
+                    <template x-for="product in products.slice(0,3)" :key="product.id">
+                      <div class="column is-4">
                         <a
                           x-bind:href="'products/'
                           +product.category.toLowerCase()
@@ -165,13 +172,23 @@
                             </div>
                             <div class="card-content">
                               <div class="content">
-                                <p class="title is-5" x-text="product.name"></p>
+                                <p class="title is-6" x-text="product.name"></p>
                                 <p x-text="product.category" class="subtitle is-7"></p>
                                 <small>£</small><small x-text="product.price"></small>
                               </div>
                             </div>
                           </div>
                         </a>
+                      </div>
+                    </template>
+                    <template x-if="products.length > 3">
+                      <div class="column has-text-centered">
+                        <button 
+                          class="button is-primary" 
+                          @click.prevent="showRemainingProducts()"
+                        >
+                        View all&nbsp;<span x-text="products.length"></span>&nbsp;items
+                        </button>
                       </div>
                     </template>
                   </template>

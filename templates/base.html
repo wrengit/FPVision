@@ -21,10 +21,11 @@
           q: "",
           products: [],
           image_src: "/media/",
-
+          js_url: "{% url 'js_search' %}",
+          url: "{% url 'search_result' %}",
           fetchProducts() {
             if (this.q) {
-              fetch(`http://localhost:8000/search/js_search/?q=${this.q}`)
+              fetch(`${this.js_url}?q=${this.q}`)
                 .then((res) => res.json())
                 .then((data) => {
                   this.products = data;
@@ -33,6 +34,9 @@
               this.products = [];
             }
           },
+          showRemainingProducts() {
+            window.location=this.url+"?q="+this.q
+          }
         };
       }
     </script>
