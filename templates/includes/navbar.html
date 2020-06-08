@@ -144,17 +144,17 @@
               <div class="dropdown-item">
                 <p class="title is-6">Products</p>
                 <hr class="navbar-divider" />
-                <template x-if="products">
-                  <template x-for="product in products" :key="product.id">
-                    <div class="column is-one-quarter-desktop is-one-third-tablet">
-                      <a
-                        x-bind:href="'products/'
-                        +product.category.toLowerCase()
-                        +'/'+product.sub_category.toLowerCase()
-                        +'/'+product.slug"
-                      >
-                        <div class="card">
-                          <div class="card-content">
+                <div class="columns is-multiline">
+                  <template x-if="products">
+                    <template x-for="product in products" :key="product.id">
+                      <div class="column is-flex is-4">
+                        <a
+                          x-bind:href="'products/'
+                          +product.category.toLowerCase()
+                          +'/'+product.sub_category.toLowerCase()
+                          +'/'+product.slug"
+                        >
+                          <div class="card">
                             <div class="card-image">
                               <figure class="image is-4by3">
                                 <img
@@ -163,17 +163,24 @@
                                 />
                               </figure>
                             </div>
-                            <div class="content">
-                              <p class="title is-5" x-text="product.name"></p>
-                              <p x-text="product.category" class="subtitle is-7"></p>
-                              <small>£</small><small x-text="product.price"></small>
+                            <div class="card-content">
+                              <div class="content">
+                                <p class="title is-5" x-text="product.name"></p>
+                                <p x-text="product.category" class="subtitle is-7"></p>
+                                <small>£</small><small x-text="product.price"></small>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </div>
+                    </template>
+                  </template>
+                  <template x-if="!products.length">
+                    <div class="dropdown-item">
+                      <p>Start typing for instant search results</p>
                     </div>
                   </template>
-                </template>
+                </div>
               </div>
             </div>
           </div>
