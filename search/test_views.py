@@ -71,7 +71,7 @@ class TestViews(TestCase):
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn("Please enter a search criteria", messages)
 
-    def test_search_by_product_name(self):
+    def test_js_search_by_product_name(self):
         test_category = Category.objects.create(
             name="test_category", slug="test-category"
         )
