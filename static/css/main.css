@@ -11888,6 +11888,7 @@ label.panel-block:hover {
   transition: -webkit-box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
+  height: 100%;
 }
 
 .card:hover {
@@ -11921,4 +11922,8 @@ label.panel-block:hover {
 
 .navbar-item.is-active .navbar-dropdown {
   display: block;
+}
+
+.navbar-item img {
+  max-height: 10rem;
 }
