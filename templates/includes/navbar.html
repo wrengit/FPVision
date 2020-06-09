@@ -156,7 +156,7 @@
                     <template x-for="product in products.slice(0,3)" :key="product.id">
                       <div class="column is-4">
                         <a
-                          x-bind:href="'products/'
+                          x-bind:href="'/products/'
                           +product.category.toLowerCase()
                           +'/'+product.sub_category.toLowerCase()
                           +'/'+product.slug"
