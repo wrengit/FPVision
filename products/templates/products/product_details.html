@@ -2,11 +2,44 @@
 {% load static %}
 
 
+{% block extra_title %}
+  {{product.name}}
+{% endblock extra_title %}
+  
 {% block content %}
+  <section>
     <div class="container">
-       {% include 'products/includes/breadcrumbs.html' %}
-
-          {{product.name}}
-    </div>
+    {% include 'products/includes/breadcrumbs.html' %}
+      <div class="columns is-multiline">
+        <div class="column is-6 is-offset-1">
+          <figure class="image">
+            <img src="{{product.image.url}}" alt="{{product.name}}">
+          </figure>
+        </div>
+        <div class="column is-4">
+          <p class="title has-text-primary">{{product.name}}</p>
+          <p class="is-size-5 has-text-weight-bold">£{{product.price}}</p>
+          
+          {% if product.stock > 0 %}
+            <p class="has-text-success">Available to order</p>  
+          {% else %}
+            <p class="has-text-danger">Out of Stock</p>
+          {% endif %}
+            
+          <hr>
+          <p class="is-size-6">SKU: {{product.sku}}</p>
+          <p class="is-size-6">Category: {{product.category}}</p>
+          <hr>
+          <button class="button is-rounded is-primary">Add to Basket</button>
+        </div>
+        
+        <div class="column is-12">
+          <div class="divider has-text-primary">Description</div>
+          <p>{{product.description | linebreaksbr}}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+    
 {% endblock content %}
     
