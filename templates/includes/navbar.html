@@ -142,13 +142,13 @@
                 <i class="fas fa-search"></i>
               </a>
             </span>
-          </form>
+          </form> 
           <div class="dropdown-menu">
             <div class="dropdown-content js-search">
               <div class="dropdown-item">
-                <p class="title is-4">Products</p>
+                <p class="is-size-4">Products</p>
                 <template x-if="products.length > 3">
-                  <p>Showing 3 of&nbsp;<span x-text="products.length"></span></p>
+                  <p>Showing 3 of&nbsp;<span x-text="products.length"></span>&nbsp;for&nbsp;"&nbsp;<span x-text="q"></span>&nbsp;"</p>
                 </template>
                 <hr class="navbar-divider" />
                 <div class="columns is-centered is-multiline">
@@ -174,7 +174,13 @@
                               <div class="content">
                                 <p class="title is-6" x-text="product.name"></p>
                                 <p x-text="product.category" class="subtitle is-7"></p>
-                                <small>£</small><small x-text="product.price"></small>
+                                <small class="has-text-weight-bold">£</small><small class="has-text-weight-bold" x-text="product.price"></small>
+                                <template x-if="product.stock > 0">
+                                  <small class="is-pulled-right has-text-success">Available</small>
+                                </template>
+                                <template x-if="product.stock == 0">
+                                  <small class="is-pulled-right has-text-danger">Out of Stock</small>
+                                </template>
                               </div>
                             </div>
                           </div>

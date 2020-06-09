@@ -102,6 +102,7 @@ class TestViews(TestCase):
                     "image_url": None,
                     "id": 1,
                     "slug": "",
+                    "stock":1,
                 }
             ],
         )

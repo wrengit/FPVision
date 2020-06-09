@@ -52,6 +52,7 @@ def js_search(request):
             "image_url",
             "id",
             "slug",
+            "stock",
         ).filter(available=True)
 
     return JsonResponse(list(filter_products), safe=False)
