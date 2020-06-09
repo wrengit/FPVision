@@ -10,9 +10,15 @@
     </div>
     <div class="card-content">
       <div class="content">
-        <p class="title is-5">{{product.name}}</p>
-        <p class="subtitle is-7">{{product.category.name | title}} / {{product.sub_category.name | title}}</p>
-        <small>£{{product.price}}</small>
+        <p class="title is-6 has-text-primary">{{product.name | truncatechars:20 }}</p>
+        <p class="subtitle is-7">{{product.category.name | title }} / {{product.sub_category.name | title}}</p>
+        <p class="is-size-7">{{product.description | truncatechars:75}}</p>
+        <small class="has-text-weight-bold">£{{product.price}}</small>
+        {% if product.stock > 0 %}
+          <small class="is-pulled-right has-text-success">Available to Order</small> 
+        {% else %}
+          <small class="is-pulled-right has-text-danger">Out of Stock</small> 
+        {% endif %}
       </div>
     </div>
   </div>
