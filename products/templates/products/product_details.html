@@ -7,7 +7,7 @@
 {% endblock extra_title %}
   
 {% block content %}
-  <section>
+  <section class="section">
     <div class="container">
     {% include 'products/includes/breadcrumbs.html' %}
       <div class="columns is-multiline">
@@ -28,7 +28,8 @@
             
           <hr>
           <p class="is-size-6">SKU: {{product.sku}}</p>
-          <p class="is-size-6">Category: {{product.category}}</p>
+          <p class="is-size-6">Category:  {{product.category}}</p>
+          <p class="is-size-6">Sub Category: {{product.sub_category.name}}</p>
           <hr>
           <button class="button is-rounded is-primary">Add to Basket</button>
         </div>
