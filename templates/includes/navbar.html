@@ -1,10 +1,10 @@
 {% load static %}
 
 <nav
-  x-data="{ open: false}"
-  class="navbar is-fixed-top"
-  role="navigation"
-  aria-label="main navigation"
+x-data="{ open: false}"
+class="navbar is-fixed-top"
+role="navigation"
+aria-label="main navigation"
 >
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
@@ -48,7 +48,7 @@
           class="navbar-dropdown"
           data-style="width: 18rem;"
         >
-          <div class="container is-fluid">
+          <div class="container">
             <div class="columns">
               {% for c in all_categories %}
                 <div class="column">
@@ -260,5 +260,8 @@
           </a>
       </div>
     </div>
+    </div>
   </div>
 </nav>
+
+
