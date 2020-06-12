@@ -12,7 +12,7 @@
         x-bind:class="{ 'is-active': open }"
         @click="open = true"
         role="button"
-        class="navbar-burger burger"
+        class="navbar-burger"
         aria-label="menu"
         aria-expanded="false"
         data-target="navbar"
@@ -25,13 +25,13 @@
       <a class="navbar-item" href="/">
         <strong>FPVision</strong>
       </a>
-
+      <!--Account / Basket Touch-->
       <div class="navbar-item is-hidden-desktop">
-        <div>
+        <div class="buttons">
           {% if user.is_authenticated %}
           <div class="dropdown is-right">
             <div class="dropdown-trigger">
-              <button class="button is-primary is-outlined">
+              <button class="button is-primary is-outlined is-rounded is-icon">
                 <span class="icon">
                   <i class="far fa-user-circle"></i>
                 </span>
@@ -51,7 +51,7 @@
           {% else %}
           <div class="dropdown is-hoverable is-right">
             <div class="dropdown-trigger">
-              <button class="button is-outlined">
+              <button class="button is-outlined is-rounded is-icon">
                 <span class="icon">
                   <i class="far fa-user-circle"></i>
                 </span>
@@ -72,7 +72,7 @@
 
           {% endif %}
 
-          <a class="button is-primary is-outlined is-hidden-desktop">
+          <a class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1">
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
@@ -88,7 +88,7 @@
       class="navbar-menu"
     >
       <div class="navbar-start">
-        <!--Products-->
+        <!--Products Desktop-->
         <div
           class="navbar-item has-dropdown is-hoverable is-mega is-hidden-touch"
           x-bind:class="{ 'is-active': openItem }"
@@ -287,7 +287,7 @@
             </div>
           </div>
         </div>
-
+        <!--Products Touch-->
         <div class="navbar-item is-hidden-desktop">
           <div class="container">
             {% for c in all_categories %}
@@ -304,13 +304,13 @@
             {% endfor %}
           </div>
         </div>
-
+        <!--Account / Basket Desktop-->
         <div class="navbar-item is-hidden-touch">
           <div>
             {% if user.is_authenticated %}
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
-                <button class="button is-primary is-outlined">
+                <button class="button is-rounded is-primary is-outlined">
                   <span>{{user.username | title}}</span>
                   <span class="icon">
                     <i class="far fa-user-circle"></i>
@@ -331,7 +331,7 @@
             {% else %}
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
-                <button class="button is-outlined">
+                <button class="button is-rounded is-outlined">
                   <span class="icon">
                     <i class="far fa-user-circle"></i>
                   </span>
@@ -352,7 +352,7 @@
 
             {% endif %}
 
-            <a class="button is-primary is-outlined is-hidden-touch">
+            <a class="button is-rounded is-primary is-outlined is-hidden-touch">
               <span class="icon">
                 <i class="fas fa-shopping-basket"></i>
               </span>
