@@ -1,267 +1,302 @@
 {% load static %}
 
 <nav
-x-data="{ open: false}"
-class="navbar is-fixed-top"
-role="navigation"
-aria-label="main navigation"
+  x-data="{ open: false}"
+  class="navbar is-fixed-top"
+  role="navigation"
+  aria-label="main navigation"
 >
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-      <strong>FPVision</strong>
-    </a>
-
-    <a
-      x-bind:class="{ 'is-active': open }"
-      @click="open = true"
-      role="button"
-      class="navbar-burger burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="navbar"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div
-    x-bind:class="{ 'is-active': open }"
-    @click.away="open = false"
-    id="navbar"
-    class="navbar-menu"
-  >
-    <div class="navbar-start">
-      <!--Products-->
-      <div
-        class="navbar-item has-dropdown is-hoverable is-mega"
-        x-bind:class="{ 'is-active': openItem }"
-        @click="openItem =!openItem"
-        x-data="{ openItem: false }"
+  <div class="container is-widescreen">
+    <div class="navbar-brand mx-1">
+      <a
+        x-bind:class="{ 'is-active': open }"
+        @click="open = true"
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbar"
       >
-        <div class="navbar-link">
-          Products
-        </div>
-        <div
-          id="productsDropdown"
-          class="navbar-dropdown"
-          data-style="width: 18rem;"
-        >
-          <div class="container">
-            <div class="columns">
-              {% for c in all_categories %}
-                <div class="column">
-                  <a class="navbar-item" href="{% url 'products_by_category' c.slug %}"><h1 class="title is-6 is-mega-menu-title">{{c.name}}</h1></a>
-                  <hr class="navbar-divider" />
-                  {% for sc in all_subcategories %}
-                  {% if sc.category == c %}
-                    <a class="navbar-item" href="{% url 'products_by_subcategory' c.slug sc.slug %}">
-                      {{sc.name}}
-                    </a>
-                  {% endif %}
-                  {% endfor %}
-                </div>
-              {% endfor %}
-            </div>
-          </div>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
 
-          <hr class="navbar-divider" />
-          <div class="navbar-item">
-            <div class="navbar-content">
-              <div class="level is-mobile">
-                <div class="level-left">
-                  <div class="level-item">
-                    <strong
-                      >Stay up to date with all the latest FPVision news. Join
-                      our mailing list.</strong
-                    >
-                  </div>
+      <a class="navbar-item" href="/">
+        <strong>FPVision</strong>
+      </a>
+
+      <a href="#" class="navbar-item is-hidden-desktop">
+        <span class="icon">
+          <i class="fas fa-shopping-basket"></i>
+        </span>
+      </a>
+    </div>
+
+    <div
+      x-bind:class="{ 'is-active': open }"
+      @click.away="open = false"
+      id="navbar"
+      class="navbar-menu"
+    >
+      <div
+        class="navbar-start"
+      >
+        <!--Products-->
+        <div
+          class="navbar-item has-dropdown is-hoverable is-mega"
+          x-bind:class="{ 'is-active': openItem }"
+          @click="openItem =!openItem"
+          x-data="{ openItem: false }"
+        >
+          <div class="navbar-link">
+            Products
+          </div>
+          <div
+            id="productsDropdown"
+            class="navbar-dropdown"
+            data-style="width: 18rem;"
+          >
+            <div class="container">
+              <div class="columns">
+                {% for c in all_categories %}
+                <div class="column">
+                  <a
+                    class="navbar-item"
+                    href="{% url 'products_by_category' c.slug %}"
+                    ><h1 class="title is-6 is-mega-menu-title">
+                      {{c.name}}
+                    </h1></a
+                  >
+                  <hr class="navbar-divider" />
+                  {% for sc in all_subcategories %} {% if sc.category == c %}
+                  <a
+                    class="navbar-item"
+                    href="{% url 'products_by_subcategory' c.slug sc.slug %}"
+                  >
+                    {{sc.name}}
+                  </a>
+                  {% endif %} {% endfor %}
                 </div>
-                <div class="level-right">
-                  <div class="level-item">
-                    <a
-                      class="button bd-is-rss is-small"
-                      href="http://bulma.io/atom.xml"
-                    >
-                      <span class="icon is-small">
-                        <i class="fa fa-rss"></i>
-                      </span>
-                      <span>Subscribe</span>
-                    </a>
+                {% endfor %}
+              </div>
+            </div>
+
+            <hr class="navbar-divider" />
+            <div class="navbar-item">
+              <div class="navbar-content">
+                <div class="level is-mobile">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <strong
+                        >Stay up to date with all the latest FPVision news. Join
+                        our mailing list.</strong
+                      >
+                    </div>
+                  </div>
+                  <div class="level-right">
+                    <div class="level-item">
+                      <a
+                        class="button bd-is-rss is-small"
+                        href="http://bulma.io/atom.xml"
+                      >
+                        <span class="icon is-small">
+                          <i class="fa fa-rss"></i>
+                        </span>
+                        <span>Subscribe</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!--Blog-->
-      <div
-        class="navbar-item has-dropdown is-hoverable"
-        x-bind:class="{ 'is-active': openItem }"
-        @click="openItem =!openItem"
-        x-data="{ openItem:false}"
-      >
-        <div class="navbar-link">
-          Blog
-        </div>
-        <div id="blogDropdown" class="navbar-dropdown">
-          <a class="navbar-item" href="#">
-            <div class="navbar-content">
-              <p>
-                <small class="has-text-info">03 Aug 2019</small>
-              </p>
-              <p>Blog entry</p>
-            </div>
-          </a>
-        </div>
-      </div>
-      <!--Search-->
-      <div class="navbar-item field">
-        <div x-data="Search()" x-bind:class="{ 'is-active': open }" class="dropdown">
-          <form 
-            class="control has-icons-right" 
-            action="{% url 'search_result' %}" 
-            method="GET"
-          >
-            <input 
-              x-on:keyup="fetchProducts()" 
-              x-model="q" 
-              @click="open = true" 
-              @click.away="open = false" 
-              autocomplete="off" 
-              class="input" 
-              type="search" 
-              placeholder="Search" 
-              aria-label="Search" 
-              name="q"
-            />
-            <span class="icon is-right">
-              <a href="">
-                <i class="fas fa-search"></i>
-              </a>
-            </span>
-          </form> 
-          <div class="dropdown-menu">
-            <div class="dropdown-content js-search">
-              <div class="dropdown-item">
-                <p class="is-size-4">Products</p>
-                <template x-if="products.length > 3">
-                  <p>Showing 3 of&nbsp;<span x-text="products.length"></span>&nbsp;for&nbsp;"&nbsp;<span x-text="q"></span>&nbsp;"</p>
-                </template>
-                <hr class="navbar-divider" />
-                <div class="columns is-centered is-multiline">
-                  <template x-if="products">
-                    <template x-for="product in products.slice(0,3)" :key="product.id">
-                      <div class="column is-4">
-                        <a
-                          x-bind:href="'/products/'
+        <!--Search-->
+        <div class="navbar-item search-container">
+          <div
+              x-data="Search()"
+              x-bind:class="{ 'is-active': open }"
+              class="dropdown"
+            >
+              <form
+                class="control has-icons-right js-search"
+                action="{% url 'search_result' %}"
+                method="GET"
+              >
+                <input
+                  x-on:keyup="fetchProducts()"
+                  x-model="q"
+                  @click="open = true"
+                  @click.away="open = false"
+                  autocomplete="off"
+                  class="input is-primary is-rounded"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="q"
+                />
+                <span class="icon is-right">
+                  <a href="">
+                    <i class="fas fa-search"></i>
+                  </a>
+                </span>
+              </form>
+              <div class="dropdown-menu js-search">
+                <div class="dropdown-content">
+                  <div class="dropdown-item">
+                    <p class="is-size-4">Products</p>
+                    <template x-if="products.length > 3">
+                      <p>
+                        Showing 3 of&nbsp;<span x-text="products.length"></span
+                        >&nbsp;for&nbsp;"&nbsp;<span x-text="q"></span>&nbsp;"
+                      </p>
+                    </template>
+                    <hr class="navbar-divider" />
+                    <div class="columns is-centered is-multiline">
+                      <template x-if="products">
+                        <template
+                          x-for="product in products.slice(0,3)"
+                          :key="product.id"
+                        >
+                          <div class="column is-4">
+                            <a
+                              x-bind:href="'/products/'
                           +product.category.toLowerCase()
                           +'/'+product.sub_category.toLowerCase()
                           +'/'+product.slug"
-                        >
-                          <div class="card">
-                            <div class="card-image">
-                              <figure class="image is-4by3">
-                                <img
-                                  :src="image_src + product.image"
-                                  :alt="product.name"
-                                />
-                              </figure>
-                            </div>
-                            <div class="card-content">
-                              <div class="content">
-                                <p class="title is-6" x-text="product.name"></p>
-                                <p x-text="product.category" class="subtitle is-7"></p>
-                                <small class="has-text-weight-bold">£</small><small class="has-text-weight-bold" x-text="product.price"></small>
-                                <template x-if="product.stock > 0">
-                                  <small class="is-pulled-right has-text-success">Available</small>
-                                </template>
-                                <template x-if="product.stock == 0">
-                                  <small class="is-pulled-right has-text-danger">Out of Stock</small>
-                                </template>
+                            >
+                              <div class="card">
+                                <div class="card-image">
+                                  <figure class="image is-square">
+                                    <img
+                                      :src="image_src + product.image"
+                                      :alt="product.name"
+                                    />
+                                  </figure>
+                                </div>
+                                <div class="card-content">
+                                  <div class="content">
+                                    <p
+                                      class="title is-6"
+                                      x-text="product.name"
+                                    ></p>
+                                    <p
+                                      x-text="product.category"
+                                      class="subtitle is-7"
+                                    ></p>
+                                    <small class="has-text-weight-bold">£</small
+                                    ><small
+                                      class="has-text-weight-bold"
+                                      x-text="product.price"
+                                    ></small>
+                                    <template x-if="product.stock > 0">
+                                      <small
+                                        class="is-pulled-right has-text-success"
+                                        >Available</small
+                                      >
+                                    </template>
+                                    <template x-if="product.stock == 0">
+                                      <small
+                                        class="is-pulled-right has-text-danger"
+                                        >Out of Stock</small
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
+                            </a>
                           </div>
-                        </a>
-                      </div>
-                    </template>
-                    <template x-if="products.length > 3">
-                      <div class="column has-text-centered">
-                        <button 
-                          class="button is-primary" 
-                          @click.prevent="showRemainingProducts()"
-                        >
-                        View all&nbsp;<span x-text="products.length"></span>&nbsp;items
-                        </button>
-                      </div>
-                    </template>
-                  </template>
-                  <template x-if="!products.length">
-                    <div class="dropdown-item">
-                      <p>Start typing for instant search results</p>
+                        </template>
+                        <template x-if="products.length > 3">
+                          <div class="column has-text-centered">
+                            <button
+                              class="button is-primary"
+                              @click.prevent="showRemainingProducts()"
+                            >
+                              View all&nbsp;<span
+                                x-text="products.length"
+                              ></span
+                              >&nbsp;items
+                            </button>
+                          </div>
+                        </template>
+                      </template>
+                      <template x-if="!products.length && !q">
+                        <div class="dropdown-item">
+                          <p>Start typing for instant search results</p>
+                        </div>
+                      </template>
+                      <template x-if="!products.length && q">
+                        <div class="dropdown-item">
+                          <p class="has-text-danger">
+                            No products matching the search criteria
+                          </p>
+                        </div>
+                      </template>
                     </div>
-                  </template>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="navbar-item">
+          <div>
+            {% if user.is_authenticated %}
+            <div class="dropdown is-hoverable is-right">
+              <div class="dropdown-trigger">
+                <button class="button is-primary is-outlined">
+                  <span>{{user.username | title}}</span>
+                  <span class="icon">
+                    <i class="far fa-user-circle"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item">Account</a>
+                  <hr class="dropdown-divider" />
+                  <a href="{% url 'account_logout' %}" class="dropdown-item"
+                    >Logout</a
+                  >
                 </div>
               </div>
             </div>
+
+            {% else %}
+            <div class="dropdown is-hoverable is-right">
+              <div class="dropdown-trigger">
+                <button class="button is-outlined">
+                  <span class="icon">
+                    <i class="far fa-user-circle"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu">
+                <div class="dropdown-content">
+                  <a href="{% url 'account_login' %}" class="dropdown-item"
+                    >Login</a
+                  >
+                  <hr class="dropdown-divider" />
+                  <a href="{% url 'account_signup' %}" class="dropdown-item"
+                    >Register</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            {% endif %}
+
+            <a class="button is-primary is-outlined is-hidden-touch">
+              <span class="icon">
+                <i class="fas fa-shopping-basket"></i>
+              </span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div>
-          {% if user.is_authenticated %}
-          <div class="dropdown is-hoverable is-right">
-            <div class="dropdown-trigger">
-              <button class="button is-primary is-outlined">
-                <span>{{user.username | title}}</span>
-                <span class="icon">
-                  <i class="far fa-user-circle"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item">Account</a>
-                <hr class="dropdown-divider">
-                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-              </div>
-            </div>
-          </div>
-          
-          {% else %}
-          <div class="dropdown is-hoverable is-right">
-            <div class="dropdown-trigger">
-              <button class="button is-outlined">
-                <span class="icon">
-                  <i class="far fa-user-circle"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-content">
-                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-                <hr class="dropdown-divider">
-                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-              </div>
-            </div>
-          </div>
-
-          {% endif %}
-            
-          <a class="button is-primary is-outlined">
-            <span class="icon">
-              <i class="fas fa-shopping-basket"></i>
-            </span>
-          </a>
-      </div>
-    </div>
-    </div>
   </div>
 </nav>
-
-
