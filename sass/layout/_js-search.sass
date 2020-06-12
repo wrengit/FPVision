@@ -1,13 +1,18 @@
 .js-search
-    width: 45vw
-    max-width: 40rem
-    @include mobile
-        width: 90%
+    width: 60vw
+    max-width: 60rem
+    left: calc((-60vw/5)/2)
+    @include touch
+        width: 90vw
+        left: 0
     
 .search-container
     width: 45vw
     max-width: 40rem
     justify-content: center
-    @include mobile
-        width: 100%
+    @include touch
+        width: 90vw
+        max-width: 400rem
+        text-align: center
+
 
