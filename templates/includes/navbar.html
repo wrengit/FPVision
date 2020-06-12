@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav
-  x-data="{ open: false}"
+  x-data="{ open: false, openAccount: false,}"
   class="navbar is-fixed-top"
   role="navigation"
   aria-label="main navigation"
@@ -26,18 +26,28 @@
         <strong>FPVision</strong>
       </a>
       <!--Account / Basket Touch-->
-      <div class="navbar-item is-hidden-desktop">
+      <div class="navbar-item has-dropdown is-hidden-desktop">
         <div class="buttons">
           {% if user.is_authenticated %}
-          <div class="dropdown is-right">
+          <div 
+            class="dropdown is-right" 
+            x-bind:class="{ 'is-active': openAccount }" 
+            @click.away="openAccount = false"
+          >
             <div class="dropdown-trigger">
-              <button class="button is-primary is-outlined is-rounded is-icon">
+              <button 
+                class="button is-primary is-outlined is-rounded is-icon" 
+                @click="openAccount =!openAccount"
+              >
                 <span class="icon">
                   <i class="far fa-user-circle"></i>
                 </span>
               </button>
             </div>
-            <div class="dropdown-menu">
+            <div 
+              class="dropdown-menu" 
+              
+            >
               <div class="dropdown-content">
                 <a href="#" class="dropdown-item">Account</a>
                 <hr class="dropdown-divider" />
