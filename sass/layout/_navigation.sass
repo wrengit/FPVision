@@ -1,20 +1,36 @@
-.navbar-item
-    .navbar-dropdown
-        display: none
-            
-    &.is-active
+.navbar
+    max-width: 100vw
+
+    &-item
         .navbar-dropdown
-            display: block
-    & img
-        max-height: 30rem
+            display: none
+            &.is-active
+                display: block
+        & img
+            max-height: 30rem
 
-.navbar-burger
-    margin-left: 0.1rem
+    &-burger
+        margin-left: 0.1rem
 
-.navbar-start
-    flex: 1 1 0
-    justify-content: space-between
+    &-start
+        flex: 1 1 0
+        justify-content: space-between
 
+    &-brand
+        justify-content: space-between
 
-.navbar-brand
-    justify-content: space-between
+@include until($desktop)
+
+    .navbar-menu.is-active
+        display: block
+        transform-origin: top
+        animation: dropdown .2s ease-out
+
+@keyframes dropdown
+    0%
+        opacity: 0
+        transform: scaleY(0)
+    40%
+        opacity: 1
+    100%
+        transform: scaleY(1)
