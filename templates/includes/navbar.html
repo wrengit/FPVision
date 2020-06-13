@@ -218,7 +218,7 @@
                         x-for="product in products.slice(0,4)"
                         :key="product.id"
                       >
-                        <div class="column is-quarter is-half-touch">
+                        <div class="column search-result-column is-quarter is-half-touch">
                           <a
                             x-bind:href="'/products/'
                           +product.category.toLowerCase()
@@ -341,7 +341,7 @@
             {% else %}
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
-                <button class="button is-rounded is-outlined">
+                <button class="button is-rounded is-outlined is-icon">
                   <span class="icon">
                     <i class="far fa-user-circle"></i>
                   </span>
@@ -362,7 +362,7 @@
 
             {% endif %}
 
-            <a class="button is-rounded is-primary is-outlined is-hidden-touch">
+            <a class="button is-rounded is-primary is-outlined is-hidden-touch is-icon">
               <span class="icon">
                 <i class="fas fa-shopping-basket"></i>
               </span>
