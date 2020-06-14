@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "index",
     "products",
-    "search", 
+    "search",
+    "basket",
 ]
 
 MIDDLEWARE = [
@@ -72,10 +73,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "basket.context.basket_contents",
             ],
         },
     },
 ]
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -145,3 +149,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+FREE_DELIVERY_THRESHOLD = 50
+STANDARD_DELIVERY_PERCENTAGE = 10

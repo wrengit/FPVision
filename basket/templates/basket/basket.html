@@ -1,0 +1,97 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load basket_tools %} 
+{% block content %} 
+
+{% if basket_items %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for item in basket_items %}
+    <tr>
+      <td>
+        <img
+          class="image is-96x96"
+          src="{{item.product.image.url}}"
+          alt="{{item.product.name}}"
+        />
+        <p>{{item.product.name}}</p>
+      </td>
+      <td>
+        <p>{{item.product.price}}</p>
+      </td>
+      <td>
+        <form
+          action="{% url 'adjust_basket' item.product.id %}"
+          method="POST"
+          id="basket-quantity-form-{{item.product.id}}"
+          class="form"
+          x-data="qtyFormControl()"
+        >
+          {% csrf_token %}
+          <div class="field has-addons">
+            <div class="control">
+              <button
+                @click.prevent="decrementQty({{item.product.id}})"
+                class="button is-rounded is-icon is-primary"
+                id="decrement-{{item.product.id}}"
+              >
+                <span class="icon is-small">
+                  <i class="fas fa-minus"></i>
+                </span>
+              </button>
+            </div>
+            <div class="control">
+              <input
+                type="number"
+                name="quantity"
+                value="{{item.quantity}}"
+                min="1"
+                max="{{item.product.stock}}"
+                class="input is-primary"
+                id="qty-{{item.product.id}}"
+                x-on:keypress="blockAlpha($event)"
+              />
+            </div>
+            <div class="control">
+              <button
+                @click.prevent="incrementQty({{item.product.id}})"
+                class="button is-rounded is-icon is-primary"
+                id="increment-{{item.product.id}}"
+              >
+                <span class="icon is-small">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+          <a @click="updateSubmitForm({{item.product.id}})"><small>Update</small></a>
+          <a @click="removeItem({{item.product.id}})"><small>Remove</small></a>
+        </form>
+      </td>
+      <td>
+        <p>{{item.product.price | calc_subtotal:item.quantity}}</p>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endif %}
+
+{% endblock content %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/qtyFormControl.js' %}"></script>
+{% endblock postloadjs %}
+  

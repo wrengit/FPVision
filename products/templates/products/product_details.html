@@ -1,46 +1,97 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block extra_title %}{{product.name}}{% endblock extra_title %} 
 
-
-{% block extra_title %}
-  {{product.name}}
-{% endblock extra_title %}
-  
 {% block content %}
-  <section class="section">
-    <div class="container">
+<section class="section">
+  <div class="container">
     {% include 'products/includes/breadcrumbs.html' %}
-      <div class="columns is-multiline">
-        <div class="column is-6 is-offset-1">
-          <figure class="image">
-            <img src="{{product.image.url}}" alt="{{product.name}}">
-          </figure>
-        </div>
-        <div class="column is-4">
-          <p class="title has-text-primary">{{product.name}}</p>
-          <p class="is-size-5 has-text-weight-bold">£{{product.price}}</p>
-          
-          {% if product.stock > 0 %}
-            <p class="has-text-success">Available to order</p>  
-          {% else %}
-            <p class="has-text-danger">Out of Stock</p>
-          {% endif %}
-            
-          <hr>
-          <p class="is-size-6">SKU: {{product.sku}}</p>
-          <p class="is-size-6">Category:  {{product.category}}</p>
-          <p class="is-size-6">Sub Category: {{product.sub_category.name}}</p>
-          <hr>
-          <button class="button is-rounded is-primary">Add to Basket</button>
-        </div>
-        
-        <div class="column is-12">
-          <div class="divider has-text-primary">Description</div>
-          <p>{{product.description | linebreaksbr}}</p>
-        </div>
+    <div class="columns is-multiline">
+      <div class="column is-6 is-offset-1">
+        <figure class="image">
+          <img src="{{product.image.url}}" alt="{{product.name}}" />
+        </figure>
       </div>
-    </div>    
-  </section>
-    
+      <div class="column is-4">
+        <p class="title has-text-primary">{{product.name}}</p>
+        <p class="is-size-5 has-text-weight-bold">£{{product.price}}</p>
+
+        {% if product.stock > 0 %}
+        <p class="has-text-success">Available to order</p>
+        {% else %}
+        <p class="has-text-danger">Out of Stock</p>
+        {% endif %}
+
+        <hr />
+        <p class="is-size-6">SKU: {{product.sku}}</p>
+        <p class="is-size-6">Category: {{product.category}}</p>
+        <p class="is-size-6">Sub Category: {{product.sub_category.name}}</p>
+        <hr />
+        <form
+          class="form"
+          id="basket-quantity-form-{{product.id}}"
+          x-data="qtyFormControl()"
+          action="{% url 'add_to_basket' product.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <div class="field has-addons">
+            <div class="control">
+              <button
+                class="button is-rounded is-icon is-primary"
+                @click.prevent="decrementQty({{product.id}})"
+                id="decrement-{{product.id}}"
+              >
+                <span class="icon is-small">
+                  <i class="fas fa-minus"></i>
+                </span>
+              </button>
+            </div>
+            <div class="control">
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                min="1"
+                max="{{product.stock}}"
+                id="qty-{{product.id}}"
+                class="input is-primary"
+                x-on:keypress="blockAlpha($event)"
+                x-on:keyup="updateInput({{product.id}})"
+              />
+            </div>
+            <div class="control">
+              <button
+                @click.prevent="incrementQty({{product.id}})"
+                class="button is-rounded is-icon is-primary"
+                id="increment-{{product.id}}"
+              >
+                <span class="icon is-small">
+                  <i class="fas fa-plus"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <button class="button is-rounded is-primary" type="submit">
+            Add to Basket
+          </button>
+          <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+        </form>
+      </div>
+
+      <div class="column is-12">
+        <div class="divider has-text-primary">Description</div>
+        <p>{{product.description | linebreaksbr}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock content %}
-    
+
+
+{% block postloadjs %}
+  <script src="{% static 'js/qtyFormControl.js' %}"></script>
+{% endblock postloadjs %}
+  
