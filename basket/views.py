@@ -59,7 +59,7 @@ def remove_from_basket(request, product_id):
         messages.success(request, f"Removed {product.name} from your basket")
 
         request.session["basket"] = basket
-        return HttpResponse(status=200)
+        return redirect(reverse("view_basket"))
 
     except Exception as e:
         messages.error(request, f"Error removing product: {e}")

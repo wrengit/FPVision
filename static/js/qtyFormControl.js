@@ -1,10 +1,11 @@
 function qtyFormControl() {
+    let timer = null
     return {
         handleEnableDisable(targetId) {
             let input = document.getElementById(`qty-${targetId}`);
             let currentVal = parseInt(input.value);
             let maxVal = parseInt(input.getAttribute("max"));
-            let minusDisabled = currentVal < 1;
+            let minusDisabled = currentVal < 2;
             let plusDisabled = currentVal > maxVal - 1;
             let increment = document.getElementById(`increment-${targetId}`);
             let decrement = document.getElementById(`decrement-${targetId}`);
@@ -18,33 +19,16 @@ function qtyFormControl() {
             }
         },
         updateSubmitForm(targetId) {
-            let form = document.getElementById(`basket-quantity-form-${targetId}`);
-            let input = document.getElementById(`qty-${targetId}`);
-            let currentVal = parseInt(input.value);
-            let maxVal = parseInt(input.getAttribute("max"));
-            if (currentVal > maxVal) {
-                input.value = maxVal;
-            }
-            form.submit();
-        },
-        updateInput(targetId) {
-            let input = document.getElementById(`qty-${targetId}`);
-            let currentVal = parseInt(input.value);
-            let maxVal = parseInt(input.getAttribute("max"));
-            if (currentVal > maxVal) {
-                input.value = maxVal;
-            }
-            this.handleEnableDisable(targetId)
-        },
-        removeItem(targetId) {
-            let csrfToken = "{{csrf_token}}";
-            let url = `/basket/remove/${targetId}/`;
-            let data = {
-                csrfmiddlewaretoken: csrfToken
-            };
-            fetch(url, data).then(function () {
-                location.reload();
-            });
+            timer = setTimeout(() => {
+                let form = document.getElementById(`basket-quantity-form-${targetId}`);
+                let input = document.getElementById(`qty-${targetId}`);
+                let currentVal = parseInt(input.value);
+                let maxVal = parseInt(input.getAttribute("max"));
+                if (currentVal > maxVal) {
+                    input.value = maxVal;
+                }
+                form.submit();
+            }, 1000)
         },
         incrementQty(targetId) {
             let input = document.getElementById(`qty-${targetId}`);
@@ -56,6 +40,12 @@ function qtyFormControl() {
                 input.value = maxVal;
             }
             this.handleEnableDisable(targetId);
+            if (timer) {
+                clearTimeout(timer)
+                timer = null
+            }
+            this.updateSubmitForm(targetId)
+
         },
         decrementQty(targetId) {
             let input = document.getElementById(`qty-${targetId}`);
@@ -67,18 +57,23 @@ function qtyFormControl() {
                 input.value = currentVal - 1;
             }
             this.handleEnableDisable(targetId);
+            if (timer) {
+                clearTimeout(timer)
+                timer = null
+            }
+            this.updateSubmitForm(targetId)
         },
         //https://stackoverflow.com/questions/19966417/prevent-typing-non-numeric-in-input-type-number
-        blockAlpha($event) {
+        blockAlpha(e) {
             if (
-                ($event.key.length === 1 &&
-                    $event.key !== "." &&
-                    isNaN($event.key) &&
-                    !$event.ctrlKey) ||
-                ($event.key === "." &&
-                    $event.target.value.toString().indexOf(".") > -1)
+                (e.key.length === 1 &&
+                    e.key !== "." &&
+                    isNaN(e.key) &&
+                    !e.ctrlKey) ||
+                (e.key === "." &&
+                    e.target.value.toString().indexOf(".") > -1)
             ) {
-                $event.preventDefault();
+                e.preventDefault();
             }
         },
     };
