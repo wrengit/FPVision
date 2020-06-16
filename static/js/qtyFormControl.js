@@ -27,8 +27,12 @@ function qtyFormControl() {
                 if (currentVal > maxVal) {
                     input.value = maxVal;
                 }
-                form.submit();
-            }, 1000)
+                if (window.location.pathname == "/basket/") {
+                    form.submit();   
+                }
+                
+            }, 800)
+            this.handleEnableDisable(targetId)
         },
         incrementQty(targetId) {
             let input = document.getElementById(`qty-${targetId}`);
@@ -40,12 +44,13 @@ function qtyFormControl() {
                 input.value = maxVal;
             }
             this.handleEnableDisable(targetId);
-            if (timer) {
-                clearTimeout(timer)
-                timer = null
+            if (window.location.pathname == "/basket/") {
+                if (timer) {
+                    clearTimeout(timer)
+                    timer = null
+                }
+                this.updateSubmitForm(targetId)
             }
-            this.updateSubmitForm(targetId)
-
         },
         decrementQty(targetId) {
             let input = document.getElementById(`qty-${targetId}`);
@@ -57,11 +62,14 @@ function qtyFormControl() {
                 input.value = currentVal - 1;
             }
             this.handleEnableDisable(targetId);
-            if (timer) {
-                clearTimeout(timer)
-                timer = null
+            if (window.location.pathname == "/basket/") {
+                if (timer) {
+                    clearTimeout(timer)
+                    timer = null
+                }
+                this.updateSubmitForm(targetId)
             }
-            this.updateSubmitForm(targetId)
+
         },
         //https://stackoverflow.com/questions/19966417/prevent-typing-non-numeric-in-input-type-number
         blockAlpha(e) {
