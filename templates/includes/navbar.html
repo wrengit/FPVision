@@ -362,10 +362,16 @@
 
             {% endif %}
 
-            <a class="button is-rounded is-primary is-outlined is-hidden-touch is-icon">
+            <a href="{% url 'view_basket' %}" class="button is-rounded is-primary is-outlined is-hidden-touch is-icon">
               <span class="icon">
                 <i class="fas fa-shopping-basket"></i>
               </span>
+              
+              {% if product_count > 0 %}
+                <p>{{product_count}}</p>
+              {% endif %}
+                
+              
             </a>
           </div>
         </div>
