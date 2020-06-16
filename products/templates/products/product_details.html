@@ -28,7 +28,7 @@
         <p class="is-size-6">Sub Category: {{product.sub_category.name}}</p>
         <hr />
         <form
-          class="form"
+          class="form qty-form"
           id="basket-quantity-form-{{product.id}}"
           x-data="qtyFormControl()"
           action="{% url 'add_to_basket' product.id %}"
@@ -55,9 +55,9 @@
                 min="1"
                 max="{{product.stock}}"
                 id="qty-{{product.id}}"
-                class="input is-primary"
+                class="input is-primary "
                 x-on:keypress="blockAlpha($event)"
-                x-on:keyup="updateInput({{product.id}})"
+                x-on:keyup="updateSubmitForm({{product.id}})"
               />
             </div>
             <div class="control">

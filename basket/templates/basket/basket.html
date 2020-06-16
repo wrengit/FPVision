@@ -3,10 +3,11 @@
 {% load basket_tools %} 
 {% block content %} 
 
-{% if basket_items %}
+
 
 <main class="container">
   <section class="section">
+    {% if basket_items %}
     <table class="table">
       <thead>
         <tr>
@@ -52,6 +53,7 @@
             id="basket-quantity-form-{{item.product.id}}"
             x-data="qtyFormControl()"
             class="control qty-form"
+            x-init="handleEnableDisable({{item.product.id}})"
             
           >
           {% csrf_token %}
@@ -109,11 +111,16 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p>You have no items in your basket</p>
+    {% endif %}
+
+    {{item_data}}
   </section>
 </main>
     
 
-{% endif %}
+
 
 {% endblock content %}
 
