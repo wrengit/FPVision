@@ -1,131 +1,177 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% load basket_tools %} 
-{% block content %} 
 
-
+{% block content %}
 
 <main class="container">
-  <section class="section">
-    {% if basket_items %}
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-          <th></th>
-        </tr>
-      </thead>
+  <section class="section columns is-centered">
+    <div class="column is-8">
+      {% if basket_items %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th></th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {% for item in basket_items %}
-        <tr>
-          <td class="is-vcentered">
-            
-            <a href="{{item.product.get_url}}">
-              <article class="is-flex">
-                <figure class="media-left">
-                  <p class="image is-96x96">
-                    <img
-                      src="{{item.product.image.url}}"
-                      alt="{{item.product.name}}"
+        <tbody>
+          {% for item in basket_items %}
+          <tr>
+            <td class="is-vcentered">
+              <a href="{{item.product.get_url}}">
+                <article class="is-flex">
+                  <figure class="media-left">
+                    <p class="image is-96x96">
+                      <img
+                        src="{{item.product.image.url}}"
+                        alt="{{item.product.name}}"
+                      />
+                    </p>
+                  </figure>
+                  <div class="media-content level-item">
+                    <div class="content">
+                      <p>{{item.product.name}}</p>
+                    </div>
+                  </div>
+                </article>
+              </a>
+            </td>
+            <td class="is-vcentered">
+              <p class="has-text-weight-bold">£ {{item.product.price}}</p>
+            </td>
+            <td class="is-vcentered">
+              <form
+                action="{% url 'adjust_basket' item.product.id %}"
+                method="POST"
+                id="basket-quantity-form-{{item.product.id}}"
+                x-data="qtyFormControl()"
+                class="control qty-form"
+                x-init="handleEnableDisable({{item.product.id}})"
+              >
+                {% csrf_token %}
+                <div class="field has-addons">
+                  <div class="control">
+                    <button
+                      @click.prevent="decrementQty({{item.product.id}})"
+                      class="button is-rounded is-icon is-primary"
+                      id="decrement-{{item.product.id}}"
                     >
-                  </p>
-                </figure>
-                <div class="media-content level-item">
-                  <div class="content">
-                    <p>{{item.product.name}}</p>
-                    
+                      <span class="icon">
+                        <i class="fas fa-minus"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="control qty-input">
+                    <input
+                      type="number"
+                      name="quantity"
+                      value="{{item.quantity}}"
+                      min="1"
+                      max="{{item.product.stock}}"
+                      class="input is-primary"
+                      id="qty-{{item.product.id}}"
+                      x-on:keypress="blockAlpha($event)"
+                      x-on:keyup="updateSubmitForm({{item.product.id}})"
+                    />
+                  </div>
+                  <div class="control">
+                    <button
+                      @click.prevent="incrementQty({{item.product.id}})"
+                      class="button is-rounded is-icon is-primary"
+                      id="increment-{{item.product.id}}"
+                    >
+                      <span class="icon">
+                        <i class="fas fa-plus"></i>
+                      </span>
+                    </button>
                   </div>
                 </div>
-              </article> 
-            </a>
-          </td>
-          <td class="is-vcentered">
-            <p class="has-text-weight-bold">£ {{item.product.price}}</p>
-          </td>
-          <td class="is-vcentered">
-            <form
-            action="{% url 'adjust_basket' item.product.id %}"
-            method="POST"
-            id="basket-quantity-form-{{item.product.id}}"
-            x-data="qtyFormControl()"
-            class="control qty-form"
-            x-init="handleEnableDisable({{item.product.id}})"
-            
-          >
-          {% csrf_token %}
-            <div class="field has-addons">
-              <div class="control">
-                <button
-                  @click.prevent="decrementQty({{item.product.id}})"
-                  class="button is-rounded is-icon is-primary" 
-                  id="decrement-{{item.product.id}}"
-                  {% if item.quantity == 1 %}
-                  disabled=""
-                  {% endif %}
-                >
-                  <span class="icon">
-                    <i class="fas fa-minus"></i>
-                  </span>
-                </button>
-              </div>
-              <div class="control qty-input">
-                <input
-                  type="number"
-                  name="quantity"
-                  value="{{item.quantity}}"
-                  min="1"
-                  max="{{item.product.stock}}"
-                  class="input is-primary"
-                  id="qty-{{item.product.id}}"
-                  x-on:keypress="blockAlpha($event)"
-                  x-on:keyup="updateSubmitForm({{item.product.id}})"
-                />
-              </div>
-              <div class="control">
-                <button
-                  @click.prevent="incrementQty({{item.product.id}})"
-                  class="button is-rounded is-icon is-primary"
-                  id="increment-{{item.product.id}}"
-                >
-                  <span class="icon">
-                    <i class="fas fa-plus"></i>
-                  </span>
-                </button>
-              </div>
-            </div>
-            
-          </form>
-          </td>
-          <td class="is-vcentered">
-            <p class="has-text-weight-bold">£ {{item.product.price | calc_subtotal:item.quantity}}</p>
-          </td>
-          <td class="is-vcentered">
-            <a href="{% url 'remove_from_basket' item.product.id %}"><span class="icon"><i class="fas fa-trash"></i></span></a>
-          </td>
-        </tr>
-        
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>You have no items in your basket</p>
-    {% endif %}
+              </form>
+            </td>
+            <td class="is-vcentered">
+              <p class="has-text-weight-bold">
+                £ {{item.product.price | calc_subtotal:item.quantity}}
+              </p>
+            </td>
+            <td class="is-vcentered">
+              <a href="{% url 'remove_from_basket' item.product.id %}"
+                ><span class="icon"><i class="fas fa-trash"></i></span
+              ></a>
+            </td>
+          </tr>
 
-    {{item_data}}
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>You have no items in your basket</p>
+      {% endif %}
+
+    </div>
+    <div class="column is-4">
+      <div class="basket-totals">
+{% if basket_items %}
+        <table class="table basket-table">
+          <thead>
+            <tr>
+              <th>Basket Totals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p>Subtotal: <strong>£{{total}}</strong></p>
+                
+                {% if delivery == 0 %}
+                  <p>Delivery: <strong>Free</strong></p>
+                {% else %}
+                  <p>Delivery: <strong>£{{ delivery | floatformat:2 }}</strong></p>
+                {% endif %}
+                <p>Grand Total: <strong>£{{ grand_total | floatformat:2 }}</strong></p>
+                
+                {% if free_delivery_delta > 0 %}
+                  <p>Spend £{{ free_delivery_delta }} for free delivery!</p>
+                {% endif %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="has-text-centered">
+          <a
+            href="{% url 'all_products' %}"
+            class="button is-rounded is-primary is-outlined"
+          >
+            <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
+            <span class="is-uppercase"><strong>Continue Shopping</strong></span>
+          </a>
+        </div>
+        <div class="divider">OR</div>
+        <div class="has-text-centered">
+          <a href=""
+            class="button is-rounded is-primary"
+          >
+            <span class="is-uppercase">Secure Checkout</span>
+            <span class="icon">
+              <i class="fas fa-lock"></i>
+            </span>
+          </a>
+        </div>
+      {% endif %}
+      </div>
+      
+        
+    </div>
   </section>
 </main>
-    
 
-
-
-{% endblock content %}
-
-{% block postloadjs %}
-{{ block.super }}
-<script type="text/javascript" src="{% static 'js/qtyFormControl.js' %}"></script>
+{% endblock content %} {% block postloadjs %} {{ block.super }}
+<script
+  type="text/javascript"
+  src="{% static 'js/qtyFormControl.js' %}"
+></script>
 {% endblock postloadjs %}
-  
