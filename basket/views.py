@@ -16,10 +16,16 @@ def add_to_basket(request, product_id):
     basket = request.session.get("basket", {})
 
     if product_id in list(basket.keys()):
-        basket[product_id] += quantity
-        messages.success(
-            request, f"Updated {product.name} quantity to {basket[product_id]}"
-        )
+        if product.stock >= quantity + basket[product_id]:
+            basket[product_id] += quantity
+            messages.success(
+                request, f"Updated {product.name} quantity to {basket[product_id]}"
+            )
+        else:
+            messages.warning(
+                request,
+                f"You cannot add that amount to the basket - we have {product.stock} in stock and you already have {basket[product_id]} in your basket",
+            )
     else:
         basket[product_id] = quantity
         messages.success(request, f"Added {product.name} to your basket")
