@@ -1,0 +1,63 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load basket_tools %} 
+{% load templatetags %}
+
+{% block content %}
+
+
+<main class="container">
+  <section class="section columns is-centered">
+    <div class="column is-12">
+      <p>Please fill out form</p>
+
+      <form action="{% url 'checkout' %}" method="POST" id="payment-form" class="form">
+        {% csrf_token %}
+        <fieldset>
+          <legend>Details</legend>
+          {{order_form.full_name | add_class:"input"}}
+          {{order_form.email | add_class:"input"}}
+        </fieldset>
+        <fieldset>
+          <legend>Delivery</legend>
+          {{order_form.phone_number | add_class:"input"}}
+          {{order_form.country | add_class:"input"}}
+          {{order_form.postcode | add_class:"input"}}
+          {{order_form.post_town | add_class:"input"}}
+          {{order_form.address_1 | add_class:"input"}}
+          {{order_form.address_2 | add_class:"input"}}
+          {{order_form.county | add_class:"input"}}
+        </fieldset>
+        <fieldset>
+          <legend>Payment</legend>
+          <div id="card-element"></div>
+          <div id="card-errors"></div>
+        </fieldset>
+        <div>
+          <button class="button" id="submit-payment-button">
+            <span>Complete Order</span>
+            <span class="icon">
+              <i class="fas fa-lock"></i>
+            </span>
+          </button>
+        </div>
+      </form>   
+        
+    </div>
+      
+  </section>
+</main>
+
+{% endblock content %} 
+
+
+{% block postloadjs %}
+{{ block.super }}
+{{ stripe_public_key|json_script:"id_stripe_public_key"}}
+{{ client_secret|json_script:"id_client_secret"}}
+<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+  
+{% endblock postloadjs %}
+  
+
+
