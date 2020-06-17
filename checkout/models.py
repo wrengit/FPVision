@@ -40,14 +40,14 @@ class Order(models.Model):
     def update_total(self):
         self.order_total = self.lineitems.aggregate(Sum("lineitem_total"))[
             "lineitem_total__sum"
-        ]
+        ] or 0
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-            self.deleviery_cost = (
+            self.delivery_cost = (
                 self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
             )
         else:
             self.delivery_cost = 0
-        self.grand_total = self.order_total + self.deleviery_cost
+        self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
     def __str__(self):
@@ -55,7 +55,7 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
-    Order = models.ForeignKey(
+    order = models.ForeignKey(
         Order,
         null=False,
         blank=False,
