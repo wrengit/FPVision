@@ -156,6 +156,14 @@ requests = "*"
 requests-oauthlib = ">=0.3.0"
 
 [[package]]
+category = "main"
+description = "Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application."
+name = "django-environ"
+optional = false
+python-versions = "*"
+version = "0.4.5"
+
+[[package]]
 category = "dev"
 description = "the modular source code checker: pep8 pyflakes and co"
 name = "flake8"
@@ -425,7 +433,7 @@ python-versions = "*"
 version = "0.2.3"
 
 [metadata]
-content-hash = "4f869cc60bb74774ccbae7f1a69066c0a35b3601b2d4b751dfa09565356287bd"
+content-hash = "c2c2668d5e61fde79d986a973b858c56f174188c1d2cbcc2f72e8504f11544ec"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -513,6 +521,10 @@ django = [
 ]
 django-allauth = [
     {file = "django-allauth-0.42.0.tar.gz", hash = "sha256:f17209410b7f87da0a84639fd79d3771b596a6d3fc1a8e48ce50dabc7f441d30"},
+]
+django-environ = [
+    {file = "django-environ-0.4.5.tar.gz", hash = "sha256:6c9d87660142608f63ec7d5ce5564c49b603ea8ff25da595fd6098f6dc82afde"},
+    {file = "django_environ-0.4.5-py2.py3-none-any.whl", hash = "sha256:c57b3c11ec1f319d9474e3e5a79134f40174b17c7cc024bbb2fad84646b120c4"},
 ]
 flake8 = [
     {file = "flake8-3.8.3-py2.py3-none-any.whl", hash = "sha256:15e351d19611c887e482fb960eae4d44845013cc142d42896e9862f775d8cf5c"},
