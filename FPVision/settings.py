@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
+
+
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +26,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "60ibq=c)tog)y+@*c!zzfkn1b++@-!7vq0jf3jao*dh9_x&dsk"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -77,6 +83,7 @@ TEMPLATES = [
                 "basket.context.basket_contents",
                 "products.context.all_products_all_categories",
             ],
+            "libraries": {"templatetags": "templatetags.form_tags"},
         },
     },
 ]
@@ -155,5 +162,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 
-STRIPE_PUBLISHABLE_KEY = "pk_test_RGQePUj1BRODGpTZKHr67Kb800eLRgi5wi"
-STRIPE_SECRET_KEY = "sk_test_TgXa7fvrYNcynN350uKCgTCX00NHPOi5e2"
+STRIPE_CURRENCY = "gbp"
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY", "")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
