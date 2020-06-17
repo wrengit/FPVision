@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "products",
     "search",
     "basket",
+    "checkout",
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
+
+STRIPE_PUBLISHABLE_KEY = "pk_test_RGQePUj1BRODGpTZKHr67Kb800eLRgi5wi"
+STRIPE_SECRET_KEY = "sk_test_TgXa7fvrYNcynN350uKCgTCX00NHPOi5e2"

@@ -39,7 +39,7 @@ class SubCategory(models.Model):
         verbose_name_plural = "Sub Categories"
 
     def __str__(self):
-        name =self.name
+        name = self.name
         parent_name = [self.category.name]
         parent_name.append(name)
         return " --> ".join(parent_name)
@@ -55,7 +55,7 @@ class Product(models.Model):
     sub_category = models.ForeignKey(
         "SubCategory", null=True, blank=True, on_delete=models.CASCADE, to_field="name"
     )
-    sku = models.CharField(max_length=10, unique=True, blank=True, default=create_sku())
+    sku = models.CharField(max_length=10, unique=True, blank=True)
     name = models.CharField(max_length=254, unique=True)
     slug = models.SlugField(max_length=254, unique=True)
     description = models.TextField(blank=True)
@@ -74,6 +74,11 @@ class Product(models.Model):
         ordering = ["name"]
         verbose_name = "product"
         verbose_name_plural = "products"
+
+    def save(self, *args, **kwargs):
+        if not self.sku:
+            self.sku = create_sku()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
