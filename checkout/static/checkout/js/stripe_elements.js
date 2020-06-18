@@ -1,12 +1,14 @@
-let stripePublicKey = document.getElementById("id_stripe_public_key").textContent.slice(1, -1)
-let clientSecret = document.getElementById("id_client_secret").textContent.slice(1, -1)
+const stripePublicKey = document.getElementById("id_stripe_public_key").textContent.slice(1, -1)
+const clientSecret = document.getElementById("id_client_secret").textContent.slice(1, -1)
+const errorDiv = document.getElementById("card-errors")
+const form = document.getElementById("payment-form")
+const paymentButton = document.getElementById("submit-payment-button")
 let stripe = Stripe(stripePublicKey)
 let elements = stripe.elements()
 let card = elements.create("card")
 card.mount("#card-element")
 
 card.addEventListener('change', e => {
-    let errorDiv = document.getElementById("card-errors")
     if (e.error) {
         errorDiv.innerHTML = `
             <span class="icon" role="alert">
@@ -19,15 +21,12 @@ card.addEventListener('change', e => {
     }
 })
 
-let form = document.getElementById("payment-form")
-
 form.addEventListener("submit", e => {
-    let errorDiv = document.getElementById("card-errors")
     e.preventDefault()
     card.update({
         "disabled": true
     })
-    document.getElementById("submit-payment-button").setAttribute("disabled", "")
+    paymentButton.setAttribute("disabled", "")
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -43,7 +42,7 @@ form.addEventListener("submit", e => {
             card.update({
                 "disabled": false
             })
-            document.getElementById("submit-button").removeAttribute("disabled")
+            paymentButton.removeAttribute("disabled")
         } else {
             if (result.paymentIntent.status === "succeeded") {
                 form.submit()
