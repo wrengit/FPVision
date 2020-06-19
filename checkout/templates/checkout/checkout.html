@@ -28,6 +28,17 @@
           {{order_form.address_2 | add_class:"input"}}
           {{order_form.county | add_class:"input"}}
         </fieldset>
+        {% if user.is_authenticated %}
+          <label class="checkbox" for="id-save-info">
+            <input type="checkbox" id="id-save-info" name="save-info">Save this delivery information to my profile
+          </label>
+          
+        {% else %}
+          <label class="form-check-label" for="id-save-info">
+              <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+              <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+          </label>
+				{% endif %}
         <fieldset>
           <legend>Payment</legend>
           <div id="card-element"></div>

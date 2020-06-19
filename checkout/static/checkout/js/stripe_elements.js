@@ -29,28 +29,26 @@ form.addEventListener("submit", e => {
         "disabled": true
     })
     paymentButton.setAttribute("disabled", "")
-    let saveInfo = Boolean(saveInfoCheck.getAttribute("checked"))
-    let csrfToken = Cookies.get('csrftoken')
-    let postData = {
-        "csrfmiddlewaretoken": csrfToken,
-        "client_secret": clientSecret,
-        "save_info": saveInfo,
-    }
-    let url = "/checkout/cache_checkout_data/"
+    let saveInfo = Boolean(saveInfoCheck.checked)
+    let csrfToken = csrfTokenInput[0].value
+    let postData = new FormData()
+    postData.append("csrfmiddlewaretoken", csrfToken)
+    postData.append("client_secret", clientSecret)
+    postData.append("save_info", saveInfo)
+    let url = "cache_checkout_data/"
 
     fetch(url, {
         method: "POST",
         credentials: "same-origin",
-        body: JSON.stringify(postData),
+        body: postData,
         headers: {
             "X-CSRFToken": csrfToken
         }
     }).then(response => {
         if (!response.ok) {
-            location.reload()
+            console.log(response)
         }
-        console.log(body)
-    }).then(() => { 
+    }).then(() => {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
