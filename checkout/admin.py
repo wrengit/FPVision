@@ -15,6 +15,8 @@ class OrderAdmin(admin.ModelAdmin):
         "delivery_cost",
         "order_total",
         "grand_total",
+        "original_basket",
+        "stripe_pid",
     )
     fields = (
         "order_number",
@@ -31,6 +33,8 @@ class OrderAdmin(admin.ModelAdmin):
         "delivery_cost",
         "order_total",
         "grand_total",
+        "original_basket",
+        "stripe_pid",
     )
     list_display = (
         "order_number",
