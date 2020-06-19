@@ -46,7 +46,7 @@ form.addEventListener("submit", e => {
         }
     }).then(response => {
         if (!response.ok) {
-            console.log(response)
+            location.reload()
         }
     }).then(() => {
         stripe.confirmCardPayment(clientSecret, {
