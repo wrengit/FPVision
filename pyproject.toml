@@ -13,6 +13,7 @@ pillow = "^7.1.2"
 django-allauth = "^0.42.0"
 stripe = "^2.48.0"
 django-environ = "^0.4.5"
+django-countries = "^6.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
