@@ -120,9 +120,7 @@ def checkout(request):
                     "address_2": profile.default_address_2,
                     "county": profile.default_county,
                 }
-                print(saved_info)
                 order_form = OrderForm(initial=saved_info)
-                print(order_form.is_bound)
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
         else:
