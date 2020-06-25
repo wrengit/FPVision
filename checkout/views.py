@@ -61,7 +61,7 @@ def checkout(request):
             order = order_form.save(commit=False)
             pid = request.POST.get("client_secret").split("_secret")[0]
             order.stripe_pid = pid
-            order.original_bag = json.dumps(basket)
+            order.original_basket = json.dumps(basket)
             order.save()
             for item_id, item_data in basket.items():
                 try:
@@ -81,10 +81,9 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect(reverse("view_basket"))
+
             request.session["save_info"] = "save-info" in request.POST
-            return redirect(reverse(
-                "checkout_success", args=[order.order_number]
-            ))
+            return redirect(reverse("checkout_success", args=[order.order_number]))
         else:
             messages.error(
                 request,
@@ -106,7 +105,28 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
             payment_method_types=["card"],
         )
-        order_form = OrderForm()
+
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                saved_info = {
+                    "full_name": profile.user.get_full_name(),
+                    "email": profile.user.email,
+                    "phone_number": profile.default_phone_number,
+                    "country": profile.default_country,
+                    "postcode": profile.default_postcode,
+                    "post_town": profile.default_post_town,
+                    "address_1": profile.default_address_1,
+                    "address_2": profile.default_address_2,
+                    "county": profile.default_county,
+                }
+                print(saved_info)
+                order_form = OrderForm(initial=saved_info)
+                print(order_form.is_bound)
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
 
     if not stripe_public_key:
         messages.warning(
