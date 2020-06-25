@@ -2,5 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.profile, name="profile")
+    path("", views.my_account, name="my_account"),
+    path("order_history/", views.order_history, name="order_history"),
+    path("order_history/<order_number>", views.order_history, name="order_history"),
+    path("update_address/", views.update_address, name="update_address"),
 ]
