@@ -1,0 +1,57 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Orders</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-multiline is-8-desktop is-offset-1-desktop">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Order Number</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr>
+              <td><a href="{% url 'order_history' order.order_number %}"><abbr title="{{order.order_number}}">{{order.order_number|truncatechars:6}}</abbr></a></td>
+              <td>{{order.date}}</td>
+              <td>
+                <ul>
+                  {% for item in order.lineitems.all %}
+                  <li>
+                    {{item.product.name}} x {{item.quantity}}
+                  </li>
+                  {% endfor %}
+                </ul>
+                
+              </td>
+              <td>£{{order.grand_total}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+          
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

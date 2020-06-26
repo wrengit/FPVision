@@ -1,0 +1,51 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Dashboard</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-8-desktop is-offset-1-desktop">
+        <h2 class="subtitle">
+          Hello <strong>{{user.username}}</strong>
+          <small
+            >(not <strong>{{user.username}}</strong>?
+            <a href="{% url 'account_logout' %}">Log out</a>)</small
+          >
+        </h2>
+        <div class="buttons">
+          <a class="button is-rounded" href="{% url 'order_history' %}"
+            ><span class="icon"><i class="fas fa-mail-bulk"></i></span
+            ><span>Orders</span></a
+          >
+          <a class="button is-rounded" href="{% url 'update_address' %}"
+            ><span class="icon"><i class="far fa-address-book"></i></span
+            ><span>Address</span></a
+          >
+          <a class="button is-rounded"
+            ><span class="icon"><i class="far fa-user-circle"></i></span
+            ><span>Account Details</span></a
+          >
+          <a class="button is-rounded"
+            ><span class="icon"><i class="fas fa-cart-arrow-down"></i></span
+            ><span>Wishlist</span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load templatetags %}
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Dashboard</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-8 is-12-touch is-offset-1-desktop">
+        <form method="POST" id="address-form" class="form">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Delivery Address</legend>
+            <div class="field is-horizontal">
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    {{form.default_address_1|add_class:"input"}}
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control is-expanded">
+                    {{form.default_address_2|add_class:"input"}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    {{form.default_post_town|add_class:"input"}}
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control is-expanded">
+                    {{form.default_county|add_class:"input"}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-body">
+                <div class="field" id="country-select">
+                  <div class="select">
+                    {{form.default_country|add_class:"address-country-select"}}
+                  </div>
+                </div>
+                <div class="field">
+                  <p class="control is-expanded">
+                    {{form.default_postcode|add_class:"input"}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div>
+            <button class="button mt-6 is-primary is-rounded">
+              <span class="icon">
+                <i class="fas fa-house-user"></i>
+              </span>
+              <span>Update Address</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %} {% block postloadjs %} {{ block.super }}
+<script src="{% static 'profiles/js/country_select.js' %}"></script>
+{% endblock postloadjs %}

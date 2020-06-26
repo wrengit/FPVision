@@ -8,16 +8,16 @@ from django_countries.fields import CountryField
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     default_phone_number = models.CharField(
-        max_length=20, blank=False, null=True
+        max_length=20, blank=True, null=True
     )
     default_country = CountryField(
-        blank_label="Country *", blank=False, null=True
+        blank_label="Country", blank=True, null=True
     )
-    default_postcode = models.CharField(max_length=20, blank=False, null=True)
-    default_post_town = models.CharField(max_length=40, blank=False, null=True)
-    default_address_1 = models.CharField(max_length=80, blank=False, null=True)
-    default_address_2 = models.CharField(max_length=80, blank=False, null=True)
-    default_county = models.CharField(max_length=80, blank=False, null=True)
+    default_postcode = models.CharField(max_length=20, blank=True, null=True)
+    default_post_town = models.CharField(max_length=40, blank=True, null=True)
+    default_address_1 = models.CharField(max_length=80, blank=True, null=True)
+    default_address_2 = models.CharField(max_length=80, blank=True, null=True)
+    default_county = models.CharField(max_length=80, blank=True, null=True)
 
     def __str__(self):
         return self.user.username

@@ -11,7 +11,7 @@ def my_account(request):
 
 def order_history(request, order_number=None):
     profile = get_object_or_404(UserProfile, user=request.user)
-    orders = profile.orders.all()
+    orders = profile.orders.all().order_by("-date")
     if order_number is not None:
         order = get_object_or_404(Order, order_number=order_number)
         date = order.date

@@ -15,11 +15,11 @@ class UserProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             "default_phone_number": "Phone Number",
-            "default_postcode": "Postal Code",
+            "default_postcode": "Post Code",
             "default_post_town": "Town or City",
             "default_address_1": "Street Address 1",
             "default_address_2": "Street Address 2",
-            "default_county": "County, State or Locality",
+            "default_county": "County",
         }
 
         self.fields["default_phone_number"].widget.attrs["autofocus"] = True
@@ -30,7 +30,4 @@ class UserProfileForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs["placeholder"] = placeholder
-            self.fields[field].widget.attrs[
-                "class"
-            ] = ""
             self.fields[field].label = False
