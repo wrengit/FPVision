@@ -49,7 +49,7 @@
               
             >
               <div class="dropdown-content">
-                <a href="#" class="dropdown-item">Account</a>
+                <a href="{% url 'my_account' %}" class="dropdown-item">Account</a>
                 <hr class="dropdown-divider" />
                 <a href="{% url 'account_logout' %}" class="dropdown-item"
                   >Logout</a
@@ -82,7 +82,7 @@
 
           {% endif %}
 
-          <a class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1">
+          <a href="{% url 'view_basket' %}" class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1">
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
@@ -329,7 +329,7 @@
               </div>
               <div class="dropdown-menu">
                 <div class="dropdown-content">
-                  <a href="#" class="dropdown-item">Account</a>
+                  <a href="{% url 'my_account' %}" class="dropdown-item">Account</a>
                   <hr class="dropdown-divider" />
                   <a href="{% url 'account_logout' %}" class="dropdown-item"
                     >Logout</a
