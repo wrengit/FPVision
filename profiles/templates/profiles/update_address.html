@@ -18,12 +18,12 @@
     <div class="columns">
       {% include 'includes/profile_nav.html' %}
 
-      <div class="column is-8 is-12-touch is-offset-1-desktop">
+      <div class="column is-7 is-12-touch">
+        <p>Add your address to make checking out quicker for your next order.</p>
+
         <form method="POST" id="address-form" class="form">
           {% csrf_token %}
-          <fieldset>
-            <legend>Delivery Address</legend>
-            <div class="field is-horizontal">
+            <div class="field is-horizontal pt-3">
               <div class="field-body">
                 <div class="field">
                   <p class="control is-expanded">
@@ -37,7 +37,7 @@
                 </div>
               </div>
             </div>
-            <div class="field is-horizontal">
+            <div class="field is-horizontal pt-3">
               <div class="field-body">
                 <div class="field">
                   <p class="control is-expanded">
@@ -51,7 +51,7 @@
                 </div>
               </div>
             </div>
-            <div class="field is-horizontal">
+            <div class="field is-horizontal pt-3">
               <div class="field-body">
                 <div class="field" id="country-select">
                   <div class="select">
@@ -65,9 +65,8 @@
                 </div>
               </div>
             </div>
-          </fieldset>
           <div>
-            <button class="button mt-6 is-primary is-rounded">
+            <button class="button mt-3 is-success is-rounded">
               <span class="icon">
                 <i class="fas fa-house-user"></i>
               </span>

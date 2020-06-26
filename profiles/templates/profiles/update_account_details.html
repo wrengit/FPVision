@@ -1,0 +1,69 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load templatetags %}
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Account Details</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-7 is-12-touch">
+        <p>Add your first and last name, change your username, and update your email address.</p>
+        
+        <form method="POST" class="form">
+          {% csrf_token %}
+          <div class="field is-horizontal pt-3">
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-expanded">
+                  {{form.first_name|add_class:"input"}}
+                </div>
+              </div>
+              <div class="field">
+                <div class="control is-expanded">
+                  {{form.last_name|add_class:"input"}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal pt-3">
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-expanded">
+                  {{form.username|add_class:"input"}}
+                </div>
+                <p class="help">This is how your name will be displayed around the site</p>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal pt-3">
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-expanded">
+                  {{form.email|add_class:"input"}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="button is-rounded is-success mt-3"><span class="icon"><i class="fas fa-save"></i></span><span>Save Changes</span></button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %} {% block postloadjs %} {{ block.super }}
+<script src="{% static 'profiles/js/country_select.js' %}"></script>
+{% endblock postloadjs %}

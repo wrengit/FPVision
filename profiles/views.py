@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .models import UserProfile
-from .forms import UserProfileForm
+from .forms import UserProfileForm, UserForm
 from checkout.models import Order
 
 
@@ -44,5 +44,18 @@ def update_address(request):
             form.save()
             messages.success(request, "We have updated your address")
     template = "profiles/update_address.html"
+    context = {"form": form}
+    return render(request, template, context)
+
+
+def update_account_details(request):
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "We have updated your account details")
+    else:
+        form = UserForm(instance=request.user)
+    template = "profiles/update_account_details.html"
     context = {"form": form}
     return render(request, template, context)

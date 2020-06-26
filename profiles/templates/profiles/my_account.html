@@ -17,15 +17,18 @@
     <div class="columns">
       {% include 'includes/profile_nav.html' %}
 
-      <div class="column is-8-desktop is-offset-1-desktop">
-        <h2 class="subtitle">
+      <div class="column is-7-desktop">
+
+        <h2>
           Hello <strong>{{user.username}}</strong>
           <small
             >(not <strong>{{user.username}}</strong>?
             <a href="{% url 'account_logout' %}">Log out</a>)</small
           >
         </h2>
-        <div class="buttons">
+
+        <p class="pt-5">From the 'My Account' Dashboard, you can view previous orders, update your address, check and edit your account details and see what you've added to your wishlist.</p>
+        <div class="buttons pt-6">
           <a class="button is-rounded is-primary is-outlined" href="{% url 'order_history' %}"
             ><span class="icon"><i class="fas fa-mail-bulk"></i></span
             ><span>Orders</span></a
