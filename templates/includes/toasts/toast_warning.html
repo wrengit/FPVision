@@ -1,4 +1,13 @@
-<div x-data class="notification is-warning">
-    <button class="delete" @click="$el.parentNode.remove()"></button>
-    {{message}}
-</div>
+<div x-data class="message is-warning">
+    <div class="message-header">
+      <p>Warning!</p>
+      <button
+        class="delete"
+        @click="$el.parentNode.remove()"
+      ></button>
+    </div>
+    <div class="message-body">
+      {{message}}
+    </div>
+  </div>
+  

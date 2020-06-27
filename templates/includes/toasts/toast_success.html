@@ -1,4 +1,12 @@
-<div x-data class="notification is-success">
-    <button class="delete" @click="$el.parentNode.remove()"></button>
+<div x-data class="message is-success">
+  <div class="message-header">
+    <p>Success!</p>
+    <button
+      class="delete"
+      @click="$el.parentNode.remove()"
+    ></button>
+  </div>
+  <div class="message-body">
     {{message}}
+  </div>
 </div>

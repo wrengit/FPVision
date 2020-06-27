@@ -1,4 +1,14 @@
-<div x-data class="notification is-info">
-    <button class="delete" @click="$el.parentNode.remove()"></button>
-    {{message}}
-</div>
+<div x-data class="message is-info">
+    <div class="message-header">
+        <a href="{% url 'view_wishlist' %}" class="button is-rounded is-info is-inverted is-small">Wishlist</a>
+      <button
+        class="delete"
+        @click="$el.parentNode.remove()"
+      ></button>
+    </div>
+    <div class="message-body">
+      <p>{{message}}</p>
+      
+    </div>
+  </div>
+  
