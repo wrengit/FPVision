@@ -5,7 +5,7 @@
     <li><a class="{% if url_name == 'order_history' %}is-active{% endif %}" href="{% url 'order_history' %}">Orders</a></li>
     <li><a class="{% if url_name == 'update_address' %}is-active{% endif %}" href="{% url 'update_address' %}">Address</a></li>
     <li><a class="{% if url_name == 'update_account_details' %}is-active{% endif %}" href="{% url 'update_account_details' %}">Account Details</a></li>
-    <li><a class="{% if url_name == 'wishlist' %}is-active{% endif %}" href="#">Wishlist</a></li>
+    <li><a class="{% if url_name == 'view_wishlist' %}is-active{% endif %}" href="{% url 'view_wishlist' %}">Wishlist</a></li>
     {% endwith %}
   </ul>
 </aside>

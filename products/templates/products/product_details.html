@@ -73,8 +73,11 @@
             </div>
           </div>
 
-          <button class="button is-rounded is-primary" type="submit">
+          <button class="button is-rounded is-success" type="submit">
             Add to Basket
+          </button>
+          <button class="button is-rounded is-success" type="submit" formaction="{% url 'add_to_wishlist' product.id %}">
+            Add to Wishlist
           </button>
           <input type="hidden" name="redirect_url" value="{{ request.path }}" />
         </form>

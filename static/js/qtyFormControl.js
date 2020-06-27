@@ -5,8 +5,8 @@ function qtyFormControl() {
             let input = document.getElementById(`qty-${targetId}`);
             let currentVal = parseInt(input.value);
             let maxVal = parseInt(input.getAttribute("max"));
-            let minusDisabled = currentVal < 2;
-            let plusDisabled = currentVal > maxVal - 1;
+            let minusDisabled = currentVal == 1;
+            let plusDisabled = currentVal == maxVal;
             let increment = document.getElementById(`increment-${targetId}`);
             let decrement = document.getElementById(`decrement-${targetId}`);
             if (minusDisabled) {
@@ -27,10 +27,10 @@ function qtyFormControl() {
                 if (currentVal > maxVal) {
                     input.value = maxVal;
                 }
-                if (window.location.pathname == "/basket/") {
-                    form.submit();   
+                if (window.location.pathname == "/basket/" || window.location.pathname == "/wishlist/") {
+                    form.submit();
                 }
-                
+
             }, 800)
             this.handleEnableDisable(targetId)
         },
@@ -44,7 +44,7 @@ function qtyFormControl() {
                 input.value = maxVal;
             }
             this.handleEnableDisable(targetId);
-            if (window.location.pathname == "/basket/") {
+            if (window.location.pathname == "/basket/" || window.location.pathname == "/wishlist/") {
                 if (timer) {
                     clearTimeout(timer)
                     timer = null
@@ -62,7 +62,7 @@ function qtyFormControl() {
                 input.value = currentVal - 1;
             }
             this.handleEnableDisable(targetId);
-            if (window.location.pathname == "/basket/") {
+            if (window.location.pathname == "/basket/" || window.location.pathname == "/wishlist/" ) {
                 if (timer) {
                     clearTimeout(timer)
                     timer = null

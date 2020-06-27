@@ -1,0 +1,150 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Wishlist</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-multiline is-7-desktop">
+        {% if wishlist_products %}
+
+        <p class="pb-3">
+          Items you have added to your wishlist can be found here. <br />
+          Press the button below to add all 'Wishlist' products to your basket.
+        </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for item in wishlist_products %}
+            <tr>
+              <td class="is-vcentered">
+                <a href="{{item.product.get_url}}">
+                  <article class="is-flex">
+                    <figure class="media-left">
+                      <p class="image is-96x96">
+                        <img
+                          src="{{item.product.image.url}}"
+                          alt="{{item.product.name}}"
+                        />
+                      </p>
+                    </figure>
+                    <div class="media-content level-item">
+                      <div class="content">
+                        <p>{{item.product.name}}</p>
+                      </div>
+                    </div>
+                  </article>
+                </a>
+              </td>
+              <td class="is-vcentered">
+                <p class="has-text-weight-bold">£ {{item.product.price}}</p>
+              </td>
+              <td class="is-vcentered">
+                <form
+                  action="{% url 'adjust_wishlist' item.product.id %}"
+                  method="POST"
+                  id="basket-quantity-form-{{item.product.id}}"
+                  x-data="qtyFormControl()"
+                  class="control qty-form"
+                  x-init="handleEnableDisable({{item.product.id}})"
+                >
+                  {% csrf_token %}
+                  <div class="field has-addons">
+                    <div class="control">
+                      <button
+                        @click.prevent="decrementQty({{item.product.id}})"
+                        class="button is-rounded is-icon is-primary"
+                        id="decrement-{{item.product.id}}"
+                      >
+                        <span class="icon">
+                          <i class="fas fa-minus"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control qty-input">
+                      <input
+                        type="number"
+                        name="quantity"
+                        value="{{item.quantity}}"
+                        min="1"
+                        max="{{item.product.stock}}"
+                        class="input is-primary"
+                        id="qty-{{item.product.id}}"
+                        x-on:keypress="blockAlpha($event)"
+                        x-on:keyup="updateSubmitForm({{item.product.id}})"
+                      />
+                    </div>
+                    <div class="control">
+                      <button
+                        @click.prevent="incrementQty({{item.product.id}})"
+                        class="button is-rounded is-icon is-primary"
+                        id="increment-{{item.product.id}}"
+                      >
+                        <span class="icon">
+                          <i class="fas fa-plus"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </td>
+              <td class="is-vcentered">
+                <p class="has-text-weight-bold">
+                  £ {{item.wishlistitem_total}}
+                </p>
+              </td>
+              <td class="is-vcentered">
+                <a href="{% url 'remove_from_wishlist' item.product.id %}"
+                  ><span class="icon"><i class="fas fa-trash"></i></span
+                ></a>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="level">
+          <div class="level-item">
+            <a href="{% url 'add_wishlist_to_basket' %}" class="button is-rounded is-primary">
+              Add all to basket (£{{wishlist.wishlist_total}})
+            </a>
+          </div>
+        </div>
+
+        {% else %}
+        <p>
+          You have no items in your wishlist. <br />
+          Add products to the wishlist from the product page.
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %} 
+
+{% block postloadjs %}
+<script src="{% static 'js/qtyFormControl.js' %}"></script>
+{% endblock postloadjs %}
