@@ -20,11 +20,17 @@ def add_to_wishlist(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     redirect_url = request.POST.get("redirect_url")
     quantity = int(request.POST.get("quantity"))
-    WishlistItem.objects.create(
+    wishlist_item, created = WishlistItem.objects.get_or_create(
         product=product,
         wishlist=wishlist,
-        quantity=quantity
     )
+    print(wishlist_item.quantity)
+    if wishlist_item.quantity == 0:
+        wishlist_item.quantity = quantity
+        wishlist_item.save()
+    else:
+        wishlist_item.quantity += quantity
+        wishlist_item.save()
     wishlist.update_total()
     messages.info(request, f"{product.name} was added to your wishlist")
     return redirect(redirect_url)
@@ -94,22 +100,24 @@ def add_wishlist_to_basket(request):
                     f"Added {item.product.name} x \
                         {item.quantity} to your basket",
                 )
-                request.session["basket"] = basket
-                wishlist_products.delete()
-                return redirect(reverse("view_basket"))
+                item.delete()
             else:
                 messages.warning(
                     request,
-                    f"You cannot add that amount to the basket - we have \
-                        {item.product.stock} in stock and you already \
-                            have {basket[id]} in your basket",
+                    f"You cannot add {item.product.name} X {item.quantity}\
+                     to the basket - we have {item.product.stock} in stock\
+                     and you already have {basket[id]} in your basket",
                 )
-                return redirect(reverse("view_wishlist"))
         else:
             basket[item.product.id] = item.quantity
             messages.success(
                 request, f"Added {item.product.name} to your basket"
             )
-            request.session["basket"] = basket
-            wishlist_products.delete()
-            return redirect(reverse("view_basket"))
+            item.delete()
+
+    if not wishlist_products:
+        request.session["basket"] = basket
+        return redirect(reverse("view_basket"))
+    else:
+        request.session["basket"] = basket
+        return redirect(reverse("view_wishlist"))
