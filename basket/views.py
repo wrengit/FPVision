@@ -19,7 +19,8 @@ def add_to_basket(request, product_id):
         if product.stock >= quantity + basket[product_id]:
             basket[product_id] += quantity
             messages.success(
-                request, f"Updated {product.name} quantity to {basket[product_id]}"
+                request, f"Updated {product.name} quantity\
+                     to {basket[product_id]}"
             )
         else:
             messages.warning(
