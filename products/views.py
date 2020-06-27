@@ -1,12 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Category, SubCategory, Product
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
     category = None
     subcategory = None
-    if category_slug != None:
-        if subcategory_slug != None:
+    if category_slug is not None:
+        if subcategory_slug is not None:
             category = Category.objects.get(slug=category_slug)
             subcategory = SubCategory.objects.get(slug=subcategory_slug)
             products_list = Product.objects.filter(sub_category=subcategory.name)
