@@ -29,14 +29,14 @@
       <div class="navbar-item has-dropdown is-hidden-desktop">
         <div class="buttons">
           {% if user.is_authenticated %}
-          <div 
-            class="dropdown is-right" 
-            x-bind:class="{ 'is-active': openAccount }" 
+          <div
+            class="dropdown is-right"
+            x-bind:class="{ 'is-active': openAccount }"
             @click.away="openAccount = false"
           >
             <div class="dropdown-trigger">
-              <button 
-                class="button is-primary is-outlined is-rounded is-icon" 
+              <button
+                class="button is-primary is-outlined is-rounded is-icon"
                 @click="openAccount =!openAccount"
               >
                 <span class="icon">
@@ -44,12 +44,11 @@
                 </span>
               </button>
             </div>
-            <div 
-              class="dropdown-menu" 
-              
-            >
+            <div class="dropdown-menu">
               <div class="dropdown-content">
-                <a href="{% url 'my_account' %}" class="dropdown-item">Account</a>
+                <a href="{% url 'my_account' %}" class="dropdown-item"
+                  >Account</a
+                >
                 <hr class="dropdown-divider" />
                 <a href="{% url 'account_logout' %}" class="dropdown-item"
                   >Logout</a
@@ -82,7 +81,10 @@
 
           {% endif %}
 
-          <a href="{% url 'view_basket' %}" class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1">
+          <a
+            href="{% url 'view_basket' %}"
+            class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1"
+          >
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
@@ -125,14 +127,16 @@
                     </h1></a
                   >
                   <hr class="navbar-divider" />
-                  {% for sc in all_subcategories %} {% if sc.category == c %}
+                  {% for sc in all_subcategories %} 
+                  {% if sc.category == c %}
                   <a
                     class="navbar-item"
                     href="{% url 'products_by_subcategory' c.slug sc.slug %}"
                   >
                     {{sc.name}}
                   </a>
-                  {% endif %} {% endfor %}
+                  {% endif %} 
+                  {% endfor %}
                 </div>
                 {% endfor %}
               </div>
@@ -204,21 +208,25 @@
                   <template x-if="products.length > 0">
                     <div class="divider has-text-primary">Products</div>
                   </template>
-                  
+
                   <template x-if="products.length > 4">
                     <p>
                       Showing 4 of&nbsp;<span x-text="products.length"></span
                       >&nbsp;for&nbsp;"&nbsp;<span x-text="q"></span>&nbsp;"
                     </p>
                   </template>
-                  
-                  <div class="columns is-variable is-mobile is-1 is-centered is-multiline is-touch is-flex-touch">
+
+                  <div
+                    class="columns is-variable is-mobile is-1 is-centered is-multiline is-touch is-flex-touch"
+                  >
                     <template x-if="products">
                       <template
                         x-for="product in products.slice(0,4)"
                         :key="product.id"
                       >
-                        <div class="column search-result-column is-quarter is-half-touch">
+                        <div
+                          class="column search-result-column is-quarter is-half-touch"
+                        >
                           <a
                             x-bind:href="'/products/'
                           +product.category.toLowerCase()
@@ -269,19 +277,21 @@
                       </template>
                     </template>
                     <template x-if="products.length > 4">
-                        <div class="column has-text-centered">
-                          <button
-                            class="button is-primary"
-                            @click.prevent="showRemainingProducts()"
-                          >
-                            View all&nbsp;<span x-text="products.length"></span
-                            >&nbsp;items
-                          </button>
-                        </div>
+                      <div class="column has-text-centered">
+                        <button
+                          class="button is-primary"
+                          @click.prevent="showRemainingProducts()"
+                        >
+                          View all&nbsp;<span x-text="products.length"></span
+                          >&nbsp;items
+                        </button>
+                      </div>
                     </template>
                     <template x-if="!products.length && !q">
                       <div class="dropdown-item">
-                        <p class="has-text-info has-text-weight-bold">Start typing for instant search results</p>
+                        <p class="has-text-info has-text-weight-bold">
+                          Start typing for instant search results
+                        </p>
                       </div>
                     </template>
                     <template x-if="!products.length && q">
@@ -302,16 +312,14 @@
           <div class="container">
             {% for c in all_categories %}
             <div class="divider has-text-primary">{{c.name}}</div>
-              {% for sc in all_subcategories %} {% if sc.category == c %}
-              <a
-                class="navbar-item has-text-centered"
-                href="{% url 'products_by_subcategory' c.slug sc.slug %}"
-              >
-                {{sc.name}}
-              </a>
-              {% endif %} 
-              {% endfor %} 
-            {% endfor %}
+            {% for sc in all_subcategories %} {% if sc.category == c %}
+            <a
+              class="navbar-item has-text-centered"
+              href="{% url 'products_by_subcategory' c.slug sc.slug %}"
+            >
+              {{sc.name}}
+            </a>
+            {% endif %} {% endfor %} {% endfor %}
           </div>
         </div>
         <!--Account / Basket Desktop-->
@@ -330,18 +338,22 @@
                 </div>
                 <div class="dropdown-menu">
                   <div class="dropdown-content">
-                    <a href="{% url 'my_account' %}" class="dropdown-item">Dashboard</a>
+                    <a href="{% url 'my_account' %}" class="dropdown-item"
+                      >Dashboard</a
+                    >
                     <a href="{% url 'order_history' %}" class="dropdown-item"
                       >Orders</a
                     >
                     <a href="{% url 'update_address' %}" class="dropdown-item"
                       >Update Address</a
                     >
-                    <a href="{% url 'update_account_details' %}" class="dropdown-item"
+                    <a
+                      href="{% url 'update_account_details' %}"
+                      class="dropdown-item"
                       >Account Details</a
                     >
                     <a href="{% url 'view_wishlist' %}" class="dropdown-item"
-                    >Wishlist</a
+                      >Wishlist</a
                     >
                     <hr class="dropdown-divider" />
                     <a href="{% url 'account_logout' %}" class="dropdown-item"
@@ -376,15 +388,16 @@
               </div>
             </a>
 
-            {% endif %}
-            
+            {% endif %} 
             {% if basket_items %}
             <div class="dropdown is-hoverable is-right">
               <div class="dropdown-trigger">
                 <a href="{% url 'view_basket' %}">
-                  <button class="button is-rounded is-primary is-outlined is-hidden-touch is-icon">
+                  <button
+                    class="button is-rounded is-primary is-outlined is-hidden-touch is-icon"
+                  >
                     {% if product_count > 0 %}
-                      <span>{{product_count}}</span>
+                    <span>{{product_count}}</span>
                     {% endif %}
                     <span class="icon">
                       <i class="fas fa-shopping-basket"></i>
@@ -394,65 +407,87 @@
               </div>
               <div class="dropdown-menu">
                 <div class="dropdown-content">
-                    {% if grand_total %}
-                      {% for item in basket_items %}
-                      <article class="media dropdown-item">
-                        <a href="{{product.get_url}}">
-                          <figure class="media-left">
-                            <p class="image is-48x48">
-                              <img src="{{item.product.image.url}}" alt="{{item.product.name}}">
-                            </p>
-                          </figure>
-                        </a>
-                          <div class="media-content">
-                            <div class="content">
-                              <a href="{{product.get_url}}">
-                                <p class="is-6">{{item.product.name}}</p>
-                              </a>
-                              <small>{{item.quantity}} x £{{item.product.price}}</small>
-                            </div>
-                          </div>        
-                        </article>
-
-                      {% endfor %}
-                    {% endif %}
-                    <div class="dropdown-item">
-                      <strong><p>
-                        Total{% if free_delivery_delta > 0 %} (Exc. delivery){% endif %}: 
-                        <span class="float-right">£{{ total|floatformat:2 }}</span>
-                      </p></strong>
-                      {% if free_delivery_delta > 0 %}
-                        <p class="mb-0 p-2 bg-warning shadow-sm text-black text-center">
-                            Spend <strong>£{{ free_delivery_delta }}</strong> more to get free next day delivery!
+                  {% if grand_total %} {% for item in basket_items %}
+                  <article class="media dropdown-item">
+                    <a href="{{product.get_url}}">
+                      <figure class="media-left">
+                        <p class="image is-48x48">
+                          <img
+                            src="{{item.product.image.url}}"
+                            alt="{{item.product.name}}"
+                          />
                         </p>
-                      {% endif %}
+                      </figure>
+                    </a>
+                    <div class="media-content">
+                      <div class="content">
+                        <a href="{{product.get_url}}">
+                          <p class="is-6">{{item.product.name}}</p>
+                        </a>
+                        <small
+                          >{{item.quantity}} x £{{item.product.price}}</small
+                        >
+                      </div>
                     </div>
-                    <div class="dropdown-content buttons dropdown-item">
-                      <a href="{% url 'view_basket' %}" class="button is-fullwidth is-primary is-rounded">View Basket</a>
-                      <a href="{% url 'checkout' %}" class="button is-fullwidth is-success is-rounded">Checkout</a>
-                    </div>
+                  </article>
+
+                  {% endfor %} 
+                  {% endif %}
+                  <div class="dropdown-item">
+                    <strong
+                      ><p>
+                        Total{% if free_delivery_delta > 0 %} (Exc. delivery)
+                        {% endif %}:
+                        <span class="float-right"
+                          >£{{ total|floatformat:2 }}</span
+                        >
+                      </p></strong
+                    >
+                    {% if free_delivery_delta > 0 %}
+                    <p
+                      class="mb-0 p-2 bg-warning shadow-sm text-black text-center"
+                    >
+                      Spend <strong>£{{ free_delivery_delta }}</strong> more to
+                      get free next day delivery!
+                    </p>
+                    {% endif %}
+                  </div>
+                  <div class="dropdown-content buttons dropdown-item">
+                    <a
+                      href="{% url 'view_basket' %}"
+                      class="button is-fullwidth is-info is-rounded"
+                      ><span class="icon"
+                        ><i class="fas fa-shopping-basket"></i></span
+                      ><span><strong>View Basket</strong></span></a
+                    >
+                    <a
+                      href="{% url 'checkout' %}"
+                      class="button is-fullwidth is-success is-rounded"
+                      ><span class="icon"><i class="fas fa-lock"></i></span
+                      ><span><strong>Checkout</strong></span></a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
-
 
             {% else %}
             <a href="{% url 'view_basket' %}">
               <div class="dropdown is-hoverable is-right">
                 <div class="dropdown-trigger">
-                  <button class="button is-rounded is-outlined is-hidden-touch is-icon">
+                  <button
+                    class="button is-rounded is-outlined is-hidden-touch is-icon"
+                  >
                     {% if product_count > 0 %}
-                      <span>{{product_count}}</span>
+                    <span>{{product_count}}</span>
                     {% endif %}
                     <span class="icon has-text-primary">
-                      <i class="fas fa-shopping-basket "></i>
+                      <i class="fas fa-shopping-basket"></i>
                     </span>
                   </button>
                 </div>
                 <div class="dropdown-menu">
-                  <div class="dropdown-content">
-                    
-                  </div>
+                  <div class="dropdown-content"></div>
                 </div>
               </div>
             </a>
