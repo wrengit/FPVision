@@ -329,7 +329,19 @@
               </div>
               <div class="dropdown-menu">
                 <div class="dropdown-content">
-                  <a href="{% url 'my_account' %}" class="dropdown-item">Account</a>
+                  <a href="{% url 'my_account' %}" class="dropdown-item">Dashboard</a>
+                  <a href="{% url 'order_history' %}" class="dropdown-item"
+                    >Orders</a
+                  >
+                  <a href="{% url 'update_address' %}" class="dropdown-item"
+                    >Update Address</a
+                  >
+                  <a href="{% url 'update_account_details' %}" class="dropdown-item"
+                    >Account Details</a
+                  >
+                  <a href="{% url 'view_wishlist' %}" class="dropdown-item"
+                  >Wishlist</a
+                  >
                   <hr class="dropdown-divider" />
                   <a href="{% url 'account_logout' %}" class="dropdown-item"
                     >Logout</a
