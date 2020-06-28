@@ -1,11 +1,48 @@
 <aside class="menu column is-3 is-offset-1-desktop pr-6">
   <ul class="menu-list">
     {% with url_name=request.resolver_match.url_name %}
-    <li><a class="{% if url_name == 'my_account' %}is-active{% endif %}" href="{% url 'my_account' %}">Dashboard</a></li>
-    <li><a class="{% if url_name == 'order_history' %}is-active{% endif %}" href="{% url 'order_history' %}">Orders</a></li>
-    <li><a class="{% if url_name == 'update_address' %}is-active{% endif %}" href="{% url 'update_address' %}">Address</a></li>
-    <li><a class="{% if url_name == 'update_account_details' %}is-active{% endif %}" href="{% url 'update_account_details' %}">Account Details</a></li>
-    <li><a class="{% if url_name == 'view_wishlist' %}is-active{% endif %}" href="{% url 'view_wishlist' %}">Wishlist</a></li>
+    <li>
+      <a
+        class="{% if url_name == 'my_account' %}is-active{% endif %}"
+        href="{% url 'my_account' %}"
+        >Dashboard</a
+      >
+    </li>
+    <li>
+      <a
+        class="{% if url_name == 'order_history' %}is-active{% endif %}"
+        href="{% url 'order_history' %}"
+        >Orders</a
+      >
+    </li>
+    <li>
+      <a
+        class="{% if url_name == 'update_address' %}is-active{% endif %}"
+        href="{% url 'update_address' %}"
+        >Address</a
+      >
+    </li>
+    <li>
+      <a
+        class="{% if url_name == 'update_account_details' %}is-active{% endif %}"
+        href="{% url 'update_account_details' %}"
+        >Account Details</a
+      >
+    </li>
+    <li>
+      <a
+        class="{% if url_name == 'account_change_password' %}is-active{% endif %}"
+        href="{% url 'account_change_password' %}"
+        >Change Password</a
+      >
+    </li>
+    <li>
+      <a
+        class="{% if url_name == 'view_wishlist' %}is-active{% endif %}"
+        href="{% url 'view_wishlist' %}"
+        >Wishlist</a
+      >
+    </li>
     {% endwith %}
   </ul>
 </aside>
