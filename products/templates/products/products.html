@@ -33,3 +33,10 @@
   </div>
 </section>
 {% endblock content %}
+
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'products/js/product_filter.js' %}"></script>
+{% endblock postloadjs %}
+  

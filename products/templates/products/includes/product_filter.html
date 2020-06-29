@@ -1,17 +1,17 @@
-<aside class="menu sticky-filter">
+<aside x-data="productFilter()" class="menu sticky-filter">
   <p class="menu-label">
     Stock
   </p>
   <ul class="menu-list">
     <li>
       <label class="checkbox">
-        <input type="checkbox">
+        <input id="in-stock-check" type="checkbox" @click="stockFilter()">
         In Stock
       </label>
     </li>
     <li>
       <label class="checkbox">
-        <input type="checkbox">
+        <input id="out-stock-check" type="checkbox" @click="stockFilter()">
         Out of Stock
       </label>
     </li>
@@ -35,4 +35,5 @@
       </div>
     </div>
   </div>
+  <button class="button is-info is-rounded is-outlined">Reset Filters</button>
 </aside>
