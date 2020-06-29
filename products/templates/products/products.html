@@ -2,11 +2,33 @@
 {% load static %} 
 {% block content %}
 
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      {% if not subcategory %} 
+      {% if category %}
+      <h1 class="title">{{category}}</h1>
+      {% else %} 
+      <h1 class="title">all products</h1>
+      {% endif %} 
+      {% else %} 
+      <h1 class="title">{{subcategory.name}}</h1> 
+      {% endif %}
+      {% include 'products/includes/breadcrumbs.html' %}
+
+    </div>
+  </div>
+</section>
 <section class="section">
   <div class="container">
-    {% include 'products/includes/breadcrumbs.html' %}
-    <div class="columns is-multiline">
-      {% include 'products/includes/product_card.html' %}
+    <div class="columns">
+      <div class="column is-3">
+        {% include 'products/includes/product_filter.html' %}
+      </div>
+      <div class="columns is-multiline">
+        {% include 'products/includes/product_card.html' %}
+
+      </div>
     </div>
   </div>
 </section>
