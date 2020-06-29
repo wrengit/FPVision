@@ -148,7 +148,7 @@
         <div class="has-text-centered">
           <a
             href="{% url 'all_products' %}"
-            class="button is-rounded is-primary is-outlined"
+            class="button is-rounded is-primary is-outlined w-100-mobile"
           >
             <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
             <span class="is-uppercase"><strong>Continue Shopping</strong></span>
@@ -157,12 +157,12 @@
         <div class="divider">OR</div>
         <div class="has-text-centered">
           <a href="{% url 'checkout' %}"
-            class="button is-rounded is-success"
+            class="button is-rounded is-success w-100-mobile"
           >
-            <span class="is-uppercase">Secure Checkout</span>
             <span class="icon">
               <i class="fas fa-lock"></i>
             </span>
+            <span class="is-uppercase"><strong>Secure Checkout</strong></span>
           </a>
         </div>
       {% endif %}
