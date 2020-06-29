@@ -32,7 +32,7 @@ def add_to_wishlist(request, product_id):
         wishlist_item.quantity += quantity
         wishlist_item.save()
     wishlist.update_total()
-    messages.info(request, f"{product.name} was added to your wishlist")
+    messages.success(request, f"{product.name} was added to your wishlist")
     return redirect(redirect_url)
 
 
@@ -115,9 +115,9 @@ def add_wishlist_to_basket(request):
             )
             item.delete()
 
-    if not wishlist_products:
-        request.session["basket"] = basket
-        return redirect(reverse("view_basket"))
-    else:
+    if wishlist_products is True:
         request.session["basket"] = basket
         return redirect(reverse("view_wishlist"))
+    else:
+        request.session["basket"] = basket
+        return redirect(reverse("view_basket"))
