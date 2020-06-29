@@ -22,18 +22,18 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Order Number</th>
-              <th>Date</th>
-              <th>Items</th>
-              <th>Total</th>
+              <th class="is-size-7-mobile">Order Number</th>
+              <th class="is-size-7-mobile">Date</th>
+              <th class="is-size-7-mobile">Items</th>
+              <th class="is-size-7-mobile">Total</th>
             </tr>
           </thead>
           <tbody>
             {% for order in orders %}
             <tr>
-              <td><a href="{% url 'order_history' order.order_number %}"><abbr title="{{order.order_number}}">{{order.order_number|truncatechars:6}}</abbr></a></td>
-              <td>{{order.date}}</td>
-              <td>
+              <td class="is-size-7-mobile"><a href="{% url 'order_history' order.order_number %}"><abbr title="{{order.order_number}}">{{order.order_number|truncatechars:6}}</abbr></a></td>
+              <td class="is-size-7-mobile">{{order.date}}</td>
+              <td class="is-size-7-mobile">
                 <ul>
                   {% for item in order.lineitems.all %}
                   <li>
@@ -43,7 +43,7 @@
                 </ul>
                 
               </td>
-              <td>£{{order.grand_total}}</td>
+              <td class="is-size-7-mobile">£{{order.grand_total}}</td>
             </tr>
             {% endfor %}
           </tbody>

@@ -27,36 +27,40 @@
           <thead>
             <tr>
               <th>Product</th>
-              <th>Price</th>
+              <th class="is-hidden-touch">Price</th>
               <th>Quantity</th>
-              <th>Subtotal</th>
+              <th class="is-hidden-mobile">Subtotal</th>
               <th></th>
             </tr>
           </thead>
-
+  
           <tbody>
             {% for item in wishlist_products %}
             <tr>
               <td class="is-vcentered">
-                <a href="{{item.product.get_url}}">
-                  <article class="is-flex">
-                    <figure class="media-left">
-                      <p class="image is-96x96">
-                        <img
-                          src="{{item.product.image.url}}"
-                          alt="{{item.product.name}}"
-                        />
-                      </p>
-                    </figure>
-                    <div class="media-content level-item">
+                <article class="is-flex">
+                  <figure class="media-left">
+                    <a href="{% url 'remove_from_wishlist' item.product.id %}">
+                      <div class="delete delete-basket is-hidden-tablet"></div>
+                    </a>
+                    <p class="image is-96x96">
+                      <img
+                      src="{{item.product.image.url}}"
+                      alt="{{item.product.name}}"
+                      />
+                    </p>
+                  </figure>
+                  <div class="media-content level-item">
+                    <a href="{{item.product.get_url}}">
                       <div class="content">
-                        <p>{{item.product.name}}</p>
+                        <p class="is-size-7-mobile">{{item.product.name}}</p>
+                        <p class="is-hidden-desktop is-size-7-mobile">{{item.quantity}} x <strong>£{{item.product.price}}</strong></p>
                       </div>
-                    </div>
-                  </article>
-                </a>
+                    </a>
+                  </div>
+                </article>
               </td>
-              <td class="is-vcentered">
+              <td class="is-vcentered is-hidden-touch">
                 <p class="has-text-weight-bold">£ {{item.product.price}}</p>
               </td>
               <td class="is-vcentered">
@@ -73,10 +77,10 @@
                     <div class="control">
                       <button
                         @click.prevent="decrementQty({{item.product.id}})"
-                        class="button is-rounded is-icon is-primary"
+                        class="button is-rounded is-icon is-primary is-size-7-mobile"
                         id="decrement-{{item.product.id}}"
                       >
-                        <span class="icon">
+                        <span class="icon is-small">
                           <i class="fas fa-minus"></i>
                         </span>
                       </button>
@@ -88,7 +92,7 @@
                         value="{{item.quantity}}"
                         min="1"
                         max="{{item.product.stock}}"
-                        class="input is-primary"
+                        class="input is-primary is-size-7-mobile"
                         id="qty-{{item.product.id}}"
                         x-on:keypress="blockAlpha($event)"
                         x-on:keyup="updateSubmitForm({{item.product.id}})"
@@ -97,10 +101,10 @@
                     <div class="control">
                       <button
                         @click.prevent="incrementQty({{item.product.id}})"
-                        class="button is-rounded is-icon is-primary"
+                        class="button is-rounded is-icon is-primary is-size-7-mobile"
                         id="increment-{{item.product.id}}"
                       >
-                        <span class="icon">
+                        <span class="icon is-small">
                           <i class="fas fa-plus"></i>
                         </span>
                       </button>
@@ -108,35 +112,38 @@
                   </div>
                 </form>
               </td>
-              <td class="is-vcentered">
+              <td class="is-vcentered is-hidden-touch">
                 <p class="has-text-weight-bold">
                   £ {{item.wishlistitem_total}}
                 </p>
               </td>
-              <td class="is-vcentered">
+              <td class="is-vcentered is-hidden-touch">
                 <a href="{% url 'remove_from_wishlist' item.product.id %}"
                   ><span class="icon"><i class="fas fa-trash"></i></span
                 ></a>
               </td>
             </tr>
-
+  
             {% endfor %}
           </tbody>
         </table>
 
         <div class="level">
           <div class="level-item">
-            <a href="{% url 'add_wishlist_to_basket' %}" class="button is-rounded is-primary">
-              Add all to basket (£{{wishlist.wishlist_total}})
+            <a href="{% url 'add_wishlist_to_basket' %}" class="button is-rounded is-success w-100-mobile">
+              <span class="icon"><i class="fas fa-cart-plus"></i></span><span><strong>Add all to basket (£{{wishlist.wishlist_total}})</strong></span>
             </a>
           </div>
         </div>
+
+        {{wishlist_products}}
 
         {% else %}
         <p>
           You have no items in your wishlist. <br />
           Add products to the wishlist from the product page.
         </p>
+        {{wishlist_products}}
         {% endif %}
       </div>
     </div>
