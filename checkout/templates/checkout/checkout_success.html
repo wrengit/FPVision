@@ -1,14 +1,94 @@
 {% extends 'base.html' %} 
 {% load static %} 
-{% load templatetags %}
 
 {% block content %}
 
 
 <main class="container">
-  <section class="section columns is-centered">
+  <section class="section columns is-multiline is-centered">
     <div class="column is-12">
-      <p>Thank you for your order</p>
+      
+      <p class="has-text-centered">Order {{order.order_number}} was placed on {{order.date}}</p>
+    </div>
+    <div class="column is-4">
+      <div class="box">
+        <p class="title is-5">Delivery Address</p>
+        <p>{{order.full_name}}</p>
+        <p>{{order.address_1}}</p>
+        
+        {% if order.address_2 %}
+          <p>{{order.address_2}}</p>
+        {% endif %}
+        <p>{{order.post_town}}</p>
+        {% if order.county %}
+          <p>{{order.county}}</p>
+        {% endif %}
+        
+        {% if order.postcode %}
+          <p>{{order.postcode}}</p>
+        {% endif %}
+        <p>{{order.country}}</p>
+        <p>{{order.phone_number}}</p>
+      </div>
+    </div>
+    <div class="column is-4">
+      <div class="box">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>  
+            {% for item in order.lineitems.all %}
+              <tr>
+                <td>
+                  <p>{{item.product.name}} x {{item.quantity}} @ £{{item.product.price}}</p>
+                </td>
+                <td>
+                  <p><strong>£{{item.lineitem_total}}</strong></p>
+                </td>
+              </tr>
+            {% endfor %}
+            <tr>
+              <td>
+                <p><strong>Subtotal:</strong></p>
+              </td>
+              <td>
+                <p>£{{order.order_total}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p><strong>Shipping:</strong></p>
+              </td>
+              <td>
+                <p>£{{order.delivery_cost}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p><Strong>Total:</Strong></p>
+              </td>
+              <td>
+                <p>£{{order.grand_total}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    
+      
+    <div class="has-text-centered column is-12">
+      {% if from_profile %}
+      <a href="{% url 'order_history' %}" class="button is-info is-rounded w-100-mobile"><span class="icon"><i class="fas fa-arrow-left"></i></span><span><strong>Back to Order History</strong></span> </a>
+    {% else %}
+      <a href="{% url 'all_products' %}" class="button is-info is-rounded w-100-mobile"><span class="icon"><i class="fas fa-arrow-left"></i></span><span><strong>Continue Shopping</strong></span></a>
+    {% endif %}
     </div>
       
   </section>

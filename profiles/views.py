@@ -26,7 +26,7 @@ def order_history(request, order_number=None):
         )
 
         template = "checkout/checkout_success.html"
-        context = {"order": order}
+        context = {"order": order, "from_profile": True}
         return render(request, template, context)
 
     else:
