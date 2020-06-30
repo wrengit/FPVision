@@ -1,5 +1,5 @@
 {% for product in products %}
-<div class="column">
+<div class="column is-3-desktop is-4-tablet">
   <a href="{{product.get_url}}">
     <div class="card">
       <div class="card-image">
@@ -28,6 +28,7 @@
       </div>
     </div>
   </a>
-  <div class="hideme" hidden>{{product.stock}}</div>
+  <div class="hideme-stock" hidden>{{product.stock}}</div>
+  <div class="hideme-price" hidden>{{product.price}}</div>
 </div>
 {% endfor %}

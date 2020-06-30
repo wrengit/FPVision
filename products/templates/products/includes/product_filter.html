@@ -1,17 +1,21 @@
-<aside x-data="productFilter()" class="menu sticky-filter">
+<aside 
+  x-data="productFilter()" 
+  x-init="() => {stockFilter(), findMaxPrice(), findMinPrice()}" 
+  class="menu sticky-filter box"
+>
   <p class="menu-label">
     Stock
   </p>
   <ul class="menu-list">
     <li>
       <label class="checkbox">
-        <input id="in-stock-check" type="checkbox" @click="stockFilter()">
+        <input id="in-stock-check" type="checkbox" @click="stockFilter">
         In Stock
       </label>
     </li>
     <li>
       <label class="checkbox">
-        <input id="out-stock-check" type="checkbox" @click="stockFilter()">
+        <input id="out-stock-check" type="checkbox" @click="stockFilter">
         Out of Stock
       </label>
     </li>
@@ -23,17 +27,37 @@
     <div class="field-body">
       <div class="field">
         <p class="control">
-          <input type="text" class="input is-small">
+          <input 
+            id="min-price-filter" 
+            type="text" 
+            :value="minPrice"
+            :min="minPrice" 
+            x-on:keyup="priceFilter()" 
+            class="input is-small"
+          >
           <p class="help">Min Price</p>
         </p>
       </div>
       <div class="field">
         <p class="control">
-          <input type="text" class="input is-small">
+          <input id="max-price-filter" 
+            type="text" 
+            :value="maxPrice" 
+            x-on:keyup="priceFilter" 
+            class="input is-small"
+           >
           <p class="help">Max Price</p>
         </p>
       </div>
     </div>
   </div>
-  <button class="button is-info is-rounded is-outlined">Reset Filters</button>
+  <button 
+    @click="resetFilters" 
+    class="button is-info is-rounded is-outlined w-100"
+  >
+    <span class="icon">
+      <i class="fas fa-sync-alt"></i>
+    </span>
+    <span><strong>Reset Filters</strong></span>
+  </button>
 </aside>
