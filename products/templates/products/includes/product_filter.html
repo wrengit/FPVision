@@ -1,6 +1,6 @@
 <aside 
   x-data="productFilter()" 
-  x-init="() => {stockFilter(), findMaxPrice(), findMinPrice()}" 
+  x-init="() => {stockPriceFilter(), findMaxPrice(), findMinPrice()}" 
   class="menu sticky-filter box"
 >
   <p class="menu-label">
@@ -9,13 +9,13 @@
   <ul class="menu-list">
     <li>
       <label class="checkbox">
-        <input id="in-stock-check" type="checkbox" @click="stockFilter">
+        <input id="in-stock-check" type="checkbox" @click="stockPriceFilter">
         In Stock
       </label>
     </li>
     <li>
       <label class="checkbox">
-        <input id="out-stock-check" type="checkbox" @click="stockFilter">
+        <input id="out-stock-check" type="checkbox" @click="stockPriceFilter">
         Out of Stock
       </label>
     </li>
@@ -30,9 +30,9 @@
           <input 
             id="min-price-filter" 
             type="text" 
+            x-model="minPrice"
             :value="minPrice"
-            :min="minPrice" 
-            x-on:keyup="priceFilter()" 
+            x-on:keyup="stockPriceFilter" 
             class="input is-small"
           >
           <p class="help">Min Price</p>
@@ -42,8 +42,9 @@
         <p class="control">
           <input id="max-price-filter" 
             type="text" 
+            x-model="maxPrice"
             :value="maxPrice" 
-            x-on:keyup="priceFilter" 
+            x-on:keyup="stockPriceFilter" 
             class="input is-small"
            >
           <p class="help">Max Price</p>
@@ -52,7 +53,8 @@
     </div>
   </div>
   <button 
-    @click="resetFilters" 
+    x-on:click="resetFilters" 
+    x-on:click.debounce.1="stockPriceFilter"
     class="button is-info is-rounded is-outlined w-100"
   >
     <span class="icon">
