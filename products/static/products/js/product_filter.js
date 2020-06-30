@@ -81,7 +81,7 @@ function productFilter() {
         resetFilters() {
             inStockCheck.checked = false
             outStockCheck.checked = false
-            this.priceFilter()
+            this.stockFilter()
         }
 
     }
