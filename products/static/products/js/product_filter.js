@@ -29,7 +29,6 @@ function productFilter() {
         },
 
         stockPriceFilter() {
-            console.log("filter")
             switch (true) {
                 case inStockCheck.checked && !outStockCheck.checked:
                     for (let i = 0; i < stockList.length; i++) {
