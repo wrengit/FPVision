@@ -29,7 +29,7 @@ function productFilter() {
         let maxPriceHigher =
           parseFloat(maxPriceInput.value) >=
             parseFloat(priceList[i].textContent) || maxPriceInput.value == "";
-        stockLevel = stockList[i].textContent;
+        stockLevel = parseInt(stockList[i].textContent);
 
         // Check each product against current filters
         switch (true) {
@@ -45,6 +45,8 @@ function productFilter() {
               maxPriceHigher && minPriceLower && stockLevel == 0
                 ? "block"
                 : "none";
+            break;
+            
           default:
             productNode.style.display =
               maxPriceHigher && minPriceLower ? "block" : "none";
