@@ -12,7 +12,7 @@ function productFilter() {
     minPrice: "",
     findMinMaxPrice() {
       let priceArr = [];
-      for (let i = 0; i < priceList.length; i++) {
+      for (i = 0; i < priceList.length; i++) {
         priceArr.push(priceList[i].textContent);
       }
       priceArr.sort((a, b) => b - a);
