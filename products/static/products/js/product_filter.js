@@ -85,6 +85,9 @@ function productFilter() {
       for (i = 0; i < subCatCheckList.length; i++) {
         subCatCheckList[i].checked = false;
       }
+      for (i = 0; i < catCheckList.length; i++) {
+        catCheckList[i].checked = false
+      }
     },
   };
 }
