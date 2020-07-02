@@ -1,7 +1,7 @@
-// Import a Google Font
+// Font Imports
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap')
 
-// Set your brand colors
+// Colors
 $purple: #8A4D76
 $pink: #FA7C91
 $brown: #757763
@@ -23,7 +23,9 @@ $body-background-color: $white
 $control-border-width: 2px
 
 
-// Import only what you need from Bulma
+// Import Bulma components
 @import "./node_modules/bulma/bulma"
-@import "./extensions/_all.sass"
 
+//Import Bulma extensions
+@import "./extensions/bulma-divider/src/sass/index"
+@import "./extensions/megamenu"
