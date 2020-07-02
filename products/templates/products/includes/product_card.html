@@ -1,5 +1,5 @@
 {% for product in products %}
-<div class="column is-3-desktop is-4-tablet">
+<div class="column is-3-desktop is-4-tablet is-6-mobile">
   <a href="{{product.get_url}}">
     <div class="card">
       <div class="card-image">
@@ -19,11 +19,11 @@
           <p class="is-size-7">{{product.description | truncatechars:80}}</p>
           <small class="has-text-weight-bold">£{{product.price}}</small>
           {% if product.stock > 0 %}
-          <small class="is-pulled-right has-text-success"
+          <small class="is-pulled-right has-text-success is-size-7-mobile"
             >Available</small
           >
           {% else %}
-          <small class="is-pulled-right has-text-danger">Out of Stock</small>
+          <small class="is-pulled-right has-text-danger is-size-7-mobile">Out of Stock</small>
           {% endif %}
         </div>
       </div>
