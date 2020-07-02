@@ -55,35 +55,22 @@ function productFilter() {
             parseFloat(priceList[i].textContent) || maxPriceInput.value == "";
         stockLevel = parseInt(stockList[i].textContent);
 
+        allTrue = maxPriceHigher && minPriceLower && subCatTrue && catTrue;
+        
         // Check each product against current filters
         switch (true) {
           case inStockCheck.checked && !outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher &&
-              minPriceLower &&
-              subCatTrue &&
-              catTrue &&
-              stockLevel > 0
-                ? "block"
-                : "none";
+              allTrue && stockLevel > 0 ? "block" : "none";
             break;
 
           case !inStockCheck.checked && outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher &&
-              minPriceLower &&
-              subCatTrue &&
-              catTrue &&
-              stockLevel == 0
-                ? "block"
-                : "none";
+              allTrue && stockLevel == 0 ? "block" : "none";
             break;
 
           default:
-            productNode.style.display =
-              maxPriceHigher && minPriceLower && subCatTrue && catTrue
-                ? "block"
-                : "none";
+            productNode.style.display = allTrue ? "block" : "none";
             break;
         }
       }
