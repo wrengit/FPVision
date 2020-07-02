@@ -6,11 +6,17 @@
   <div class="hero-body">
     <div class="container">
       {% if not subcategory %} 
-      {% if category %}
-      <h1 class="title">{{category}}</h1>
-      {% else %} 
-      <h1 class="title">All Products</h1>
-      {% endif %} 
+        {% if category %}
+        <h1 class="title">{{category}}</h1>
+        {% else %} 
+        <h1 class="title">All Products</h1>
+          {% for category in all_categories %}
+            &#10012 &nbsp;<a href="{{category.get_url}}">{{category.name}}</a>&nbsp;
+            {% if forloop.last %}
+            &#10012
+            {% endif %}
+          {% endfor %}
+        {% endif %} 
       {% else %} 
       <h1 class="title">{{subcategory.name}}</h1> 
       {% endif %}
