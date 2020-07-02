@@ -4,8 +4,11 @@
 {% block content %}
 <section>
   <div class="container">
-    <div>
+    <div class="has-text-centered">
       <span>Showing {{products.count}} results for " {{query}} "</span>
+    </div>
+    <div class="has-text-centered mt-3">
+      <a href="{% url 'all_products' %}" class="button is-rounded is-info is-outlined"><strong>View All Products</strong></a>
     </div>
     <div class="columns is-multiline">
      {% include 'products/includes/product_card.html' %}
