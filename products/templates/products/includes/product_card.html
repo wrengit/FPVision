@@ -9,6 +9,7 @@
       </div>
       <div class="card-content">
         <div class="content">
+          <p class="subcatname" hidden>{{product.sub_category.name}}</p>
           <p class="title is-6 has-text-primary">
             {{product.name | truncatechars:20 }}
           </p>
@@ -28,7 +29,7 @@
       </div>
     </div>
   </a>
-  <div class="hideme-stock" hidden>{{product.stock}}</div>
+  <div class="hideme-stock" name="{{product.sub_category.name}}" hidden>{{product.stock}}</div>
   <div class="hideme-price" hidden>{{product.price}}</div>
 </div>
 {% endfor %}

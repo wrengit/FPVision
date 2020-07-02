@@ -5,6 +5,7 @@ function productFilter() {
   let outStockCheck = document.getElementById("out-stock-check");
   let minPriceInput = document.getElementById("min-price-filter");
   let maxPriceInput = document.getElementById("max-price-filter");
+  let subCatCheckList = document.querySelectorAll("input.subcatcheck");
   let i;
 
   return {
@@ -21,8 +22,19 @@ function productFilter() {
     },
 
     stockPriceFilter() {
+      // Add checked subcategories names to an array
+      let subCatChecked = [];
+      for (i = 0; i < subCatCheckList.length; i++) {
+        if (subCatCheckList[i].checked) {
+          subCatChecked.push(subCatCheckList[i].name);
+        }
+      }
       for (i = 0; i < stockList.length; i++) {
         let productNode = stockList[i].parentNode;
+        let subCategoryName = stockList[i].attributes.name.textContent;
+        // Boolean to determine if products are in subCatCheck array
+        let subCat =
+          subCatChecked.includes(subCategoryName) || subCatChecked.length == 0;
         let minPriceLower =
           parseFloat(minPriceInput.value) <=
             parseFloat(priceList[i].textContent) || minPriceInput.value == "";
@@ -35,32 +47,35 @@ function productFilter() {
         switch (true) {
           case inStockCheck.checked && !outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher && minPriceLower && stockLevel > 0
+              maxPriceHigher && minPriceLower && subCat && stockLevel > 0
                 ? "block"
                 : "none";
             break;
 
           case !inStockCheck.checked && outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher && minPriceLower && stockLevel == 0
+              maxPriceHigher && minPriceLower && subCat && stockLevel == 0
                 ? "block"
                 : "none";
             break;
-            
+
           default:
             productNode.style.display =
-              maxPriceHigher && minPriceLower ? "block" : "none";
+              maxPriceHigher && minPriceLower && subCat ? "block" : "none";
             break;
         }
       }
     },
 
-    // Uncheck 'stock' filters and find the whole product list
-    // min and max price
+    // Uncheck 'stock' and 'sub categories' filters and find the
+    // product list min and max price
     resetFilters() {
       this.findMinMaxPrice();
       inStockCheck.checked = false;
       outStockCheck.checked = false;
+      for (i = 0; i < subCatCheckList.length; i++) {
+        subCatCheckList[i].checked = false;
+      }
     },
   };
 }

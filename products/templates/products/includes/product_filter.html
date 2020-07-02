@@ -20,6 +20,27 @@
       </label>
     </li>
   </ul>
+  
+  {% if category and not subcategory %}
+  <p class="menu-label">
+    Sub Categories
+  </p>
+  <ul class="menu-list">
+    {% for subcategory in category.subcategories.all %}
+      <li>
+        <label class="checkbox">
+          <input @click="stockPriceFilter" class="subcatcheck" type="checkbox" name="{{subcategory.name}}">
+          {{subcategory.name}}
+        </label>
+      </li>
+    {% endfor %}
+
+  </ul>
+    
+  {% endif %}
+    
+    
+  
   <p class="menu-label">
     Price 
   </p>
