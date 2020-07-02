@@ -6,6 +6,7 @@ function productFilter() {
   let minPriceInput = document.getElementById("min-price-filter");
   let maxPriceInput = document.getElementById("max-price-filter");
   let subCatCheckList = document.querySelectorAll("input.subcatcheck");
+  let catCheckList = document.querySelectorAll("input.catcheck");
   let i;
 
   return {
@@ -22,19 +23,30 @@ function productFilter() {
     },
 
     stockPriceFilter() {
-      // Add checked subcategories names to an array
+      // Add checked subcategory names to an array
       let subCatChecked = [];
       for (i = 0; i < subCatCheckList.length; i++) {
         if (subCatCheckList[i].checked) {
           subCatChecked.push(subCatCheckList[i].name);
         }
       }
+      // Add checked category names to an array
+      let catChecked = [];
+      for (i = 0; i < catCheckList.length; i++) {
+        if (catCheckList[i].checked) {
+          catChecked.push(catCheckList[i].name);
+        }
+      }
       for (i = 0; i < stockList.length; i++) {
         let productNode = stockList[i].parentNode;
         let subCategoryName = stockList[i].attributes.name.textContent;
+        let categoryName = priceList[i].attributes.name.textContent;
         // Boolean to determine if products are in subCatCheck array
-        let subCat =
+        let subCatTrue =
           subCatChecked.includes(subCategoryName) || subCatChecked.length == 0;
+        // Boolean to determine if products are in catCheck array
+        let catTrue =
+          catChecked.includes(categoryName) || catChecked.length == 0;
         let minPriceLower =
           parseFloat(minPriceInput.value) <=
             parseFloat(priceList[i].textContent) || minPriceInput.value == "";
@@ -47,21 +59,31 @@ function productFilter() {
         switch (true) {
           case inStockCheck.checked && !outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher && minPriceLower && subCat && stockLevel > 0
+              maxPriceHigher &&
+              minPriceLower &&
+              subCatTrue &&
+              catTrue &&
+              stockLevel > 0
                 ? "block"
                 : "none";
             break;
 
           case !inStockCheck.checked && outStockCheck.checked:
             productNode.style.display =
-              maxPriceHigher && minPriceLower && subCat && stockLevel == 0
+              maxPriceHigher &&
+              minPriceLower &&
+              subCatTrue &&
+              catTrue &&
+              stockLevel == 0
                 ? "block"
                 : "none";
             break;
 
           default:
             productNode.style.display =
-              maxPriceHigher && minPriceLower && subCat ? "block" : "none";
+              maxPriceHigher && minPriceLower && subCatTrue && catTrue
+                ? "block"
+                : "none";
             break;
         }
       }
