@@ -338,13 +338,13 @@
         </div>
         <!--Account / Basket Desktop-->
         <div class="navbar-item is-hidden-touch">
+          <a href="#" class="button is-rounded is-outlined is-info is-small mr-3"><strong>CONTACT US</strong></a>
           <div>
             {% if user.is_authenticated %}
             <a href="{% url 'my_account' %}">
               <div class="dropdown is-hoverable is-right">
                 <div class="dropdown-trigger">
-                  <button class="button is-rounded is-primary is-outlined">
-                    <span>{{user.username | title}}</span>
+                  <button class="button is-rounded is-primary is-outlined is-icon">
                     <span class="icon">
                       <i class="far fa-user-circle"></i>
                     </span>
@@ -383,7 +383,7 @@
               <div class="dropdown is-hoverable is-right">
                 <div class="dropdown-trigger">
                   <button class="button is-rounded is-outlined is-icon">
-                    <span class="icon">
+                    <span class="icon has-text-primary">
                       <i class="far fa-user-circle"></i>
                     </span>
                   </button>
@@ -395,7 +395,7 @@
                     >
                     <hr class="dropdown-divider" />
                     <a href="{% url 'account_signup' %}" class="dropdown-item"
-                      >sign Up</a
+                      >Sign Up</a
                     >
                   </div>
                 </div>
@@ -410,9 +410,6 @@
                   <button
                     class="button is-rounded is-primary is-outlined is-hidden-touch is-icon"
                   >
-                    {% if product_count > 0 %}
-                    <span>{{product_count}}</span>
-                    {% endif %}
                     <span class="icon">
                       <i class="fas fa-shopping-basket"></i>
                     </span>
@@ -501,7 +498,11 @@
                   </button>
                 </div>
                 <div class="dropdown-menu">
-                  <div class="dropdown-content"></div>
+                  <div class="dropdown-content">
+                    <div class="dropdown-item">
+                      Your Basket is empty
+                    </div>
+                  </div>
                 </div>
               </div>
             </a>
