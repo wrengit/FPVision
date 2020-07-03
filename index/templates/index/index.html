@@ -1,17 +1,160 @@
-{% extends 'base.html' %} {% load static %} {% block extra_title %} Index page
-{% endblock extra_title %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
 
-<section class="section hero is-primary is-bold is-large">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">This is the first page!</h1>
-      <h2 class="subtitle">Some additional text here</h2>
-      <hr />
-      <p>Welcome {{user}}</p>
+{% block extra_title %} Index page {% endblock extra_title %} 
 
-      <button><a href="{% url 'all_products' %}">View all products</a></button>
+{% block content %}
+
+  <div class="hero is-small is-light">
+    <div class="hero-body py-2">
+      <div class="container">
+        <div class="level">
+          <div class="level-item">
+            <p>Free delivery on all orders over £{{free_delivery}}</p>
+          </div>
+          <div class="level-item">
+            <p>Next day delivery</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+  <section class="section">
+    <div class="container">
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical is-8">
+          <div class="tile">
+            <div class="tile is-parent is-vertical">
+              <article class="tile is-child box px-0 py-0 has-text-white">
+                <a href="#">
+                  <div class="full-image">
+                    <img class="image" src="media/product/iflight-titan.jpg" alt="">
+                    <span>
+                      <p class="title has-text-white">Frames</p>
+                      <p class="subtitle is-size-6"><strong class="has-text-white">Racing, Freestyle, multirotor. We have you covered.</strong></p>
+                    </span>
+                  </div>
+                </a>
+              </article>
+              <article class="tile is-child box has-background-danger">
+                <a 
+                  href="{% url 'products_by_subcategory' 'quadcopter-parts' 'props' %}"
+                >
+                  <p class="title has-text-white">Props, Props, Props</p>
+                  <p class="subtitle is-size-6"><strong class="has-text-white">You'll break 'em. Get them in bulk here.</strong></p>            
+                </a>
+              </article>
+            </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box">
+                  <a href="">
+                    <p class="title">HD FPV</p>
+                    <p class="subtitle"><strong>You wont believe your eyes</strong></p>
+                    <figure class="image is-square">
+                      <img src="media/main/djihd.jpg">
+                    </figure>
+                    <p class="is-size-6 pt-3"><strong>All the latest developments from DJI</strong></p>
+                  </a>
+                </article>
+              </div>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child box py-0 px-0">
+              <a href="{% url 'products_by_subcategory' 'quadcopter-parts' 'batteries' %}">
+                <div class="full-image">
+                  <img class="image" src="media/main/tattu.jpg" alt="Tattu battery">
+                  <span>
+                    <p class="title has-text-white">Batteries</p>
+                    <p class="subtitle is-size-6">
+                      <strong class="has-text-white">1s to 6s, all shapes and sizes</strong>
+                    </p>
+                  </span>
+                </div>
+              </a>
+            </article>
+            <article class="tile is-child box has-background-primary is-hidden-mobile">
+              <a 
+                target="_blank"
+                rel="noopener" 
+                href="https://thedroneracingleague.com/"
+              >
+                <p class="title has-text-white">Drone Racing League</p>
+                <p class="subtitle is-size-6">
+                  <strong class="has-text-white">Check out the latest high-speed action</strong>
+                </p>
+                <div class="content">
+                  <p class="has-text-white">
+                    DRL is the global, professional drone racing property for elite pilots. 
+                    With custom built racing drones traveling 90 MPH, pilots race FPV (First Person View) 
+                    through the most insane 3D courses ever created outside of a video game. 
+                    <br>
+                    <br>
+                    The high-speed action airs on the best sports networks, including NBC, NBC Sports, 
+                    Twitter, Sky Sports, ProSieben, Groupe AB, and Weibo. 
+                  </p>
+                </div>      
+              </a>
+            </article>
+          </div>
+        </div>
+        <div class="tile is-vertical is-4">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child box has-background-success is-hidden-mobile">
+              <a 
+                target="_blank"
+                rel="noopener" 
+                href="https://www.caa.co.uk/Consumers/Unmanned-aircraft-and-drones/"
+              >
+                <p class="title has-text-white">Local Clubs</p>
+                <p class="subtitle is-size-6"><strong class="has-text-white">Get to know your fellow pilots</strong></p>  
+                <div class="content has-text-white">
+                  <p>Flying is more enjoyable with friends. If you're flying anything over 250g, then you should be with a spotter, to keep eyes on your quad. </p>
+                </div>          
+              </a>
+            </article>
+            <article class="tile is-child box py-0 px-0">
+              <div class="full-image">
+                <img class="image" src="media/main/mavicair2.jpg" alt="Mavic Air 2">
+                <span>
+                  <p class="title has-text-white">Mavic Air 2</p>
+                  <p class="subtitle is-size-6"><strong class="has-text-white">Latest pocket flying from DJI</strong></p>
+                </span>
+              </div>
+            </article>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child box has-background-info">
+              <a 
+                target="_blank"
+                rel="noopener" 
+                href="https://www.caa.co.uk/Consumers/Unmanned-aircraft-and-drones/"
+              >
+                <p class="title has-text-white">Drone licence</p>
+                <p class="subtitle is-size-6"><strong class="has-text-white">Make sure you are flying legally</strong></p>            
+                <div class="content">
+                  <p class="has-text-white">From 30 November 2019 it is illegal to fly without registering and passing a theory test</p>
+                </div>              
+              </a>
+            </article>
+            <article class="tile is-child box px-0 py-0 has-text-white">
+              <a href="#">
+                <div class="full-image">
+                  <img class="image" src="media/main/littlebee-esc.png" alt="electronic Speed Controller">
+                  <span>
+                    <p class="title has-text-white">ESC's</p>
+                    <p class="subtitle is-size-6"><strong class="has-text-white">Take control</strong></p>
+                  </span>
+                </div>
+              </a>
+            </article>
+
+          </div>
+        
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
 
 {% endblock content %}
