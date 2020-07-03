@@ -1,0 +1,133 @@
+<div class="navbar-item">
+    <div
+      x-data="Search()"
+      x-bind:class="{ 'is-active': open }"
+      class="dropdown"
+    >
+      <form
+        class="control has-icons-right search-container"
+        action="{% url 'search_result' %}"
+        method="GET"
+      >
+        <input
+          x-on:keyup="fetchProducts()"
+          x-model="q"
+          @click="open = true"
+          @click.away="open = false"
+          autocomplete="off"
+          class="input is-primary is-rounded"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          name="q"
+        />
+        <span class="icon is-right">
+          <a href="">
+            <i class="fas fa-search"></i>
+          </a>
+        </span>
+      </form>
+      <div class="dropdown-menu js-search">
+        <div class="dropdown-content">
+          <div class="dropdown-item">
+            <template x-if="products.length > 0">
+              <div class="divider has-text-primary mb-1">Results for &nbsp;"&nbsp;<span x-text="q"></span>&nbsp;" </div>
+            </template>
+
+            <template x-if="products.length > 4">
+              <div class="has-text-centered pb-3">
+                <small>Showing 4 of&nbsp;<span x-text="products.length"></span></small>
+              </div>
+            </template>
+
+            <div
+              class="columns is-variable is-mobile is-1 is-centered is-multiline is-touch is-flex-touch"
+            >
+              <template x-if="products">
+                <template
+                  x-for="product in products.slice(0,4)"
+                  :key="product.id"
+                >
+                  <div
+                    class="column search-result-column is-quarter is-half-touch"
+                  >
+                    <a
+                      x-bind:href="'/products/'
+                    +product.category.toLowerCase()
+                    +'/'+product.sub_category.toLowerCase()
+                    +'/'+product.slug"
+                    >
+                      <div class="card">
+                        <div class="card-image">
+                          <figure class="image is-square">
+                            <img
+                              :src="image_src + product.image"
+                              :alt="product.name"
+                            />
+                          </figure>
+                        </div>
+                        <div class="card-content">
+                          <div class="content">
+                            <p
+                              class="title is-6 is-size-7-touch"
+                              x-text="product.name"
+                            ></p>
+                            <p
+                              x-text="product.category"
+                              class="is-size-7"
+                            ></p>
+                            <small class="has-text-weight-bold">£</small
+                            ><small
+                              class="has-text-weight-bold"
+                              x-text="product.price"
+                            ></small>
+                            <template x-if="product.stock > 0">
+                              <small
+                                class="has-text-success"
+                                >Available</small
+                              >
+                            </template>
+                            <template x-if="product.stock == 0">
+                              <small
+                                class="has-text-danger"
+                                >Out of Stock</small
+                              >
+                            </template>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </template>
+              </template>
+              <template x-if="products.length > 4">
+                <div class="column is-12 has-text-centered">
+                  <button
+                    class="button is-primary"
+                    @click.prevent="showRemainingProducts()"
+                  >
+                    View all&nbsp;<span x-text="products.length"></span
+                    >&nbsp;items
+                  </button>
+                </div>
+              </template>
+              <template x-if="!products.length && !q">
+                <div class="dropdown-item">
+                  <p class="has-text-info has-text-weight-bold">
+                    Start typing for instant search results
+                  </p>
+                </div>
+              </template>
+              <template x-if="!products.length && q">
+                <div class="dropdown-item">
+                  <p class="has-text-danger has-text-weight-bold">
+                    No products matching the search criteria
+                  </p>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

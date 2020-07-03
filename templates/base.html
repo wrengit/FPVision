@@ -48,8 +48,9 @@
   <body class="has-navbar-fixed-top">
     {% include 'includes/navbar.html' %}
 
-    {% block content %} 
-    {% endblock content%} 
+    {% block content %}
+
+    {% endblock content %} 
     
     {% if messages %}
       <div class="message-container">
@@ -70,7 +71,6 @@
     {% endif %} 
     
     {% include 'includes/footer.html' %}
-    
     {% block postloadjs %}
     {% endblock postloadjs %}
   </body>

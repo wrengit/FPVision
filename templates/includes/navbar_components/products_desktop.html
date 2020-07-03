@@ -1,0 +1,65 @@
+<div
+  class="navbar-item has-dropdown is-hoverable is-mega is-hidden-touch"
+  x-bind:class="{ 'is-active': openItem }"
+  @click="openItem =!openItem"
+  x-data="{ openItem: false }"
+>
+  <div class="navbar-link">
+    Products
+  </div>
+  <div id="productsDropdown" class="navbar-dropdown" data-style="width: 18rem;">
+    <div class="container">
+      <div class="columns">
+        {% for c in all_categories %}
+        <div class="column">
+          <a class="navbar-item" href="{% url 'products_by_category' c.slug %}"
+            ><h1 class="title is-6 is-mega-menu-title">
+              {{c.name}}
+            </h1></a
+          >
+          <hr class="navbar-divider" />
+          {% for sc in all_subcategories %} 
+            {% if sc.category == c %}
+            <a
+                class="navbar-item"
+                href="{% url 'products_by_subcategory' c.slug sc.slug %}"
+            >
+                {{sc.name}}
+            </a>
+            {% endif %} 
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <hr class="navbar-divider" />
+    <div class="navbar-item">
+      <div class="navbar-content">
+        <div class="level is-mobile">
+          <div class="level-left">
+            <div class="level-item">
+              <strong
+                >Stay up to date with all the latest FPVision news. Join our
+                mailing list.</strong
+              >
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <a
+                class="button bd-is-rss is-small"
+                href="http://bulma.io/atom.xml"
+              >
+                <span class="icon is-small">
+                  <i class="fa fa-rss"></i>
+                </span>
+                <span>Subscribe</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

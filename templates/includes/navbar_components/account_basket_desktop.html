@@ -1,0 +1,172 @@
+<div class="navbar-item is-hidden-touch">
+    <a href="#" class="button is-rounded is-outlined is-info is-small mr-3"><strong>CONTACT US</strong></a>
+    <div>
+      {% if user.is_authenticated %}
+      <a href="{% url 'my_account' %}">
+        <div class="dropdown is-hoverable is-right">
+          <div class="dropdown-trigger">
+            <button class="button is-rounded is-primary is-outlined is-icon">
+              <span class="icon">
+                <i class="far fa-user-circle"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-content">
+              <a href="{% url 'my_account' %}" class="dropdown-item"
+                >Dashboard</a
+              >
+              <a href="{% url 'order_history' %}" class="dropdown-item"
+                >Orders</a
+              >
+              <a href="{% url 'update_address' %}" class="dropdown-item"
+                >Update Address</a
+              >
+              <a
+                href="{% url 'update_account_details' %}"
+                class="dropdown-item"
+                >Account Details</a
+              >
+              <a href="{% url 'view_wishlist' %}" class="dropdown-item"
+                >Wishlist</a
+              >
+              <hr class="dropdown-divider" />
+              <a href="{% url 'account_logout' %}" class="dropdown-item"
+                >Logout</a
+              >
+            </div>
+          </div>
+        </div>
+      </a>
+
+      {% else %}
+      <a href="{% url 'my_account' %}">
+        <div class="dropdown is-hoverable is-right">
+          <div class="dropdown-trigger">
+            <button class="button is-rounded is-outlined is-icon">
+              <span class="icon has-text-primary">
+                <i class="far fa-user-circle"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-content">
+              <a href="{% url 'account_login' %}" class="dropdown-item"
+                >Log In</a
+              >
+              <hr class="dropdown-divider" />
+              <a href="{% url 'account_signup' %}" class="dropdown-item"
+                >Sign Up</a
+              >
+            </div>
+          </div>
+        </div>
+      </a>
+
+      {% endif %} 
+      {% if basket_items %}
+      <div class="dropdown is-hoverable is-right">
+        <div class="dropdown-trigger">
+          <a href="{% url 'view_basket' %}">
+            <button
+              class="button is-rounded is-primary is-outlined is-hidden-touch is-icon"
+            >
+              <span class="icon">
+                <i class="fas fa-shopping-basket"></i>
+              </span>
+            </button>
+          </a>
+        </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-content">
+            {% if grand_total %} {% for item in basket_items %}
+            <article class="media dropdown-item">
+              <a href="{{product.get_url}}">
+                <figure class="media-left">
+                  <p class="image is-48x48">
+                    <img
+                      src="{{item.product.image.url}}"
+                      alt="{{item.product.name}}"
+                    />
+                  </p>
+                </figure>
+              </a>
+              <div class="media-content">
+                <div class="content">
+                  <a href="{{product.get_url}}">
+                    <p class="is-6">{{item.product.name}}</p>
+                  </a>
+                  <small
+                    >{{item.quantity}} x £{{item.product.price}}</small
+                  >
+                </div>
+              </div>
+            </article>
+
+            {% endfor %} 
+            {% endif %}
+            <div class="dropdown-item">
+              <strong
+                ><p>
+                  Total{% if free_delivery_delta > 0 %} (Exc. delivery)
+                  {% endif %}:
+                  <span class="float-right"
+                    >£{{ total|floatformat:2 }}</span
+                  >
+                </p></strong
+              >
+              {% if free_delivery_delta > 0 %}
+              <p
+                class="mb-0 p-2 bg-warning shadow-sm text-black text-center"
+              >
+                Spend <strong>£{{ free_delivery_delta }}</strong> more to
+                get free next day delivery!
+              </p>
+              {% endif %}
+            </div>
+            <div class="dropdown-content buttons dropdown-item">
+              <a
+                href="{% url 'view_basket' %}"
+                class="button is-fullwidth is-info is-rounded"
+                ><span class="icon"
+                  ><i class="fas fa-shopping-basket"></i></span
+                ><span><strong>View Basket</strong></span></a
+              >
+              <a
+                href="{% url 'checkout' %}"
+                class="button is-fullwidth is-success is-rounded"
+                ><span class="icon"><i class="fas fa-lock"></i></span
+                ><span><strong>Checkout</strong></span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% else %}
+      <a href="{% url 'view_basket' %}">
+        <div class="dropdown is-hoverable is-right">
+          <div class="dropdown-trigger">
+            <button
+              class="button is-rounded is-outlined is-hidden-touch is-icon"
+            >
+              {% if product_count > 0 %}
+              <span>{{product_count}}</span>
+              {% endif %}
+              <span class="icon has-text-primary">
+                <i class="fas fa-shopping-basket"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                Your Basket is empty
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      {% endif %}
+    </div>
+  </div>

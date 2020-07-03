@@ -1,0 +1,79 @@
+<div class="navbar-item has-dropdown is-hidden-desktop">
+    <div class="buttons">
+      {% if user.is_authenticated %}
+      <div
+        class="dropdown is-right"
+        x-bind:class="{ 'is-active': openAccount }"
+        @click.away="openAccount = false"
+      >
+        <div class="dropdown-trigger">
+          <button
+            class="button is-primary is-outlined is-rounded is-icon"
+            @click="openAccount =!openAccount"
+          >
+            <span class="icon">
+              <i class="far fa-user-circle"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-content">
+            <a href="{% url 'my_account' %}" class="dropdown-item"
+              >Dashboard</a
+            >
+            <a href="{% url 'order_history' %}" class="dropdown-item"
+              >Orders</a
+            >
+            <a href="{% url 'update_address' %}" class="dropdown-item"
+              >Update Address</a
+            >
+            <a
+              href="{% url 'update_account_details' %}"
+              class="dropdown-item"
+              >Account Details</a
+            >
+            <a href="{% url 'view_wishlist' %}" class="dropdown-item"
+              >Wishlist</a
+            >
+            <hr class="dropdown-divider" />
+            <a href="{% url 'account_logout' %}" class="dropdown-item"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% else %}
+      <div class="dropdown is-hoverable is-right">
+        <div class="dropdown-trigger">
+          <button class="button is-outlined is-rounded is-icon">
+            <span class="icon">
+              <i class="far fa-user-circle"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-content">
+            <a href="{% url 'account_login' %}" class="dropdown-item"
+              >Login</a
+            >
+            <hr class="dropdown-divider" />
+            <a href="{% url 'account_signup' %}" class="dropdown-item"
+              >Register</a
+            >
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+
+      <a
+        href="{% url 'view_basket' %}"
+        class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1"
+      >
+        <span class="icon">
+          <i class="fas fa-shopping-basket"></i>
+        </span>
+      </a>
+    </div>
+  </div>

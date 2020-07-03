@@ -1,0 +1,17 @@
+<div class="navbar-item is-hidden-desktop">
+  <div class="container">
+    {% for c in all_categories %}
+    <div class="divider has-text-primary">{{c.name}}</div>
+      {% for sc in all_subcategories %} 
+        {% if sc.category == c %}
+          <a
+            class="navbar-item has-text-centered"
+            href="{% url 'products_by_subcategory' c.slug sc.slug %}"
+          >
+            {{sc.name}}
+          </a>
+        {% endif %} 
+      {% endfor %} 
+    {% endfor %}
+  </div>
+</div>
