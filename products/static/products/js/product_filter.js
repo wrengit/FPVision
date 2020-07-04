@@ -81,7 +81,7 @@ function productFilter() {
     // Close filter when user clicks away
     handleCloseFilter(e) {
       if (!e.target.closest("#filter-container")) {
-        if (filterNav.style.transform == "translateX(-22rem)") {
+        if (filterNav.style.transform == "translateX(-31rem)") {
           filterNav.style.transform = "translateX(2.5rem)";
           overlay.classList.toggle("fade");
         }
@@ -91,9 +91,9 @@ function productFilter() {
     // Toggle filter open/closed
     handleShowHideFilter() {
       filterNav.style.transform =
-        filterNav.style.transform == "translateX(-22rem)"
+        filterNav.style.transform == "translateX(-31rem)"
           ? "translateX(2.5rem)"
-          : "translateX(-22rem)";
+          : "translateX(-31rem)";
       overlay.classList.toggle("fade");
     },
 

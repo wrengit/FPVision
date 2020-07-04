@@ -1,13 +1,13 @@
 .sticky-filter
     position: sticky
     top: 7rem
-    max-width: 100%
-    @include mobile
+    max-width: 15rem
+    @include touch
         position: fixed
         top: auto
         bottom: 4rem
         z-index: 1000
-        right: -21rem
+        right: -30rem
         transition: transform .2s cubic-bezier(.175, .885, .32, 1.275)
         will-change: transform
 
@@ -20,4 +20,3 @@
     &:focus, &:active
        box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.5)
         
-
