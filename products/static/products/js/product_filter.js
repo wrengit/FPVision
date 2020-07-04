@@ -9,7 +9,6 @@ function productFilter() {
   let catCheckList = document.querySelectorAll("input.catcheck");
   let filterNav = document.querySelector("aside.sticky-filter");
   let overlay = document.querySelector("div.overlay");
-  let filterButton = document.querySelector("button.filter-button")
   let i;
 
   return {
@@ -84,7 +83,7 @@ function productFilter() {
       if (!e.target.closest("#filter-container")) {
         if (filterNav.style.transform == "translateX(-22rem)") {
           filterNav.style.transform = "translateX(2.5rem)";
-          overlay.classList.toggle("fade")
+          overlay.classList.toggle("fade");
         }
       }
     },
@@ -95,8 +94,7 @@ function productFilter() {
         filterNav.style.transform == "translateX(-22rem)"
           ? "translateX(2.5rem)"
           : "translateX(-22rem)";
-      overlay.classList.toggle("fade")
-
+      overlay.classList.toggle("fade");
     },
 
     // Uncheck 'stock' and 'sub categories' filters and find the
