@@ -2,3 +2,21 @@
     position: sticky
     top: 7rem
     max-width: 100%
+    @include mobile
+        position: fixed
+        top: 11rem
+        z-index: 1000
+        right: -21rem
+        transition: transform .2s cubic-bezier(.175, .885, .32, 1.275)
+        will-change: transform
+
+.filter-button
+    box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.50)
+    position: fixed
+    bottom: 2rem
+    right: 2rem
+    z-index: 1000
+    &:focus, &:active
+       box-shadow: 2px 4px 5px 0px rgba(0,0,0,0.5)
+        
+

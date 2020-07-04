@@ -7,6 +7,9 @@ function productFilter() {
   let maxPriceInput = document.getElementById("max-price-filter");
   let subCatCheckList = document.querySelectorAll("input.subcatcheck");
   let catCheckList = document.querySelectorAll("input.catcheck");
+  let filterNav = document.querySelector("aside.sticky-filter");
+  let overlay = document.querySelector("div.overlay");
+  let filterButton = document.querySelector("button.filter-button")
   let i;
 
   return {
@@ -56,7 +59,7 @@ function productFilter() {
         stockLevel = parseInt(stockList[i].textContent);
 
         allTrue = maxPriceHigher && minPriceLower && subCatTrue && catTrue;
-        
+
         // Check each product against current filters
         switch (true) {
           case inStockCheck.checked && !outStockCheck.checked:
@@ -76,6 +79,26 @@ function productFilter() {
       }
     },
 
+    // Close filter when user clicks away
+    handleCloseFilter(e) {
+      if (!e.target.closest("#filter-container")) {
+        if (filterNav.style.transform == "translateX(-22rem)") {
+          filterNav.style.transform = "translateX(2.5rem)";
+          overlay.classList.toggle("fade")
+        }
+      }
+    },
+
+    // Toggle filter open/closed
+    handleShowHideFilter() {
+      filterNav.style.transform =
+        filterNav.style.transform == "translateX(-22rem)"
+          ? "translateX(2.5rem)"
+          : "translateX(-22rem)";
+      overlay.classList.toggle("fade")
+
+    },
+
     // Uncheck 'stock' and 'sub categories' filters and find the
     // product list min and max price
     resetFilters() {
@@ -86,7 +109,7 @@ function productFilter() {
         subCatCheckList[i].checked = false;
       }
       for (i = 0; i < catCheckList.length; i++) {
-        catCheckList[i].checked = false
+        catCheckList[i].checked = false;
       }
     },
   };
