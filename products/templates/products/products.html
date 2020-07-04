@@ -3,6 +3,7 @@
 {% block content %}
 
 <section class="hero is-light">
+  
   <div class="hero-body">
     <div class="container">
       {% if not subcategory %} 
@@ -28,7 +29,7 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      <div class="column is-3 is-12-mobile">
+      <div id="filter-container" class="column is-3 is-12-mobile">
         {% include 'products/includes/product_filter.html' %}
       </div>
       <div class="column is-9 is-12-touch">
@@ -39,6 +40,7 @@
     </div>
   </div>
 </section>
+  
 {% endblock content %}
 
 
