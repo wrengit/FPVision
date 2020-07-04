@@ -2,6 +2,7 @@
   x-data="productFilter()" 
   x-init="() => {stockPriceFilter(), findMinMaxPrice()}" 
   class="menu sticky-filter box"
+  @click.away="handleCloseFilter($event)"
 >
   <p class="menu-label">
     Stock
@@ -29,7 +30,12 @@
       {% for subcategory in category.subcategories.all %}
         <li>
           <label class="checkbox">
-            <input @click="stockPriceFilter" class="subcatcheck" type="checkbox" name="{{subcategory.name}}">
+            <input 
+              @click="stockPriceFilter" 
+              class="subcatcheck" 
+              type="checkbox" 
+              name="{{subcategory.name}}"
+            >
             {{subcategory.name}}
           </label>
         </li>
@@ -45,7 +51,12 @@
       {% for category in all_categories %}
         <li>
           <label class="checkbox">
-            <input @click="stockPriceFilter" class="catcheck" type="checkbox" name="{{category}}">
+            <input 
+              @click="stockPriceFilter" 
+              class="catcheck" 
+              type="checkbox" 
+              name="{{category}}"
+            >
             {{category}}
           </label>
         </li>
@@ -101,3 +112,10 @@
     <span><strong>Reset Filters</strong></span>
   </button>
 </aside>
+<button 
+  x-data="productFilter()" 
+  @click="handleShowHideFilter" 
+  class="button is-icon is-rounded is-info filter-button is-hidden-desktop"
+>
+  <span class="icon"><i class="fas fa-filter"></i></span>
+</button>
