@@ -6,16 +6,16 @@
 
 <main class="container">
   <section class="section columns is-centered">
-    <div class="column is-8-desktop is-12 mobile-column">
+    <div class="column is-8-desktop is-7-touch is-12-mobile">
       {% if basket_items %}
-      <table class="table">
+      <table class="table mt-5">
         <thead>
           <tr>
             <th>Product</th>
             <th class="is-hidden-touch">Price</th>
             <th>Quantity</th>
-            <th class="is-hidden-mobile">Subtotal</th>
-            <th></th>
+            <th class="is-hidden-touch">Subtotal</th>
+            <th class="is-hidden-touch"></th>
           </tr>
         </thead>
 
@@ -26,7 +26,7 @@
               <article class="is-flex">
                 <figure class="media-left">
                   <a href="{% url 'remove_from_basket' item.product.id %}">
-                    <div class="delete delete-basket is-hidden-tablet"></div>
+                    <div class="delete delete-basket is-hidden-desktop"></div>
                   </a>
                   <p class="image is-96x96">
                     <img
@@ -46,7 +46,7 @@
               </article>
             </td>
             <td class="is-vcentered is-hidden-touch">
-              <p class="has-text-weight-bold">£ {{item.product.price}}</p>
+              <p class="has-text-weight-bold">£{{item.product.price}}</p>
             </td>
             <td class="is-vcentered">
               <form
@@ -99,7 +99,7 @@
             </td>
             <td class="is-vcentered is-hidden-touch">
               <p class="has-text-weight-bold">
-                £ {{item.product.price | calc_subtotal:item.quantity}}
+                £{{item.product.price | calc_subtotal:item.quantity}}
               </p>
             </td>
             <td class="is-vcentered is-hidden-touch">
@@ -117,8 +117,8 @@
       {% endif %}
 
     </div>
-    <div class="column is-4">
-      <div class="basket-totals">
+    <div class="column is-4 is-5-touch">
+      <div class="basket-totals box">
         {% if basket_items %}
         <table class="table basket-table">
           <thead>
@@ -151,7 +151,7 @@
             class="button is-rounded is-primary is-outlined w-100-mobile"
           >
             <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
-            <span class="is-uppercase"><strong>Continue Shopping</strong></span>
+            <span class="is-uppercase"><strong>Keep Shopping</strong></span>
           </a>
         </div>
         <div class="divider">OR</div>
@@ -162,7 +162,7 @@
             <span class="icon">
               <i class="fas fa-lock"></i>
             </span>
-            <span class="is-uppercase"><strong>Secure Checkout</strong></span>
+            <span class="is-uppercase"><strong>Checkout</strong></span>
           </a>
         </div>
       {% endif %}

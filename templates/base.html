@@ -46,10 +46,12 @@
     <title>FPVision |{% block extra_title %} {% endblock extra_title %}</title>
   </head>
   <body class="has-navbar-fixed-top">
+    <div class="overlay">
+    </div>
     {% include 'includes/navbar.html' %}
-
+  
     {% block content %}
-
+  
     {% endblock content %} 
     
     {% if messages %}
