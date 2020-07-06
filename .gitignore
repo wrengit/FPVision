@@ -6,3 +6,4 @@ node_modules
 htmlcov
 .coverage
 .env
+new_user_credentials.csv
