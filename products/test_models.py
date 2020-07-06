@@ -4,14 +4,16 @@ from .models import Category, SubCategory, Product
 
 class TestModels(TestCase):
     def setUp(self):
-        Category.objects.create(name="test_category", slug="test-category")
-        self.test_category = Category.objects.get(name="test_category")
-        SubCategory.objects.create(
+
+        self.test_category = Category.objects.create(
+            name="test_category", slug="test-category"
+        )
+
+        self.test_subcategory = SubCategory.objects.create(
             name="test_subcategory",
             slug="test-subcategory",
             category=self.test_category,
         )
-        self.test_subcategory = SubCategory.objects.get(name="test_subcategory")
         self.test_product = Product.objects.create(
             name="test_product",
             slug="test-product",
