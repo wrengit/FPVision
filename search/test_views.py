@@ -16,6 +16,7 @@ class TestViews(TestCase):
         test_product = Product.objects.create(
             name="test_product",
             slug="test-product",
+            description="string",
             category=test_category,
             sub_category=test_subcategory,
             stock=1,
@@ -68,6 +69,7 @@ class TestViews(TestCase):
                 {
                     "name": "test_product",
                     "price": "1.00",
+                    "description": "string",
                     "category": "test_category",
                     "sub_category": "test_subcategory",
                     "image": "/static/media/defaults/default_product.jpg",
