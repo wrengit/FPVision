@@ -121,20 +121,13 @@ WSGI_APPLICATION = "FPVision.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
-
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgres://iofnzusxkcaqyd:" +
-        "e31116e451c2085a1f7b0b45009c559d4958c27df079494793f5b75cb82514ec@" +
-        "ec2-54-75-229-28.eu-west-1.compute.amazonaws.com:5432/d4gltb1ihafgar"
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
