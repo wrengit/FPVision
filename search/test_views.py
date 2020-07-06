@@ -69,7 +69,6 @@ class TestViews(TestCase):
                 {
                     "name": "test_product",
                     "price": "1.00",
-                    "description": "string",
                     "category": "test_category",
                     "sub_category": "test_subcategory",
                     "image": "/static/media/defaults/default_product.jpg",
