@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
-import urllib
+import urllib.parse
 import dj_database_url
 
 
