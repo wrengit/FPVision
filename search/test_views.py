@@ -10,15 +10,17 @@ class TestViews(TestCase):
         Category.objects.create(
             name="test_category", slug="test-category"
         )
+        test_category = Category.objects.get(name="test_category")
         SubCategory.objects.create(
-            name="test_subcategory", slug="test-subcategory", category="test_category"
+            name="test_subcategory", slug="test-subcategory", category=test_category
         )
+        test_subcategory = SubCategory.objects.get(name="test_subcategory")
         Product.objects.create(
             name="test_product",
             slug="test-product",
             description="string",
-            category="test_category",
-            sub_category="test_subcategory",
+            category=test_category,
+            sub_category=test_subcategory,
             stock=1,
             price=1,
         )
