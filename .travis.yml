@@ -9,7 +9,7 @@ before_install:
   - export PATH="$HOME/.poetry/bin:$PATH"
   - poetry export --without-hashes --format=requirements.txt > requirements.txt
 script:
-  - coverage run --source='.' manage.py test search
+  - coverage run --source='.' manage.py test .
   - coverage report
 after_success:
   - codecov
