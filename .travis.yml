@@ -1,5 +1,10 @@
 language: python
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database test_db;' -U postgres
 before_install:
+  - export DATABASE_URL = 
   - pip install --upgrade pip
   - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
   - export PATH="$HOME/.poetry/bin:$PATH"

@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
-import urllib.parse
 import dj_database_url
 
 
@@ -126,7 +125,7 @@ WSGI_APPLICATION = "FPVision.wsgi.application"
 
 if "DATABASE_URL" in os.environ:
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 else:
     DATABASES = {
