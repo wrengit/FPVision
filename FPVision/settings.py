@@ -89,6 +89,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "basket.context.basket_contents",
+                "django.template.context_processors.media",
                 "products.context.all_products_all_categories",
             ],
             "libraries": {"templatetags": "templatetags.form_tags"},
@@ -180,6 +181,7 @@ if "USE_AWS" in os.environ:
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
         "CacheControl": "max-age=94608000",
     }
+
 
     # Bucket config
     AWS_STORAGE_BUCKET_NAME = "fpvision"

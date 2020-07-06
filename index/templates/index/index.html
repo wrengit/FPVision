@@ -28,7 +28,7 @@
               <article class="tile is-child box px-0 py-0 has-text-white">
                 <a href="{% url 'products_by_category' 'frames' %}">
                   <div class="full-image">
-                    <img class="image" src="product/hyperlow_cg.jpg" alt="">
+                    <img class="image" src="{{MEDIA_URL}}product/hyperlow_cg.jpg" alt="">
                     <span>
                       <p class="title has-text-white">Frames</p>
                       <p class="subtitle is-size-6"><strong class="has-text-white">Racing, Freestyle, multirotor. We have you covered.</strong></p>
@@ -51,7 +51,7 @@
                     <p class="title">HD FPV</p>
                     <p class="subtitle"><strong>You wont believe your eyes</strong></p>
                     <figure class="image is-square">
-                      <img src="{% static' main/djihd.jpg' %}">
+                      <img src="{{MEDIA_URL}}main/djihd.jpg">
                     </figure>
                     <p class="is-size-6 pt-3"><strong>All the latest developments from DJI</strong></p>
                   </a>
@@ -62,7 +62,7 @@
             <article class="tile is-child box py-0 px-0">
               <a href="{% url 'products_by_subcategory' 'quadcopter-parts' 'batteries' %}">
                 <div class="full-image">
-                  <img class="image" src="media/main/tattu.jpg" alt="Tattu battery">
+                  <img class="image" src="{{MEDIA_URL}}main/tattu.jpg" alt="Tattu battery">
                   <span>
                     <p class="title has-text-white">Batteries</p>
                     <p class="subtitle is-size-6">
@@ -115,7 +115,7 @@
             <article class="tile is-child box py-0 px-0">
               <a href="#">
                 <div class="full-image">
-                  <img class="image" src="media/main/mavicair2.jpg" alt="Mavic Air 2">
+                  <img class="image" src="{{MEDIA_URL}}main/mavicair2.jpg" alt="Mavic Air 2">
                   <span>
                     <p class="title has-text-white">Mavic Air 2</p>
                     <p class="subtitle is-size-6"><strong class="has-text-white">Latest pocket flying from DJI</strong></p>
@@ -141,7 +141,7 @@
             <article class="tile is-child box px-0 py-0 has-text-white">
               <a href="{% url 'products_by_subcategory' 'quadcopter-parts' 'escs' %}">
                 <div class="full-image">
-                  <img class="image" src="media/main/littlebee-esc.png" alt="electronic Speed Controller">
+                  <img class="image" src="{{MEDIA_URL}}main/littlebee-esc.png" alt="electronic Speed Controller">
                   <span>
                     <p class="title has-text-white">ESC's</p>
                     <p class="subtitle is-size-6"><strong class="has-text-white">Take control</strong></p>
