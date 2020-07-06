@@ -11,6 +11,8 @@
       defer
     ></script>
     <script>
+      // Live JS search function to pull products from DB
+      // MUST REMAIN IN HTML - django populates location based urls
       function Search() {
         return {
           open: false,
@@ -28,7 +30,6 @@
                 });
             } else {
               this.products = [];
-              console.log(this.products);
             }
           },
           showRemainingProducts() {
