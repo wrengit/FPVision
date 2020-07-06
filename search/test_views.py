@@ -6,10 +6,13 @@ from django.db.models import Q
 
 
 class TestViews(TestCase):
-    def setUp(self):
-        Category.objects.create(
-            name="test_category", slug="test-category"
-        )
+    def test_search_view(self):
+        response = self.client.get("/search/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "search/search.html")
+
+    def test_search_by_product_name(self):
+        Category.objects.create(name="test_category", slug="test-category")
         test_category = Category.objects.get(name="test_category")
         SubCategory.objects.create(
             name="test_subcategory", slug="test-subcategory", category=test_category
@@ -24,13 +27,6 @@ class TestViews(TestCase):
             stock=1,
             price=1,
         )
-
-    def test_search_view(self):
-        response = self.client.get("/search/")
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "search/search.html")
-
-    def test_search_by_product_name(self):
         url = "{url}?{filter}={value}".format(
             url=reverse("search_result"), filter="q", value="test"
         )
@@ -42,6 +38,21 @@ class TestViews(TestCase):
         )
 
     def test_search_by_product_description(self):
+        Category.objects.create(name="test_category", slug="test-category")
+        test_category = Category.objects.get(name="test_category")
+        SubCategory.objects.create(
+            name="test_subcategory", slug="test-subcategory", category=test_category
+        )
+        test_subcategory = SubCategory.objects.get(name="test_subcategory")
+        Product.objects.create(
+            name="test_product",
+            slug="test-product",
+            description="string",
+            category=test_category,
+            sub_category=test_subcategory,
+            stock=1,
+            price=1,
+        )
         url = "{url}?{filter}={value}".format(
             url=reverse("search_result"), filter="q", value="string"
         )
@@ -61,6 +72,21 @@ class TestViews(TestCase):
         self.assertIn("Please enter a search criteria", test_messages)
 
     def test_js_search_by_product_name(self):
+        Category.objects.create(name="test_category", slug="test-category")
+        test_category = Category.objects.get(name="test_category")
+        SubCategory.objects.create(
+            name="test_subcategory", slug="test-subcategory", category=test_category
+        )
+        test_subcategory = SubCategory.objects.get(name="test_subcategory")
+        Product.objects.create(
+            name="test_product",
+            slug="test-product",
+            description="string",
+            category=test_category,
+            sub_category=test_subcategory,
+            stock=1,
+            price=1,
+        )
         url = "{url}?{filter}={value}".format(
             url=reverse("js_search"), filter="q", value="test"
         )
