@@ -5,60 +5,96 @@
 
 {% block content %}
 
-
-<main class="container">
-  <section class="section columns is-centered">
-    <div class="column is-12">
-      <p>Please fill out form</p>
-
+<section class="section">
+  <div class="columns">
+    <div class="column is-10-tablet is-8-desktop is-6-widescreen is-offset-1-tablet is-offset-2-desktop is-offset-3-widescreen">
       <form action="{% url 'checkout' %}" method="POST" id="payment-form" class="form">
         {% csrf_token %}
         <fieldset>
-          <legend>Details</legend>
-          {{order_form.full_name | add_class:"input"}}
-          {{order_form.email | add_class:"input"}}
+          <legend class="pb-3">Details</legend>
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control is-expanded">
+              {{order_form.full_name | add_class:"input"}}
+            </div>
+            <div class="control is-expanded">
+              {{order_form.email | add_class:"input"}}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              {{order_form.phone_number | add_class:"input"}}
+            </div>
+          </div>
         </fieldset>
         <fieldset>
-          <legend>Delivery</legend>
-          {{order_form.phone_number | add_class:"input"}}
-          {{order_form.country | add_class:"input"}}
-          {{order_form.postcode | add_class:"input"}}
-          {{order_form.post_town | add_class:"input"}}
-          {{order_form.address_1 | add_class:"input"}}
-          {{order_form.address_2 | add_class:"input"}}
-          {{order_form.county | add_class:"input"}}
+          <legend class="pb-3 pt-5">Delivery</legend>
+          <div class="field">
+            <div class="control">
+              {{order_form.address_1 | add_class:"input"}}
+            </div>
+          </div>
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control is-expanded">
+              {{order_form.address_2 | add_class:"input"}}
+            </div>
+            <div class="control is-expanded">
+              {{order_form.post_town | add_class:"input"}}
+            </div>
+          </div>
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control is-expanded">
+              {{order_form.county | add_class:"input"}}
+            </div>
+            <div class="control is-expanded">
+              {{order_form.postcode | add_class:"input"}}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              {{order_form.country | add_class:"input"}}
+            </div>
+          </div>
         </fieldset>
         {% if user.is_authenticated %}
-          <label class="checkbox" for="id-save-info">
-            <input type="checkbox" id="id-save-info" name="save-info">Save this delivery information to my profile
-          </label>
+        <div class="field pt-3">
+          <div class="control">
+            <label class="checkbox" for="id-save-info">
+              <input type="checkbox" id="id-save-info" name="save-info">&nbsp;&nbsp;Save this delivery information to my profile
+            </label>
+          </div>
+        </div>
           
         {% else %}
           <label class="form-check-label" for="id-save-info">
               <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
               <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
           </label>
-				{% endif %}
+        {% endif %}
         <fieldset>
-          <legend>Payment</legend>
-          <div id="card-element"></div>
+          <legend class="pb-3 pt-5">Payment</legend>
+          <div class="field">
+            <div class="control">
+              <div id="card-element"></div>
+            </div>
+          </div>
           <div id="card-errors"></div>
           <input type="hidden" value="{{ client_secret }}" name="client_secret">
         </fieldset>
-        <div>
-          <button class="button" id="submit-payment-button">
-            <span>Complete Order</span>
-            <span class="icon">
-              <i class="fas fa-lock"></i>
-            </span>
-          </button>
+        <div class="field pt-3">
+          <div class="control has-text-centered">
+            <button class="button is-rounded is-success" id="submit-payment-button">
+              <span class="icon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span><strong>Complete Order</strong></span>
+            </button>
+          </div>
         </div>
       </form>   
-        
     </div>
-      
-  </section>
-</main>
+  </div>
+</section>
+
 
 {% endblock content %} 
 
