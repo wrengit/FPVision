@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
+import dj_database_url
 
 
 env = environ.Env(DEBUG=(bool, True))
@@ -31,7 +32,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["eaffbc1a19e4.ngrok.io", "localhost", ]
+ALLOWED_HOSTS = [
+    "b8302381b793.ngrok.io",
+    "localhost",
+]
 
 
 # Application definition
@@ -117,33 +121,40 @@ WSGI_APPLICATION = "FPVision.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     }
+# }
 
+DATABASES = {
+    "default": dj_database_url.parse(
+        "postgres://iofnzusxkcaqyd:" +
+        "e31116e451c2085a1f7b0b45009c559d4958c27df079494793f5b75cb82514ec@" +
+        "ec2-54-75-229-28.eu-west-1.compute.amazonaws.com:5432/d4gltb1ihafgar"
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation." +
-        "UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." +
-        "MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." +
-        "CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation." +
-        "NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "NumericPasswordValidator",
     },
 ]
 
@@ -179,8 +190,6 @@ STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_WH_SECRET = env("STRIPE_WH_SECRET")
 
-COUNTRIES_FIRST = [
-    "GB"
-]
+COUNTRIES_FIRST = ["GB"]
 
 COUNTRIES_FIRST_REPEAT = True
