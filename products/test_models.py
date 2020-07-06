@@ -5,16 +5,16 @@ from .models import Category, SubCategory, Product
 class TestModels(TestCase):
     def setUp(self):
 
-        self.test_category = Category.objects.create(
+        self.test_category, created = Category.objects.get_or_create(
             name="test_category", slug="test-category"
         )
 
-        self.test_subcategory = SubCategory.objects.create(
+        self.test_subcategory, created = SubCategory.objects.get_or_create(
             name="test_subcategory",
             slug="test-subcategory",
             category=self.test_category,
         )
-        self.test_product = Product.objects.create(
+        self.test_product, created = Product.objects.get_or_create(
             name="test_product",
             slug="test-product",
             description="string",
