@@ -81,7 +81,7 @@ class TestViews(TestCase):
                     "price": "1.00",
                     "category": "test_category",
                     "sub_category": "test_subcategory",
-                    "full_image_url": "defaults/default_product.jpg",
+                    "image": "defaults/default_product.jpg",
                     "id": 1,
                     "full_slug": "test-category/test-subcategory/test-product",
                     "stock": 1,
