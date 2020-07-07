@@ -83,7 +83,7 @@ class TestViews(TestCase):
                     "image": "/static/media/defaults/default_product.jpg",
                     "image_url": None,
                     "id": 1,
-                    "slug": "test-product",
+                    "full_slug": "test-category/test-subcategory/test-product",
                     "stock": 1,
                 }
             ],
