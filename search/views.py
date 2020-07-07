@@ -51,7 +51,7 @@ def js_search(request):
             "image",
             "image_url",
             "id",
-            "slug",
+            "full_slug",
             "stock",
         ).filter(available=True)
 

@@ -52,10 +52,7 @@
                     class="column search-result-column is-quarter is-half-touch"
                   >
                     <a
-                      x-bind:href="'/products/'
-                    +product.category.toLowerCase()
-                    +'/'+product.sub_category.toLowerCase()
-                    +'/'+product.slug"
+                      x-bind:href="'products/' + product.full_slug"
                     >
                       <div class="card">
                         <div class="card-image">
