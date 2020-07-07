@@ -51,6 +51,7 @@
                   <div
                     class="column search-result-column is-quarter is-half-touch"
                   >
+
                     <a
                       x-bind:href="'/products/' + product.full_slug"
                     >
@@ -58,7 +59,7 @@
                         <div class="card-image">
                           <figure class="image is-square">
                             <img
-                              :src="{{MEDIA_URL}} + product.image"
+                              :src="product.full_image_url"
                               :alt="product.name"
                             />
                           </figure>
