@@ -14,7 +14,7 @@
             {{product.name | truncatechars:20 }}
           </p>
           <p class="subtitle is-7">
-            {{product.category.name | title }} / {{product.sub_category.name | title}}
+            {{product.category.name | upper}} / {{product.sub_category.name | upper}}
           </p>
           <p class="is-size-7">{{product.description | truncatechars:80}}</p>
           <small class="has-text-weight-bold">£{{product.price}}</small>
