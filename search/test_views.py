@@ -3,6 +3,7 @@ from django.shortcuts import reverse
 from django.contrib.messages import get_messages
 from products.models import Category, SubCategory, Product
 from django.db.models import Q
+from django.conf import settings
 
 
 class TestViews(TestCase):
@@ -80,7 +81,7 @@ class TestViews(TestCase):
                     "price": "1.00",
                     "category": "test_category",
                     "sub_category": "test_subcategory",
-                    "image": "/static/media/defaults/default_product.jpg",
+                    "image": settings.MEDIA_URL + "defaults/default_product.jpg",
                     "image_url": None,
                     "id": 1,
                     "full_slug": "test-category/test-subcategory/test-product",
