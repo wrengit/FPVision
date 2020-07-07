@@ -6,3 +6,8 @@ class ContactList(models.Model):
     email = models.EmailField(blank=False, null=False)
     message = models.TextField(blank=False, null=False)
     date_time = models.DateTimeField(auto_now_add=True)
+
+
+class SubscriptionList(models.Model):
+    email = models.EmailField(max_length=254)
+    date_time = models.DateTimeField(auto_now_add=True)

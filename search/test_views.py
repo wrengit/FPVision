@@ -3,7 +3,6 @@ from django.shortcuts import reverse
 from django.contrib.messages import get_messages
 from products.models import Category, SubCategory, Product
 from django.db.models import Q
-from django.conf import settings
 
 
 class TestViews(TestCase):

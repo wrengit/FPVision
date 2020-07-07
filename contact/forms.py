@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactList
+from .models import ContactList, SubscriptionList
 
 
 class ContactForm(forms.ModelForm):
@@ -30,4 +30,22 @@ class ContactForm(forms.ModelForm):
                 self.fields[field].widget.attrs["class"] = "textarea"
             else:
                 self.fields[field].widget.attrs["class"] = "input"
+            self.fields[field].label = False
+
+
+class SubscriptionForm(forms.ModelForm):
+    model = SubscriptionList
+    fields = ["email"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            "email": "Email Address",
+        }
+
+        for field in self.fields:
+
+            placeholder = placeholders[field]
+            self.fields[field].widget.attrs["placeholder"] = placeholder
+            self.fields[field].widget.attrs["class"] = "input is-rounded"
             self.fields[field].label = False
