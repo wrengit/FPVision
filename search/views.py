@@ -16,10 +16,10 @@ def search_result(request):
             messages.error(request, "Please enter a search criteria")
             return redirect(reverse("all_products"))
         products = Product.objects.all().filter(
-            Q(name__contains=query)
-            | Q(description__contains=query)
-            | Q(category__name__contains=query)
-            | Q(sub_category__name__contains=query)
+            Q(name__icontains=query)
+            | Q(description__icontains=query)
+            | Q(category__name__icontains=query)
+            | Q(sub_category__name__icontains=query)
         )
     context = {
         "query": query,
@@ -30,7 +30,6 @@ def search_result(request):
     return render(request, "search/search.html", context)
 
 
-
 def js_search(request):
     products = None
     filter_products = None
@@ -38,10 +37,10 @@ def js_search(request):
     if "q" in request.GET:
         query = request.GET["q"]
         products = Product.objects.all().filter(
-            Q(name__contains=query)
-            | Q(description__contains=query)
-            | Q(category__name__contains=query)
-            | Q(sub_category__name__contains=query)
+            Q(name__icontains=query)
+            | Q(description__icontains=query)
+            | Q(category__name__icontains=query)
+            | Q(sub_category__name__icontains=query)
         )
         filter_products = products.values(
             "name",
