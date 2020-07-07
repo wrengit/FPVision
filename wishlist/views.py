@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import messages
 from products.models import Product
 from .models import Wishlist, WishlistItem
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def view_wishlist(request):
     """View products saved to the wishlist"""
 
@@ -13,6 +15,7 @@ def view_wishlist(request):
     return render(request, "profiles/wishlist.html", context)
 
 
+@login_required
 def add_to_wishlist(request, product_id):
     """Add a product to the wishlist"""
 
@@ -21,8 +24,7 @@ def add_to_wishlist(request, product_id):
     redirect_url = request.POST.get("redirect_url")
     quantity = int(request.POST.get("quantity"))
     wishlist_item, created = WishlistItem.objects.get_or_create(
-        product=product,
-        wishlist=wishlist,
+        product=product, wishlist=wishlist,
     )
     print(wishlist_item.quantity)
     if wishlist_item.quantity == 0:
@@ -36,6 +38,7 @@ def add_to_wishlist(request, product_id):
     return redirect(redirect_url)
 
 
+@login_required
 def adjust_wishlist(request, product_id):
     """Adjust the quantity of the specified product to the specified amount"""
 
@@ -58,11 +61,15 @@ def adjust_wishlist(request, product_id):
     else:
         wishlist_item.delete()
         wishlist.update_total()
-        messages.info(request, f"{product.name} was\
-             removed from your wishlist")
+        messages.info(
+            request,
+            f"{product.name} was\
+             removed from your wishlist",
+        )
     return redirect(reverse("view_wishlist"))
 
 
+@login_required
 def remove_from_wishlist(request, product_id):
     """Remove the product from the wishlist"""
 
@@ -79,6 +86,7 @@ def remove_from_wishlist(request, product_id):
     return redirect(reverse("view_wishlist"))
 
 
+@login_required
 def add_wishlist_to_basket(request):
     """
     Add all products in the wishlist to the basket.

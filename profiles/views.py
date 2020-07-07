@@ -3,12 +3,15 @@ from django.contrib import messages
 from .models import UserProfile
 from .forms import UserProfileForm, UserForm
 from checkout.models import Order
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def my_account(request):
     return render(request, "profiles/my_account.html")
 
 
+@login_required
 def order_history(request, order_number=None):
     profile = get_object_or_404(UserProfile, user=request.user)
     orders = profile.orders.all().order_by("-date")
@@ -35,6 +38,7 @@ def order_history(request, order_number=None):
         return render(request, template, context)
 
 
+@login_required
 def update_address(request):
     profile = get_object_or_404(UserProfile, user=request.user)
     form = UserProfileForm(instance=profile)
@@ -48,6 +52,7 @@ def update_address(request):
     return render(request, template, context)
 
 
+@login_required
 def update_account_details(request):
     if request.method == "POST":
         form = UserForm(request.POST, instance=request.user)
