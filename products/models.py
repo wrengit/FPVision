@@ -1,6 +1,7 @@
 from django.db import models
 from .utils import create_sku
 from django.urls import reverse
+from django.conf import settings
 
 
 class Category(models.Model):
@@ -11,7 +12,7 @@ class Category(models.Model):
         upload_to="category",
         null=True,
         blank=True,
-        default="/static/media/default/default_category.jpg",
+        default="defaults/default_category.jpg",
     )
 
     class Meta:
@@ -35,6 +36,13 @@ class SubCategory(models.Model):
         blank=True,
         on_delete=models.CASCADE,
         related_name="subcategories",
+    )
+    description = models.TextField(blank=True)
+    image = models.ImageField(
+        upload_to="category",
+        null=True,
+        blank=True,
+        default=settings.MEDIA_URL + "defaults/default_subcategory.jpg",
     )
 
     class Meta:
@@ -72,7 +80,7 @@ class Product(models.Model):
         upload_to="product",
         null=True,
         blank=True,
-        default="/static/media/defaults/default_product.jpg",
+        default=settings.MEDIA_URL + "defaults/default_product.jpg",
     )
 
     class Meta:
