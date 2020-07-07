@@ -1,0 +1,43 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container"></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-4-desktop is-6-tablet">
+        <form method="POST" class="form">
+          {% csrf_token %}
+          <div class="field">
+            <div class="control">
+              {{form.username}}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              {{form.email}}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              {{form.message}}
+            </div>
+          </div>
+          <div class="has-text-centered">
+            <button class="button is-rounded is-info w100-mobile">
+              <span class="icon"><i class="far fa-envelope"></i></span
+              ><span><strong>Send</strong></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
