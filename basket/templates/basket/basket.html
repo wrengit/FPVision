@@ -6,8 +6,8 @@
 
 <main class="container">
   <section class="section columns is-centered">
+    {% if basket_items %}
     <div class="column is-8-desktop is-7-tablet">
-      {% if basket_items %}
       <table class="table mt-5">
         <thead>
           <tr>
@@ -115,9 +115,9 @@
       {% endif %}
 
     </div>
+    {% if basket_items %}
     <div class="column is-4 is-5-tablet">
       <div class="basket-totals box">
-        {% if basket_items %}
         <table class="table basket-table">
           <thead>
             <tr>
@@ -163,22 +163,22 @@
             <span class="is-uppercase"><strong>Checkout</strong></span>
           </a>
         </div>
-      {% else %}
-        <div class="has-text-centered">
-          <p>You have no items in your basket</p>
-          <a
-            href="{% url 'all_products' %}"
-            class="button is-rounded is-primary is-outlined w-100-mobile mt-3"
-          >
-            <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
-            <span class="is-uppercase"><strong>Keep Shopping</strong></span>
-          </a>
-        </div>
-      {% endif %}
       </div>
-      
-        
     </div>
+    {% else %}
+    <div class="column is-6-tablet is-4-desktop">
+      <div class="has-text-centered">
+        <p>You have no items in your basket</p>
+        <a
+          href="{% url 'all_products' %}"
+          class="button is-rounded is-primary is-outlined w-100-mobile mt-3"
+        >
+          <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
+          <span class="is-uppercase"><strong>Keep Shopping</strong></span>
+        </a>
+      </div>
+    </div>
+    {% endif %}
   </section>
 </main>
 
