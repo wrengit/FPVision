@@ -76,12 +76,11 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
-    full_image_url = models.CharField(max_length=254, blank=True)
     image = models.ImageField(
         upload_to="product",
         null=True,
         blank=True,
-        default=settings.MEDIA_URL + "defaults/default_product.jpg",
+        default="defaults/default_product.jpg",
     )
 
     class Meta:
@@ -96,8 +95,6 @@ class Product(models.Model):
             self.full_slug = (
                 self.category.slug + "/" + self.sub_category.slug + "/" + self.slug
             )
-        if not self.full_image_url:
-            self.full_image_url = self.image
         super().save(*args, **kwargs)
 
     def __str__(self):

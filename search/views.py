@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from django.contrib import messages
 from products.models import Category, SubCategory, Product
 from django.db.models import Q
-from django.core import serializers
 
 
 def search_result(request):
@@ -31,6 +30,7 @@ def search_result(request):
     return render(request, "search/search.html", context)
 
 
+
 def js_search(request):
     products = None
     filter_products = None
@@ -48,7 +48,7 @@ def js_search(request):
             "price",
             "category",
             "sub_category",
-            "full_image_url",
+            "image",
             "id",
             "full_slug",
             "stock",
