@@ -31,10 +31,11 @@ class ProductAdmin(admin.ModelAdmin):
         "sku",
         "price",
         "stock",
+        "full_slug",
         "available",
     ]
-    list_editable = ["price", "stock", "available"]
-    prepopulated_fields = {"slug": ("name",),}
+    list_editable = ["price", "stock", "available", ]
+    prepopulated_fields = {"slug": ("name",), }
     list_per_page = 20
 
 
