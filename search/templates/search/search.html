@@ -1,18 +1,39 @@
 {% extends 'base.html' %} 
 {% load static %} 
-
 {% block content %}
-<section>
-  <div class="container">
-    <div class="has-text-centered">
-      <span>Showing {{products.count}} results for " {{query}} "</span>
-    </div>
-    <div class="has-text-centered mt-3">
-      <a href="{% url 'all_products' %}" class="button is-rounded is-info is-outlined"><strong>View All Products</strong></a>
-    </div>
-    <div class="columns is-multiline">
-     {% include 'products/includes/product_card.html' %}
+
+<section class="hero is-light">
+  
+  <div class="hero-body">
+    <div class="container">
+      <div class="has-text-centered mt-3">
+        <h1 class="title">Showing {{products.count}} results for " {{query}} "</h1>
+        <a href="{% url 'all_products' %}" class="button is-rounded is-info is-outlined"><strong>View All Products</strong></a>
+      </div>
     </div>
   </div>
 </section>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div id="filter-container" class="column is-3-desktop p-0-touch">
+        {% include 'products/includes/product_filter.html' %}
+      </div>
+      <div class="column is-9 is-12-touch">
+        <div class="columns is-mobile is-multiline">
+          {% include 'products/includes/product_card.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'products/js/product_filter.js' %}"></script>
+{% endblock postloadjs %}
+  
+
 {% endblock content %}
