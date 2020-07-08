@@ -33,16 +33,16 @@
           Enter your email address to scubcribe to our monthly newsletter,
           bringing you all the latest in FPV news and gadgets
         </p>
-        <input
-          type="email"
-          class="input is-rounded mt-3"
-          placeholder="Email Address"
-        />
-        <div class="has-text-centered">
-          <button class="button is-rounded is-success mt-3">
-            <span class="icon"><i class="fa fa-rss"></i></span>
-            <span><strong>Subscribe</strong></span>
-          </button>
+        <div class=" has-text-centered pt-5">
+          <form id="subscription_form" action="{% url 'subscribe' %}" method="POST">
+            {% csrf_token %}
+            {{sub_form}}
+            <input type="hidden" name="next" value="{{request.path}}">
+            <button type="submit" class="button is-rounded is-success mt-3">
+              <span class="icon"><i class="fa fa-rss"></i></span>
+              <span><strong>Subscribe</strong></span>
+            </button>
+          </form>
         </div>
       </div>
       <div class="column is-4">

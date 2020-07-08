@@ -7,7 +7,13 @@ class ContactList(models.Model):
     message = models.TextField(blank=False, null=False)
     date_time = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.username
+
 
 class SubscriptionList(models.Model):
     email = models.EmailField(max_length=254)
     date_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

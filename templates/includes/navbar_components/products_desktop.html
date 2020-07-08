@@ -1,3 +1,4 @@
+{% load templatetags %}
 <div
   class="navbar-item has-dropdown is-hoverable is-mega is-hidden-touch"
   x-bind:class="{ 'is-active': openItem }"
@@ -19,14 +20,14 @@
           >
           <hr class="navbar-divider" />
           {% for sc in all_subcategories %} 
-            {% if sc.category == c %}
-            <a
-                class="navbar-item"
-                href="{% url 'products_by_subcategory' c.slug sc.slug %}"
-            >
-                {{sc.name}}
-            </a>
-            {% endif %} 
+          {% if sc.category == c %}
+          <a
+            class="navbar-item"
+            href="{% url 'products_by_subcategory' c.slug sc.slug %}"
+          >
+            {{sc.name}}
+          </a>
+          {% endif %} 
           {% endfor %}
         </div>
         {% endfor %}
@@ -48,19 +49,17 @@
 
           <div class="level-right">
             <div class="level-item">
-              <input type="email" placeholder="Email Address" class="input is-small is-rounded">
+              <form action="{% url 'subscribe' %}">
+                {% csrf_token %} {{sub_form.email|add_class:"is-small w-50"}}
+                <button type="submit" class="button is-rounded is-small is-success">
+                  <span class="icon is-small">
+                    <i class="fa fa-rss"></i>
+                  </span>
+                  <span><strong>Subscribe</strong></span>
+                </button>
+              </form>
             </div>
-            <div class="level-item">
-              <a
-                class="button is-rounded is-small is-success"
-                href="#"
-              >
-                <span class="icon is-small">
-                  <i class="fa fa-rss"></i>
-                </span>
-                <span><strong>Subscribe</strong></span>
-              </a>
-            </div>
+            <div class="level-item"></div>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect, reverse
-from .forms import ContactForm
+from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
+from .forms import ContactForm, SubscriptionForm
+from .models import SubscriptionList
 from django.contrib import messages
 
 
@@ -24,3 +25,18 @@ def contact(request):
             form = ContactForm()
 
         return render(request, "contact/contact.html", {"form": form})
+
+
+def subscribe(request):
+    sub_form = SubscriptionForm()
+    if request.method == "POST":
+        next = request.POST.get("next", "/")
+        sub_form = SubscriptionForm(request.POST)
+        if SubscriptionList.objects.filter(email=request.POST.get("email")).exists():
+            messages.info(request, "You are aleady subscribed to the mailing list")
+            return HttpResponseRedirect(next)
+        else:
+            if sub_form.is_valid():
+                sub_form.save()
+                messages.success(request, "You've joined our mailing list!")
+    return HttpResponseRedirect(next)

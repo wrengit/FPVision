@@ -1,5 +1,5 @@
 <div class="navbar-item is-hidden-touch">
-    <a href="#" class="button is-rounded is-outlined is-info is-small mr-3"><strong>CONTACT US</strong></a>
+    <a href="{% url 'contact' %}" class="button is-rounded is-outlined is-info is-small mr-3"><strong>CONTACT US</strong></a>
     <div>
       {% if user.is_authenticated %}
       <a href="{% url 'my_account' %}">

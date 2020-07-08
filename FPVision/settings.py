@@ -92,6 +92,7 @@ TEMPLATES = [
                 "basket.context.basket_contents",
                 "django.template.context_processors.media",
                 "products.context.all_products_all_categories",
+                "contact.context.sub_form_context",
             ],
             "libraries": {"templatetags": "templatetags.form_tags"},
         },

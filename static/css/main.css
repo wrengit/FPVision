@@ -12929,6 +12929,10 @@ input[type=number] {
   width: 100%;
 }
 
+.w-50 {
+  width: 70%;
+}
+
 @media screen and (max-width: 766px) {
   .w-100-mobile {
     width: 100%;

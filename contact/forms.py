@@ -34,8 +34,9 @@ class ContactForm(forms.ModelForm):
 
 
 class SubscriptionForm(forms.ModelForm):
-    model = SubscriptionList
-    fields = ["email"]
+    class Meta:
+        model = SubscriptionList
+        fields = ["email"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
