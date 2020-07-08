@@ -12,7 +12,7 @@
         {% else %} 
         <h1 class="title">All Products</h1>
           {% for category in all_categories %}
-            &#10012 &nbsp;<a href="{{category.get_url}}">{{category.name}}</a>&nbsp;
+            &#10012 &nbsp;<a class="is-size-7-mobile" href="{{category.get_url}}"><Strong>{{category.name}}</Strong></a>&nbsp;
             {% if forloop.last %}
             &#10012
             {% endif %}
