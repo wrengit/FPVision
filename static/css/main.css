@@ -12757,7 +12757,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 @media screen and (max-width: 1023px) {
   .search-container {
-    width: 90vw;
+    width: 100%;
     max-width: 400rem;
     text-align: center;
   }

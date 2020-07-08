@@ -12757,7 +12757,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 @media screen and (max-width: 1023px) {
   .search-container {
-    width: 90vw;
+    width: 100%;
     max-width: 400rem;
     text-align: center;
   }
@@ -12927,6 +12927,10 @@ input[type=number] {
 
 .w-100 {
   width: 100%;
+}
+
+.w-50 {
+  width: 70%;
 }
 
 @media screen and (max-width: 766px) {
