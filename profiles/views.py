@@ -54,13 +54,12 @@ def update_address(request):
 
 @login_required
 def update_account_details(request):
+    form = UserForm(instance=request.user)
     if request.method == "POST":
         form = UserForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, "We have updated your account details")
-    else:
-        form = UserForm(instance=request.user)
     template = "profiles/update_account_details.html"
     context = {"form": form}
     return render(request, template, context)
