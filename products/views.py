@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .models import Category, SubCategory, Product
 from .forms import ProductForm
+from django.contrib.auth.decorators import login_required
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
@@ -41,7 +42,7 @@ def product_details(request, category_slug, subcategory_slug, product_slug):
     }
     return render(request, "products/product_details.html", context)
 
-
+@login_required
 def add_product(request):
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
