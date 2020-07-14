@@ -26,7 +26,6 @@ def add_to_wishlist(request, product_id):
     wishlist_item, created = WishlistItem.objects.get_or_create(
         product=product, wishlist=wishlist,
     )
-    print(wishlist_item.quantity)
     if wishlist_item.quantity == 0:
         wishlist_item.quantity = quantity
         wishlist_item.save()
@@ -45,10 +44,7 @@ def adjust_wishlist(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     quantity = int(request.POST.get("quantity"))
     wishlist = Wishlist.objects.get(user=request.user)
-    wishlist_item = WishlistItem.objects.get(
-        product=product,
-        wishlist=wishlist
-    )
+    wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist)
     if quantity > 0:
         wishlist_item.quantity = quantity
         wishlist_item.save()
@@ -75,10 +71,7 @@ def remove_from_wishlist(request, product_id):
 
     product = get_object_or_404(Product, pk=product_id)
     wishlist = Wishlist.objects.get(user=request.user)
-    wishlist_item = WishlistItem.objects.get(
-        product=product,
-        wishlist=wishlist
-    )
+    wishlist_item = WishlistItem.objects.get(product=product, wishlist=wishlist)
     wishlist_item.delete()
     wishlist.update_total()
     messages.success(request, f"Removed {product.name} from your wishlist")
@@ -118,9 +111,7 @@ def add_wishlist_to_basket(request):
                 )
         else:
             basket[item.product.id] = item.quantity
-            messages.success(
-                request, f"Added {item.product.name} to your basket"
-            )
+            messages.success(request, f"Added {item.product.name} to your basket")
             item.delete()
 
     if wishlist_products is True:

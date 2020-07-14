@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Category, SubCategory, Product
+from products.models import Category, SubCategory, Product
 
 
 class TestViews(TestCase):
@@ -8,12 +8,13 @@ class TestViews(TestCase):
         self.test_category, created = Category.objects.get_or_create(
             name="test_category", slug="test-category"
         )
-
+        self.test_category.save()
         self.test_subcategory, created = SubCategory.objects.get_or_create(
             name="test_subcategory",
             slug="test-subcategory",
             category=self.test_category,
         )
+        self.test_subcategory.save()
         self.test_product, created = Product.objects.get_or_create(
             name="test_product",
             slug="test-product",
@@ -23,6 +24,7 @@ class TestViews(TestCase):
             stock=1,
             price=1,
         )
+        self.test_product.save()
 
     def tearDown(self):
         del self.test_category

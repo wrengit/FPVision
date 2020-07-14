@@ -17,7 +17,7 @@ def contact(request):
                 "We have recieved your message. "
                 + "You can expect to hear from us soon",
             )
-            return redirect(reverse("all_products"))
+        return redirect(reverse("all_products"))
     else:
         if request.user.is_authenticated:
             form = ContactForm(instance=request.user)

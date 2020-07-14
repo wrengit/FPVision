@@ -1,5 +1,4 @@
 import uuid
-
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
@@ -38,9 +37,7 @@ class Order(models.Model):
         max_digits=10, decimal_places=2, null=False, default=0
     )
     original_basket = models.TextField(null=False, blank=False, default="")
-    stripe_pid = models.CharField(
-        max_length=254, null=False, blank=False, default=""
-    )
+    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default="")
 
     def _generate_order_number(self):
         return uuid.uuid4().hex.upper()
@@ -52,8 +49,7 @@ class Order(models.Model):
 
     def update_total(self):
         self.order_total = (
-            self.lineitems.aggregate(
-                Sum("lineitem_total"))["lineitem_total__sum"] or 0
+            self.lineitems.aggregate(Sum("lineitem_total"))["lineitem_total__sum"] or 0
         )
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             self.delivery_cost = (

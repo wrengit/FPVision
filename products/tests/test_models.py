@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Category, SubCategory, Product
+from products.models import Category, SubCategory, Product
 
 
 class TestModels(TestCase):

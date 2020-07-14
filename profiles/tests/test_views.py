@@ -2,10 +2,9 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
 from checkout.models import Order, OrderLineItem
-from .models import UserProfile
+from profiles.models import UserProfile
 from products.models import Category, SubCategory, Product
-from .forms import UserProfileForm, UserForm
-
+from profiles.forms import UserProfileForm, UserForm
 
 
 class TestViews(TestCase):
@@ -20,9 +19,7 @@ class TestViews(TestCase):
         )
         test_category.save()
         test_subcategory, created = SubCategory.objects.get_or_create(
-            name="test_subcategory",
-            slug="test-subcategory",
-            category=test_category,
+            name="test_subcategory", slug="test-subcategory", category=test_category,
         )
         test_subcategory.save()
         test_product, created = Product.objects.get_or_create(
@@ -59,7 +56,7 @@ class TestViews(TestCase):
         self.assertEqual(str(response.context["user"]), "test_user")
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "profiles/my_account.html")
-    
+
     def test_view_order_history_with_no_orders(self):
         login = self.client.login(username="test_user", password="jshSjSJ*£JS£S")
         response = self.client.get(reverse("order_history"))
@@ -68,7 +65,9 @@ class TestViews(TestCase):
 
     def test_view_order_history_with_previous_orders(self):
         login = self.client.login(username="test_user", password="jshSjSJ*£JS£S")
-        response = self.client.get(reverse("order_history_order", args=[self.test_order.order_number]))
+        response = self.client.get(
+            reverse("order_history_order", args=[self.test_order.order_number])
+        )
         self.assertTemplateUsed(response, "checkout/checkout_success.html")
         self.assertEqual(response.status_code, 200)
 
@@ -82,7 +81,7 @@ class TestViews(TestCase):
         login = self.client.login(username="test_user", password="jshSjSJ*£JS£S")
         user = self.test_user
         response = self.client.post(reverse("update_address"))
-        form_data={"default_phone_number":"09876", "user":user.id}
+        form_data = {"default_phone_number": "09876", "user": user.id}
         form = UserProfileForm(data=form_data)
         self.assertTrue(form.is_valid())
 
@@ -96,8 +95,7 @@ class TestViews(TestCase):
         login = self.client.login(username="test_user", password="jshSjSJ*£JS£S")
         user = self.test_user
         response = self.client.post(reverse("update_account_details"))
-        form_data={"username":"updated_username"}
+        form_data = {"username": "updated_username"}
         form = UserForm(data=form_data)
         self.assertTrue(form.is_valid())
-        
-   
+

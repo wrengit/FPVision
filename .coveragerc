@@ -9,3 +9,4 @@ omit =
     *admin*
     manage.py
     *migrations*
+    custom_storages.py
