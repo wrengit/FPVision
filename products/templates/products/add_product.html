@@ -7,7 +7,7 @@
 <section class="section">
   <div class="columns">
     <div class="column is-10-tablet is-8-desktop is-6-widescreen is-offset-1-tablet is-offset-2-desktop is-offset-3-widescreen">
-        <form method="POST" class="form">
+        <form method="POST" class="form" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="field">
             <label for="" class="label">{{form.name.label}}</label>
@@ -61,6 +61,13 @@
               {{form.image|add_class:"input"}}
             </div>
           </div>
+          <div hidden class="field">
+            <label for="" class="label">{{form.image_url.label}}</label>
+            <div class="control">
+              {{form.image_url|add_class:"input"}}
+            </div>
+          </div>
+          
           <div class="has-text-centered">
             
             <button class="button is-rounded is-primary">
