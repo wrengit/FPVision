@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
 from .models import Category, SubCategory, Product
+from .forms import ProductForm
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
@@ -38,3 +40,23 @@ def product_details(request, category_slug, subcategory_slug, product_slug):
         "category": category,
     }
     return render(request, "products/product_details.html", context)
+
+
+def add_product(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added product")
+            return redirect(reverse("add_product"))
+        else:
+            messages.error(
+                request, "Failed to add product. Please ensure form in valid"
+            )
+    else:
+        form = ProductForm()
+    
+    template = "products/add_product.html"
+    context = {"form": form}
+
+    return render(request, template, context)

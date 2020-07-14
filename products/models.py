@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from .utils import create_sku
 from django.urls import reverse
 from django.conf import settings
@@ -95,6 +96,8 @@ class Product(models.Model):
             self.full_slug = (
                 self.category.slug + "/" + self.sub_category.slug + "/" + self.slug
             )
+        if not self.slug:
+            self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
