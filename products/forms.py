@@ -15,4 +15,5 @@ class ProductForm(forms.ModelForm):
             "available",
             "image_url",
             "image",
+            "sku"
         }

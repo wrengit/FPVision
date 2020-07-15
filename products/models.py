@@ -76,6 +76,7 @@ class Product(models.Model):
     stock = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
+    featured = models.BooleanField(default=False)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(
         upload_to="product",
@@ -92,12 +93,10 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.sku:
             self.sku = create_sku()
-        if not self.full_slug:
-            self.full_slug = (
-                self.category.slug + "/" + self.sub_category.slug + "/" + self.slug
-            )
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
+        self.full_slug = (
+            self.category.slug + "/" + self.sub_category.slug + "/" + self.slug
+        )
         super().save(*args, **kwargs)
 
     def __str__(self):
