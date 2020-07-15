@@ -6,6 +6,11 @@ from django.db.models import Q
 
 
 def search_result(request):
+    """
+    Queries DB for matches based on the search 
+    parameters. Category/subcategory/product/description
+    are all queried
+    """
     all_categories = Category.objects.all()
     all_subcategories = SubCategory.objects.all()
     products = None
@@ -31,6 +36,10 @@ def search_result(request):
 
 
 def js_search(request):
+    """
+    Live JS search queries DB of keyup and returns
+    a JSONResponse
+    """
     products = None
     filter_products = None
     query = None

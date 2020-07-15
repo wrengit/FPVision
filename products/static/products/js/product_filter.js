@@ -1,3 +1,5 @@
+// Alpine JS function for filtering products
+
 function productFilter() {
   let stockList = document.querySelectorAll("div.hideme-stock");
   let priceList = document.querySelectorAll("div.hideme-price");

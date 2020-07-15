@@ -9,11 +9,19 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def my_account(request):
+    """
+    'my account' dashboard view
+    """
     return render(request, "profiles/my_account.html")
 
 
 @login_required
 def order_history(request, order_number=None):
+    """
+    Details a list of previous user orders if no
+    order number is given, or the order details
+    if an order number is given
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
     orders = profile.orders.all().order_by("-date")
     all_orders = Order.objects.all().order_by("-date")
@@ -42,6 +50,10 @@ def order_history(request, order_number=None):
 
 @login_required
 def update_address(request):
+    """
+    Allows users to update their address. Checkout
+    information will be pulled from this UserProfile
+    """
     profile = get_object_or_404(UserProfile, user=request.user)
     form = UserProfileForm(instance=profile)
     if request.method == "POST":
@@ -56,6 +68,9 @@ def update_address(request):
 
 @login_required
 def update_account_details(request):
+    """
+    Allows users to change username, and password
+    """
     form = UserForm(instance=request.user)
     if request.method == "POST":
         form = UserForm(request.POST, instance=request.user)
@@ -69,6 +84,9 @@ def update_account_details(request):
 
 @login_required
 def customer_messages(request):
+    """
+    Admin view that lists all customer orders
+    """
     customer_messages = ContactList.objects.all()
     return render(
         request,

@@ -39,6 +39,11 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Checkout view, pulling info from forms to
+    post to Stripe
+    """
+
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -143,6 +148,9 @@ def checkout(request):
 
 
 def checkout_success(request, order_number):
+    """
+    View after a successful checkout.
+    """
     save_info = request.session.get("save_info")
     order = get_object_or_404(Order, order_number=order_number)
 
@@ -151,6 +159,9 @@ def checkout_success(request, order_number):
         order.user_profile = profile
         order.save()
 
+        """
+        Saves user info for later use if selected
+        """
         if save_info:
             profile_data = {
                 "default_phone_number": order.phone_number,

@@ -5,6 +5,11 @@ from django.contrib import messages
 
 
 def contact(request):
+    """
+    Contact form to leave a message for shop admin
+    Does not require a logged in user. Can be accessed
+    from the admin dashboard.
+    """
     if request.method == "POST":
         if request.user.is_authenticated:
             form = ContactForm(request.POST, instance=request.user)
@@ -28,6 +33,10 @@ def contact(request):
 
 
 def subscribe(request):
+    """
+    Adds an email address to a list. Model data is currently
+    saved, but no subscriber list is set up
+    """
     sub_form = SubscriptionForm()
     if request.method == "POST":
         next = request.POST.get("next", "/")

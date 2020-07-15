@@ -1,3 +1,5 @@
+// Stripe JS for credit card element
+
 const stripePublicKey = document.getElementById("id_stripe_public_key").textContent.slice(1, -1)
 const clientSecret = document.getElementById("id_client_secret").textContent.slice(1, -1)
 const errorDiv = document.getElementById("card-errors")

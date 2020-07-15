@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 
 
 def all_products(request, category_slug=None, subcategory_slug=None):
+    """
+    Displays all products, or products filtered by either
+    category or subcategory
+    """
     category = None
     subcategory = None
     if category_slug is not None:
@@ -28,6 +32,9 @@ def all_products(request, category_slug=None, subcategory_slug=None):
 
 
 def product_details(request, category_slug, subcategory_slug, product_slug):
+    """
+    Displays the product detail page
+    """
     category = Category.objects.get(slug=category_slug)
     subcategory = SubCategory.objects.get(slug=subcategory_slug)
     product = Product.objects.get(
@@ -45,6 +52,9 @@ def product_details(request, category_slug, subcategory_slug, product_slug):
 
 @login_required
 def add_product(request):
+    """
+    Allows users with admin perms to add a product
+    """
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -66,6 +76,10 @@ def add_product(request):
 
 @login_required
 def edit_product(request, product_id):
+    """
+    Allows users with admin perms to edit an
+    exisiting product
+    """
     product = get_object_or_404(Product, pk=product_id)
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -97,6 +111,10 @@ def edit_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
+    """
+    Allows users with admin perms to delete and
+    existing product
+    """
     product = Product.objects.get(id=product_id)
     product.delete()
     messages.success(request, f"{product.name} was deleted")

@@ -1,3 +1,6 @@
+//Alpine JS function to control automatic update 
+//of values where user selects product quantity
+
 function qtyFormControl() {
   let timer = null;
   return {
@@ -19,6 +22,8 @@ function qtyFormControl() {
       }
     },
     updateSubmitForm(targetId) {
+      // setTimeout to allow user to finish changing
+      // quantity before form submitting
       timer = setTimeout(() => {
         let form = document.getElementById(`basket-quantity-form-${targetId}`);
         let input = document.getElementById(`qty-${targetId}`);
@@ -80,6 +85,7 @@ function qtyFormControl() {
     },
     //https://stackoverflow.com/questions/19966417/prevent-typing-non-numeric-in-input-type-number
     blockAlpha(e) {
+      // blocks any non numberical inputs
       if (
         (e.key.length === 1 && e.key !== "." && isNaN(e.key) && !e.ctrlKey) ||
         (e.key === "." && e.target.value.toString().indexOf(".") > -1)
