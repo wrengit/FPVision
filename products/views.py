@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from .models import Category, SubCategory, Product
 from .forms import ProductForm
@@ -42,6 +42,7 @@ def product_details(request, category_slug, subcategory_slug, product_slug):
     }
     return render(request, "products/product_details.html", context)
 
+
 @login_required
 def add_product(request):
     if request.method == "POST":
@@ -56,8 +57,47 @@ def add_product(request):
             )
     else:
         form = ProductForm()
-    
+
     template = "products/add_product.html"
     context = {"form": form}
 
     return render(request, template, context)
+
+
+@login_required
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Updated product")
+            return redirect(
+                reverse(
+                    "product_details",
+                    args=[
+                        product.category.slug,
+                        product.sub_category.slug,
+                        product.slug,
+                    ],
+                )
+            )
+        else:
+            messages.error(
+                request, "Failed to update product. Please ensure form is valid"
+            )
+    else:
+        form = ProductForm(instance=product)
+
+    template = "products/edit_product.html"
+    context = {"form": form}
+
+    return render(request, template, context)
+
+
+@login_required
+def delete_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.delete()
+    messages.success(request, f"{product.name} was deleted")
+    return redirect(reverse("all_products"))

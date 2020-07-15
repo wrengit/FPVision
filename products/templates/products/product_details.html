@@ -27,68 +27,74 @@
         <p class="is-size-6 is-size-7-mobile">Category: {{product.category}}</p>
         <p class="is-size-6 is-size-7-mobile">Sub Category: {{product.sub_category.name}}</p>
         <hr />
-        <form
-          class="form qty-form"
-          id="basket-quantity-form-{{product.id}}"
-          x-data="qtyFormControl()"
-          action="{% url 'add_to_basket' product.id %}"
-          method="POST"
-        >
-          {% csrf_token %}
-          <div class="field has-addons">
-            <div class="control">
-              <button
-                class="button is-rounded is-icon is-primary is-size-7-mobile"
-                @click.prevent="decrementQty({{product.id}})"
-                id="decrement-{{product.id}}"
-              >
-                <span class="icon is-small">
-                  <i class="fas fa-minus"></i>
-                </span>
-              </button>
+        
+        {% if not user.is_staff %}
+          <form
+            class="form qty-form"
+            id="basket-quantity-form-{{product.id}}"
+            x-data="qtyFormControl()"
+            action="{% url 'add_to_basket' product.id %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="field has-addons">
+              <div class="control">
+                <button
+                  class="button is-rounded is-icon is-primary is-size-7-mobile"
+                  @click.prevent="decrementQty({{product.id}})"
+                  id="decrement-{{product.id}}"
+                >
+                  <span class="icon is-small">
+                    <i class="fas fa-minus"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="control">
+                <input
+                  type="number"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max="{{product.stock}}"
+                  id="qty-{{product.id}}"
+                  class="input is-primary is-size-7-mobile"
+                  x-on:keypress="blockAlpha($event)"
+                  x-on:keyup="updateSubmitForm({{product.id}})"
+                />
+              </div>
+              <div class="control">
+                <button
+                  @click.prevent="incrementQty({{product.id}})"
+                  class="button is-rounded is-icon is-primary is-size-7-mobile"
+                  id="increment-{{product.id}}"
+                >
+                  <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                </button>
+              </div>
             </div>
-            <div class="control">
-              <input
-                type="number"
-                name="quantity"
-                value="1"
-                min="1"
-                max="{{product.stock}}"
-                id="qty-{{product.id}}"
-                class="input is-primary is-size-7-mobile"
-                x-on:keypress="blockAlpha($event)"
-                x-on:keyup="updateSubmitForm({{product.id}})"
-              />
-            </div>
-            <div class="control">
-              <button
-                @click.prevent="incrementQty({{product.id}})"
-                class="button is-rounded is-icon is-primary is-size-7-mobile"
-                id="increment-{{product.id}}"
-              >
-                <span class="icon is-small">
-                  <i class="fas fa-plus"></i>
-                </span>
-              </button>
-            </div>
-          </div>
 
-          <div class="field is-grouped is-grouped-multiline is-centered">
-            <p class="control">
-              <button class="button is-rounded is-success is-size-7-mobile" type="submit">
-                <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                <span><strong>Add to Basket</strong> </span>
-              </button>
-            </p>
-            <p class="control">
-              <button class="button is-rounded is-primary is-light is-size-7-mobile" type="submit" formaction="{% url 'add_to_wishlist' product.id %}">
-                <span class="icon"><i class="fas fa-gift"></i></span>
-                <span><strong>Add to Wishlist</strong> </span>
-              </button>
-            </p>
-          </div>
-          <input type="hidden" name="redirect_url" value="{{ request.path }}" />
-        </form>
+            <div class="field is-grouped is-grouped-multiline is-centered">
+              <p class="control">
+                <button class="button is-rounded is-success is-size-7-mobile" type="submit">
+                  <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                  <span><strong>Add to Basket</strong> </span>
+                </button>
+              </p>
+              <p class="control">
+                <button class="button is-rounded is-primary is-light is-size-7-mobile" type="submit" formaction="{% url 'add_to_wishlist' product.id %}">
+                  <span class="icon"><i class="fas fa-gift"></i></span>
+                  <span><strong>Add to Wishlist</strong> </span>
+                </button>
+              </p>
+            </div>
+            <input type="hidden" name="redirect_url" value="{{ request.path }}" />
+          </form>
+        {% else %}
+          <a href="{%url 'delete_product' product.id %}" class="button is-danger is-rounded"><strong>DELETE!</strong></a>
+          <a href="{%url 'edit_product' product.id %}" class="button is-info is-rounded"><strong>EDIT</strong></a>
+        {% endif %}
       </div>
 
       <div class="column is-12">
