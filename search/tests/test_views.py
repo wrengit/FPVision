@@ -9,16 +9,16 @@ class TestViews(TestCase):
     def setUp(self):
 
         self.test_category, created = Category.objects.get_or_create(
-            name="test_category", slug="test-category"
+            name="test category", slug="test-category"
         )
 
         self.test_subcategory, created = SubCategory.objects.get_or_create(
-            name="test_subcategory",
+            name="test subcategory",
             slug="test-subcategory",
             category=self.test_category,
         )
         self.test_product, created = Product.objects.get_or_create(
-            name="test_product",
+            name="test product",
             slug="test-product",
             description="string",
             category=self.test_category,
@@ -76,10 +76,10 @@ class TestViews(TestCase):
             response.content.decode("utf8"),
             [
                 {
-                    "name": "test_product",
+                    "name": "test product",
                     "price": "1.00",
-                    "category": "test_category",
-                    "sub_category": "test_subcategory",
+                    "category": "test category",
+                    "sub_category": "test subcategory",
                     "image": "defaults/default_product.jpg",
                     "id": 1,
                     "full_slug": "test-category/test-subcategory/test-product",
