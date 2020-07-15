@@ -31,7 +31,7 @@
           <tbody>
             {% for order in orders %}
             <tr>
-              <td class="is-size-7-mobile"><a href="{% url 'order_history' order.order_number %}"><abbr title="{{order.order_number}}">{{order.order_number|truncatechars:6}}</abbr></a></td>
+              <td class="is-size-7-mobile"><a href="{% url 'order_history_order' order.order_number %}"><abbr title="{{order.order_number}}">{{order.order_number|truncatechars:6}}</abbr></a></td>
               <td class="is-size-7-mobile">{{order.date}}</td>
               <td class="is-size-7-mobile">
                 <ul>
