@@ -12733,6 +12733,30 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   color: #fa755a;
 }
 
+.h-product-wrap {
+  overflow-x: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.h-product-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.h-product {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 14rem;
+  max-width: 18rem;
+  padding: 1rem;
+}
+
 .js-search {
   width: 70vw;
   max-width: 50rem;
@@ -12938,3 +12962,12 @@ input[type=number] {
     width: 100%;
   }
 }
+
+.is-size-8 {
+  font-size: 0.6rem;
+}
+
+.is-size-8-mobile {
+  font-size: 0.6rem;
+}
+/*# sourceMappingURL=main.css.map */
