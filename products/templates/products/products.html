@@ -2,8 +2,8 @@
 {% load static %} 
 {% block content %}
 
+<!--Products title area-->
 <section class="hero is-light">
-  
   <div class="hero-body">
     <div class="container">
       {% if not subcategory %} 
@@ -22,10 +22,11 @@
       <h1 class="title">{{subcategory.name}}</h1> 
       {% endif %}
       {% include 'products/includes/breadcrumbs.html' %}
-
     </div>
   </div>
 </section>
+
+<!--Main products section-->
 <section class="section">
   <div class="container">
     <div class="columns">

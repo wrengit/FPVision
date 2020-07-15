@@ -48,13 +48,18 @@
   </head>
   <body class="has-navbar-fixed-top">
     <div class="overlay"></div>
+    <!--Navigation-->
     {% include 'includes/navbar.html' %}
   
+    <!--Main Content Block-->
     {% block content %}
   
     {% endblock content %} 
     
+    <!--Horizontal products-->
     {% include "includes/horizontal_products.html" %}
+
+    <!--Message notifications-->
     {% if messages %}
       <div class="message-container">
         {% for message in messages %} 
@@ -73,7 +78,10 @@
       </div>
     {% endif %} 
     
+    <!--Footer-->
     {% include 'includes/footer.html' %}
+
+    <!--Additional post load JavaScript-->
     {% block postloadjs %}
     {% endblock postloadjs %}
   </body>

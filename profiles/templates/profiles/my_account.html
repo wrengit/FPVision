@@ -28,7 +28,7 @@
         </h2>
 
         <p class="pt-5">From the 'My Account' Dashboard, you can view previous orders, update your address, check and edit your account details and see what you've added to your wishlist.</p>
-        
+        <!--Section displayed for non admin, general users-->
         {% if not user.is_staff %}
           <div class="buttons pt-6">
             <a class="button is-rounded is-primary is-outlined" href="{% url 'order_history' %}"
@@ -52,7 +52,8 @@
               ><span>Wishlist</span></a
             >
           </div>
-        {% endif %}
+        {% else %}
+        <!--Section displayed to admin members-->
         <div class="buttons pt-6">
           <a class="button is-rounded is-primary is-outlined" href="{% url 'order_history' %}"
             ><span class="icon"><i class="fas fa-mail-bulk"></i></span
@@ -71,6 +72,7 @@
             ><span>Account Details</span></a
           >
         </div>
+        {% endif %}
           
       </div>
     </div>

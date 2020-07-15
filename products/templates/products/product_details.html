@@ -27,7 +27,7 @@
         <p class="is-size-6 is-size-7-mobile">Category: {{product.category}}</p>
         <p class="is-size-6 is-size-7-mobile">Sub Category: {{product.sub_category.name}}</p>
         <hr />
-        
+        <!--Add to basket/wishlist form for non admin users-->
         {% if not user.is_staff %}
           <form
             class="form qty-form"
@@ -91,6 +91,7 @@
             </div>
             <input type="hidden" name="redirect_url" value="{{ request.path }}" />
           </form>
+        <!--Edit/Delete product section for admin users-->
         {% else %}
           <a href="{%url 'delete_product' product.id %}" class="button is-danger is-rounded"><strong>DELETE!</strong></a>
           <a href="{%url 'edit_product' product.id %}" class="button is-info is-rounded"><strong>EDIT</strong></a>

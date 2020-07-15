@@ -4,7 +4,9 @@ register = template.Library()
 
 # https://ethanshearer.com/view-post/3/070519/sass-with-django-part2-bulma
 
-
+"""
+Allows adding classes to Django rendered forms
+"""
 @register.filter(name="add_class")
 def add_class(field, classname):
     existing_classes = field.field.widget.attrs.get("class", None)
