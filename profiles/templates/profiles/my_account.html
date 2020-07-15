@@ -28,28 +28,50 @@
         </h2>
 
         <p class="pt-5">From the 'My Account' Dashboard, you can view previous orders, update your address, check and edit your account details and see what you've added to your wishlist.</p>
+        
+        {% if not user.is_staff %}
+          <div class="buttons pt-6">
+            <a class="button is-rounded is-primary is-outlined" href="{% url 'order_history' %}"
+              ><span class="icon"><i class="fas fa-mail-bulk"></i></span
+              ><span>Orders</span></a
+            >
+            <a class="button is-rounded is-primary is-outlined" href="{% url 'update_address' %}"
+              ><span class="icon"><i class="far fa-address-book"></i></span
+              ><span>Address</span></a
+            >
+            <a class="button is-rounded is-primary is-outlined" href="{% url 'update_account_details' %}"
+              ><span class="icon"><i class="far fa-user-circle"></i></span
+              ><span>Account Details</span></a
+            >
+            <a class="button is-rounded is-primary is-outlined" href="{% url 'account_change_password' %}"
+              ><span class="icon"><i class="fas fa-key"></i></span
+              ><span>Change Password</span></a
+            >
+            <a class="button is-rounded is-primary is-outlined" href="{% url 'view_wishlist' %}"
+              ><span class="icon"><i class="fas fa-cart-arrow-down"></i></span
+              ><span>Wishlist</span></a
+            >
+          </div>
+        {% endif %}
         <div class="buttons pt-6">
           <a class="button is-rounded is-primary is-outlined" href="{% url 'order_history' %}"
             ><span class="icon"><i class="fas fa-mail-bulk"></i></span
-            ><span>Orders</span></a
+            ><span> All Customer Orders</span></a
           >
-          <a class="button is-rounded is-primary is-outlined" href="{% url 'update_address' %}"
+          <a class="button is-rounded is-primary is-outlined" href="{% url 'customer_messages' %}"
             ><span class="icon"><i class="far fa-address-book"></i></span
-            ><span>Address</span></a
-          >
-          <a class="button is-rounded is-primary is-outlined" href="{% url 'update_account_details' %}"
-            ><span class="icon"><i class="far fa-user-circle"></i></span
-            ><span>Account Details</span></a
+            ><span>Customer Messages</span></a
           >
           <a class="button is-rounded is-primary is-outlined" href="{% url 'account_change_password' %}"
             ><span class="icon"><i class="fas fa-key"></i></span
             ><span>Change Password</span></a
           >
-          <a class="button is-rounded is-primary is-outlined" href="{% url 'view_wishlist' %}"
-            ><span class="icon"><i class="fas fa-cart-arrow-down"></i></span
-            ><span>Wishlist</span></a
+          <a class="button is-rounded is-primary is-outlined" href="{% url 'update_account_details' %}"
+            ><span class="icon"><i class="far fa-user-circle"></i></span
+            ><span>Account Details</span></a
           >
         </div>
+          
       </div>
     </div>
   </div>

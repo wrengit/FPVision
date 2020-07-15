@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import UserProfile
 from .forms import UserProfileForm, UserForm
 from checkout.models import Order
+from contact.models import ContactList
 from django.contrib.auth.decorators import login_required
 
 
@@ -15,6 +16,7 @@ def my_account(request):
 def order_history(request, order_number=None):
     profile = get_object_or_404(UserProfile, user=request.user)
     orders = profile.orders.all().order_by("-date")
+    all_orders = Order.objects.all().order_by("-date")
     if order_number is not None:
         order = get_object_or_404(Order, order_number=order_number)
         date = order.date
@@ -34,7 +36,7 @@ def order_history(request, order_number=None):
 
     else:
         template = "profiles/order_history.html"
-        context = {"orders": orders}
+        context = {"orders": orders, "all_orders": all_orders}
         return render(request, template, context)
 
 
@@ -63,3 +65,14 @@ def update_account_details(request):
     template = "profiles/update_account_details.html"
     context = {"form": form}
     return render(request, template, context)
+
+
+@login_required
+def customer_messages(request):
+    customer_messages = ContactList.objects.all()
+    return render(
+        request,
+        "profiles/messages_list.html",
+        context={"customer_messages": customer_messages},
+    )
+

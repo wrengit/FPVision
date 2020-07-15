@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <h1 class="title is-spaced">My Account</h1>
+          <p>Customer Messages</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      {% include 'includes/profile_nav.html' %}
+
+      <div class="column is-multiline is-7-desktop">
+        <p class="pb-3">Messages from customers</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="is-size-7-mobile">Username</th>
+              <th class="is-size-7-mobile">Email</th>
+              <th class="is-size-7-mobile">Message</th>
+              <th class="is-size-7-mobile">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for message in customer_messages %}
+            <tr>
+              <td class="is-size-7-mobile">{{message.username}}</td>
+              <td class="is-size-7-mobile">{{message.email}}</td>
+              <td class="is-size-7-mobile">{{message.message}}</td>
+              <td class="is-size-7-mobile">{{message.date}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+          
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

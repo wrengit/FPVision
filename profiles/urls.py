@@ -11,4 +11,5 @@ urlpatterns = [
         views.update_account_details,
         name="update_account_details",
     ),
+    path("customer_messages/", views.customer_messages, name="customer_messages"),
 ]
