@@ -1,46 +1,48 @@
 <section class="section">
   <div class="container">
-    <div class="divider">FEATURED PRODUCTS</div>
+    <div class="divider has-text-primary">
+      <span class="icon"><i class="fas fa-arrow-left"></i></span>
+      FEATURED PRODUCTS
+      <span class="icon"><i class="fas fa-arrow-right"></i></span>
+    </div>
     <div class="h-product-wrap">
-      {% for product in products %}
-        {% if product.featured %}
-          <div class="h-product">
-            <a href="{{product.get_url}}">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-square">
-                    <img src="{{product.image.url}}" alt="{{product.name}}" />
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="content">
-                    <p class="subcatname" hidden>{{product.sub_category.name}}</p>
-                    <p class="title is-6 has-text-primary">
-                      {{product.name | truncatechars:20 }}
-                    </p>
-                    <p class="subtitle is-7">
-                      {{product.category.name | upper}} /
-                      {{product.sub_category.name | upper}}
-                    </p>
-                    <p class="is-size-7">
-                      {{product.description | truncatechars:80}}
-                    </p>
-                    <small class="has-text-weight-bold">£{{product.price}}</small>
-                    {% if product.stock > 0 %}
-                    <small class="is-pulled-right has-text-success is-size-7-mobile"
-                      >Available</small
-                    >
-                    {% else %}
-                    <small class="is-pulled-right has-text-danger is-size-7-mobile"
-                      >Out of Stock</small
-                    >
-                    {% endif %}
-                  </div>
-                </div>
+      {% for product in featured_products %} 
+      <div class="h-product">
+        <a href="{{product.get_url}}">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-square">
+                <img src="{{product.image.url}}" alt="{{product.name}}" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <p class="subcatname" hidden>{{product.sub_category.name}}</p>
+                <p class="title is-6 has-text-primary">
+                  {{product.name | truncatechars:20 }}
+                </p>
+                <p class="subtitle is-7">
+                  {{product.category.name | upper}} /
+                  {{product.sub_category.name | upper}}
+                </p>
+                <p class="is-size-7">
+                  {{product.description | truncatechars:80}}
+                </p>
+                <small class="has-text-weight-bold">£{{product.price}}</small>
+                {% if product.stock > 0 %}
+                <small class="has-text-success is-size-7-mobile"
+                  >Available</small
+                >
+                {% else %}
+                <small class="has-text-danger is-size-7-mobile"
+                  >Out of Stock</small
+                >
+                {% endif %}
               </div>
-            </a>
+            </div>
           </div>
-        {% endif %}
+        </a>
+      </div>
       {% endfor %}
     </div>
   </div>
