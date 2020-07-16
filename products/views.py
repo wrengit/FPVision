@@ -55,23 +55,26 @@ def add_product(request):
     """
     Allows users with admin perms to add a product
     """
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Added product")
-            return redirect(reverse("add_products"))
+    if request.user.has_perm("products.add_product"):
+        if request.method == "POST":
+            form = ProductForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Added product")
+                return redirect(reverse("add_products"))
+            else:
+                messages.error(
+                    request, "Failed to add product. Please ensure form is valid"
+                )
         else:
-            messages.error(
-                request, "Failed to add product. Please ensure form is valid"
-            )
+            form = ProductForm()
+
+        template = "products/add_product.html"
+        context = {"form": form}
+
+        return render(request, template, context)
     else:
-        form = ProductForm()
-
-    template = "products/add_product.html"
-    context = {"form": form}
-
-    return render(request, template, context)
+        return redirect(reverse("index"))
 
 
 @login_required
@@ -80,33 +83,36 @@ def edit_product(request, product_id):
     Allows users with admin perms to edit an
     exisiting product
     """
-    product = get_object_or_404(Product, pk=product_id)
-    if request.method == "POST":
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Updated product")
-            return redirect(
-                reverse(
-                    "product_details",
-                    args=[
-                        product.category.slug,
-                        product.sub_category.slug,
-                        product.slug,
-                    ],
+    if request.user.has_perm("products.change_product"):
+        product = get_object_or_404(Product, pk=product_id)
+        if request.method == "POST":
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Updated product")
+                return redirect(
+                    reverse(
+                        "product_details",
+                        args=[
+                            product.category.slug,
+                            product.sub_category.slug,
+                            product.slug,
+                        ],
+                    )
                 )
-            )
+            else:
+                messages.error(
+                    request, "Failed to update product. Please ensure form is valid"
+                )
         else:
-            messages.error(
-                request, "Failed to update product. Please ensure form is valid"
-            )
+            form = ProductForm(instance=product)
+
+        template = "products/edit_product.html"
+        context = {"form": form}
+
+        return render(request, template, context)
     else:
-        form = ProductForm(instance=product)
-
-    template = "products/edit_product.html"
-    context = {"form": form}
-
-    return render(request, template, context)
+        return redirect(reverse("index"))
 
 
 @login_required
@@ -115,7 +121,10 @@ def delete_product(request, product_id):
     Allows users with admin perms to delete and
     existing product
     """
-    product = Product.objects.get(id=product_id)
-    product.delete()
-    messages.success(request, f"{product.name} was deleted")
-    return redirect(reverse("all_products"))
+    if request.user.has_perm("products.delete_product"):
+        product = Product.objects.get(id=product_id)
+        product.delete()
+        messages.success(request, f"{product.name} was deleted")
+        return redirect(reverse("all_products"))
+    else:
+        return redirect(reverse("index"))
