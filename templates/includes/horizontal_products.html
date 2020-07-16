@@ -7,14 +7,15 @@
     </div>
     <div x-data class="h-product-container">
       <div class="h-product-arrows is-hidden-touch">
+        <!--scroll arrows for desktop view-->
         <span
-          @click="document.querySelector('.h-product-wrap').scrollBy({left:-300, behavior:'smooth'})"
+          @click="$refs.scrollProducts.scrollBy({left:-300, behavior:'smooth'})"
           class="icon is-large has-text-primary"
           ><i class="fas fa-2x fa-chevron-circle-left"></i
         ></span>
       </div>
-
-      <div class="h-product-wrap">
+      <!--Horizontal scrolling container for featured products-->
+      <div x-ref="scrollProducts" class="h-product-wrap">
         {% for product in featured_products %}
         <div class="h-product">
           <a href="{{product.get_url}}">
@@ -56,8 +57,9 @@
       </div>
 
       <div class="h-product-arrows is-hidden-touch">
+        <!--scroll arrows for desktop view-->
         <span
-          @click="document.querySelector('.h-product-wrap').scrollBy({left:300, behavior:'smooth'})"
+          @click="$refs.scrollProducts.scrollBy({left:300, behavior:'smooth'})"
           class="icon is-large has-text-primary"
           ><i class="fas fa-2x fa-chevron-circle-right"></i
         ></span>
