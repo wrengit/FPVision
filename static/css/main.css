@@ -12733,6 +12733,13 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   color: #fa755a;
 }
 
+.h-product-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
 .h-product-wrap {
   overflow-x: auto;
   display: -webkit-box;
@@ -12755,6 +12762,20 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   width: 14rem;
   max-width: 18rem;
   padding: 1rem;
+}
+
+.h-product-arrows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1.5rem;
 }
 
 .js-search {
