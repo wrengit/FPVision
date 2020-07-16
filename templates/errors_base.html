@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="{% static 'favicons/apple-icon-57x57.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="{% static 'favicons/apple-icon-60x60.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="{% static 'favicons/apple-icon-72x72.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="{% static 'favicons/apple-icon-76x76.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="{% static 'favicons/apple-icon-114x114.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="{% static 'favicons/apple-icon-120x120.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="{% static 'favicons/apple-icon-144x144.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="{% static 'favicons/apple-icon-152x152.png' %}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'favicons/apple-icon-180x180.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="{% static 'favicons/android-icon-192x192.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'favicons/favicon-32x32.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="{% static 'favicons/favicon-96x96.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{% static 'favicons/favicon-16x16.png' %}"
+    />
+    <link rel="manifest" href="{% static 'favicons/manifest.json' %}" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="{% static 'favicons/ms-icon-144x144.png' %}"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <script
+      src="https://kit.fontawesome.com/51d7063a93.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <title>FPVision | {% block extra_title %}{% endblock extra_title %}</title>
+  </head>
+  <body>
+    <!--Main Content Block-->
+
+    <section class="section">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-4-desktop is-offset-2-desktop has-text-centered">
+            {% block content %} {% endblock content %}
+            <p class="title is-1">Ooops!</p>
+            <p class="subtitle is-3">Something has gone wrong</p>
+            <button class="button is-primary is-rounded is-outlined">
+              <span class="icon"><i class="fas fa-arrow-left"></i></span
+              ><span><strong>Back to Homepage</strong></span>
+            </button>
+          </div>
+          <div class="column is-2-desktop has-text-centered">
+            <img src="{{MEDIA_URL}}error.png" alt="crashed drone" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
