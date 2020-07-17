@@ -20,7 +20,7 @@
     <a href="{% url 'my_account' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button is-rounded is-primary is-outlined is-icon">
+          <button class="button is-rounded has-text-primary is-white is-outlined is-icon">
             <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
@@ -52,8 +52,8 @@
     <a href="{% url 'my_account' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button is-rounded is-outlined is-icon">
-            <span class="icon has-text-primary">
+          <button class="button has-text-grey is-rounded is-white is-outlined is-icon">
+            <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
           </button>
@@ -76,7 +76,7 @@
       <div class="dropdown-trigger">
         <a href="{% url 'view_basket' %}">
           <button
-            class="button is-rounded is-primary is-outlined is-hidden-touch is-icon"
+            class="button is-rounded has-text-primary is-white is-outlined is-hidden-touch is-icon"
           >
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
@@ -147,11 +147,11 @@
     <a href="{% url 'view_basket' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button is-rounded is-outlined is-hidden-touch is-icon">
+          <button class="button has-text-grey is-rounded is-white is-outlined is-hidden-touch is-icon">
             {% if product_count > 0 %}
             <span>{{product_count}}</span>
             {% endif %}
-            <span class="icon has-text-primary">
+            <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
           </button>

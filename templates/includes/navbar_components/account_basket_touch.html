@@ -8,7 +8,7 @@
       >
         <div class="dropdown-trigger">
           <button
-            class="button is-primary is-outlined is-rounded is-icon"
+            class="button has-text-primary is-white is-outlined is-rounded is-icon"
             @click="openAccount =!openAccount"
           >
             <span class="icon">
@@ -46,7 +46,7 @@
       {% else %}
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button is-outlined is-rounded is-icon">
+          <button class="button has-text-grey is-white is-outlined is-rounded is-icon">
             <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
@@ -67,13 +67,26 @@
 
       {% endif %}
 
+      
+      {% if basket_items %}
       <a
         href="{% url 'view_basket' %}"
-        class="button is-primary is-outlined is-rounded is-icon is-hidden-desktop ml-1"
+        class="button is-outlined has-text-primary is-white is-rounded is-icon is-hidden-desktop ml-1"
       >
         <span class="icon">
           <i class="fas fa-shopping-basket"></i>
         </span>
       </a>
+      {% else %}
+      <a
+        href="{% url 'view_basket' %}"
+        class="button is-outlined has-text-grey is-white is-rounded is-icon is-hidden-desktop ml-1"
+      >
+        <span class="icon">
+          <i class="fas fa-shopping-basket"></i>
+        </span>
+      </a>
+      {% endif %}
+        
     </div>
   </div>
