@@ -4,35 +4,15 @@
 {% block extra_title %} We love drones {% endblock extra_title %} 
 
 {% block content %}
-
-  <div class="hero-container">
-    <img class="is-hidden-tablet" src="{{MEDIA_URL}}main/herodrone.jpg" alt="waving drones">
-    <strong class="hero-text is-hidden-tablet">FPVision</strong>
-    <img class="is-hidden-mobile" src="{{MEDIA_URL}}main/desktopdrone.jpg" alt="drone in sky">
-  </div>
-
-  <div id="delivery-banner" class="hero is-small is-light">
-    <a href="{% url 'all_products' %}" class="hero-button button is-rounded is-primary is-hidden-tablet"><strong>View All Products</strong></a>
-    <div class="hero-body py-2">
-      <div class="container">
-        <div class="level">
-          <div class="level-item">
-            <p>Free delivery on all orders over £{{free_delivery}}</p>
-          </div>
-          <div class="level-item">
-            <p>Next day delivery</p>
-          </div>
-        </div>
-      </div>
+  <div class="hero-container-desktop" style="background-image: url('{{MEDIA_URL}}/main/desktopdrone.jpg')">
+    <div class="hero-text-container">
+      <strong class="hero-text">FPV<span class="cursive">ision</span></strong>
     </div>
+    <a href="{% url 'all_products' %}" class="hero-button-desktop button is-rounded is-primary"><strong>View All Products</strong></a>
   </div>
-  <section class="section">
+
+  <section id="tiles" class="section">
     <div class="container">
-      <div class="columns">
-        <div class="column">
-          
-        </div>
-      </div>
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
@@ -48,7 +28,7 @@
                   </div>
                 </a>
               </article>
-              <article class="tile is-child box has-background-danger">
+              <article class="tile is-child box has-background-danger is-hidden-mobile">
                 <a 
                   href="{% url 'products_by_subcategory' 'quadcopter-parts' 'props' %}"
                 >
@@ -65,7 +45,6 @@
                     <figure class="image is-square">
                       <img src="{{MEDIA_URL}}main/djihd.jpg">
                     </figure>
-                    <p class="is-size-6 pt-3"><strong>All the latest developments from DJI</strong></p>
                   </a>
                 </article>
               </div>
@@ -120,7 +99,7 @@
                 <p class="title has-text-white">Local Clubs</p>
                 <p class="subtitle is-size-6"><strong class="has-text-white">Get to know your fellow pilots</strong></p>  
                 <div class="content has-text-white">
-                  <p>Flying is more enjoyable with friends. If you're flying anything over 250g, then you should be with a spotter, to keep eyes on your quad. </p>
+                  <p>Flying is more enjoyable with friends</p>
                 </div>          
               </a>
             </article>
@@ -146,7 +125,7 @@
                 <p class="title has-text-white">Drone licence</p>
                 <p class="subtitle is-size-6"><strong class="has-text-white">Make sure you are flying legally</strong></p>            
                 <div class="content">
-                  <p class="has-text-white">From 30 November 2019 it is illegal to fly without registering and passing a theory test</p>
+                  <p class="has-text-white">From 30 November 2019 it is illegal to fly without registering</p>
                 </div>              
               </a>
             </article>

@@ -1,25 +1,80 @@
 .hero-text
-    position: absolute
-    top: 12%
-    left: 50%
-    transform: translate(-50%)
+    display: block
+    animation: dropDownFade 1.5s ease-out
     color: #ffffff
-    font-size: 5.5rem
-    font-family: 'Shadows Into Light', cursive
+    backface-visibility: hidden
+    @include desktop
+        letter-spacing: 0.5rem
+    & .cursive
+        font-family: 'Shadows Into Light', cursive
+        letter-spacing: 0.3rem
+        @include desktop
+            letter-spacing: 0.5rem
+
+.hero-text-container
+    position: absolute
+    top: 30%
+    left: 50%
+    transform: translate(-50%, -30%)
+    font-size: 5rem
+    @include tablet
+        font-size: 8rem
+
+@keyframes dropDownFade
+    0%
+        opacity: 0
+    60%
+        opacity: 0
+        transform: translateY(-200px)
+    80%
+        transform: translateY(10px)
+    100%
+        opacity: 1
+        transform: translate(0)
 
 .hero-button
-    position: absolute
-    top: -25%
-    left: 50%
-    transform: translate(-50%)
+    &-desktop
+        position: absolute
+        top: 80%
+        left: 50%
+        transform: translate(-50%, -80%)
+        box-shadow: 10px 10px 30px -1px rgba(0,0,0,0.82)
+    &-mobile
+        position: absolute
+        top: -25%
+        left: 50%
+        transform: translate(-50%)
 
 .hero-container
-    height: auto
-    max-height: 90vh
-    & > img
-        max-height: 100%
+    position: relative
+    &-desktop
+        height: 110vh
+        background-size: cover
+        background-position: top
+        clip-path: polygon(0 0, 100% 0, 100% 95vh, 0% 100%)
+        @include fullhd
+            height: 120vh
+            margin-top: -10vh
+            clip-path: polygon(0 0, 100% 0, 100% 105vh, 0% 100%)
+        @media screen and (min-width: 2000px)
+            height: 130vh
+            margin-top: -20vh
+            clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%)
+        @media screen and (min-width: 2300px)
+            height: 140vh
+            margin-top: -30vh
+            clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%)
+    &-mobile
+        position: absolute
+        top: 0
+        height: auto
+        max-height: 90vh
+        & > img
+            max-height: 100%
 
 #delivery-banner
     position: relative
     padding-top: 1rem
 
+#tiles
+    margin-top: -25vh
