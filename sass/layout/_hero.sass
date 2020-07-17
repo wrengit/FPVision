@@ -33,44 +33,30 @@
         transform: translate(0)
 
 .hero-button
-    &-desktop
-        position: absolute
-        top: 80%
-        left: 50%
-        transform: translate(-50%, -80%)
-        box-shadow: 10px 10px 30px -1px rgba(0,0,0,0.82)
-    &-mobile
-        position: absolute
-        top: -25%
-        left: 50%
-        transform: translate(-50%)
+    position: absolute
+    top: 70%
+    left: 50%
+    transform: translate(-50%, -80%)
+    box-shadow: 10px 10px 30px -1px rgba(0,0,0,0.82)
 
 .hero-container
     position: relative
-    &-desktop
-        height: 110vh
-        background-size: cover
-        background-position: top
-        clip-path: polygon(0 0, 100% 0, 100% 95vh, 0% 100%)
-        @include fullhd
-            height: 120vh
-            margin-top: -10vh
-            clip-path: polygon(0 0, 100% 0, 100% 105vh, 0% 100%)
-        @media screen and (min-width: 2000px)
-            height: 130vh
-            margin-top: -20vh
-            clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%)
-        @media screen and (min-width: 2300px)
-            height: 140vh
-            margin-top: -30vh
-            clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%)
-    &-mobile
-        position: absolute
-        top: 0
-        height: auto
-        max-height: 90vh
-        & > img
-            max-height: 100%
+    height: 110vh
+    background-size: cover
+    background-position: top
+    clip-path: polygon(0 0, 100% 0, 100% 95vh, 0% 100%)
+    @include fullhd
+        height: 120vh
+        margin-top: -10vh
+        clip-path: polygon(0 0, 100% 0, 100% 105vh, 0% 100%)
+    @media screen and (min-width: 2000px)
+        height: 130vh
+        margin-top: -20vh
+        clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%)
+    @media screen and (min-width: 2300px)
+        height: 140vh
+        margin-top: -30vh
+        clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%)
 
 #delivery-banner
     position: relative

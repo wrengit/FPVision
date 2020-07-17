@@ -12987,9 +12987,9 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   }
 }
 
-.hero-button-desktop {
+.hero-button {
   position: absolute;
-  top: 80%;
+  top: 70%;
   left: 50%;
   -webkit-transform: translate(-50%, -80%);
           transform: translate(-50%, -80%);
@@ -12997,19 +12997,8 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
           box-shadow: 10px 10px 30px -1px rgba(0, 0, 0, 0.82);
 }
 
-.hero-button-mobile {
-  position: absolute;
-  top: -25%;
-  left: 50%;
-  -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-}
-
 .hero-container {
   position: relative;
-}
-
-.hero-container-desktop {
   height: 110vh;
   background-size: cover;
   background-position: top;
@@ -13018,7 +13007,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 @media screen and (min-width: 1408px) {
-  .hero-container-desktop {
+  .hero-container {
     height: 120vh;
     margin-top: -10vh;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 105vh, 0% 100%);
@@ -13027,7 +13016,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 @media screen and (min-width: 2000px) {
-  .hero-container-desktop {
+  .hero-container {
     height: 130vh;
     margin-top: -20vh;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%);
@@ -13036,23 +13025,12 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 @media screen and (min-width: 2300px) {
-  .hero-container-desktop {
+  .hero-container {
     height: 140vh;
     margin-top: -30vh;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
   }
-}
-
-.hero-container-mobile {
-  position: absolute;
-  top: 0;
-  height: auto;
-  max-height: 90vh;
-}
-
-.hero-container-mobile > img {
-  max-height: 100%;
 }
 
 #delivery-banner {
