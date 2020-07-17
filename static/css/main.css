@@ -12926,7 +12926,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   letter-spacing: 0.3rem;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1408px) {
   .hero-text .cursive {
     letter-spacing: 0.5rem;
   }
@@ -12944,6 +12944,12 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 @media screen and (min-width: 767px), print {
   .hero-text-container {
     font-size: 8rem;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .hero-text-container {
+    top: 40%;
   }
 }
 
@@ -13017,19 +13023,19 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 @media screen and (min-width: 2000px) {
   .hero-container {
-    height: 130vh;
-    margin-top: -20vh;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 115vh, 0% 100%);
+    height: 140vh;
+    margin-top: -30vh;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
   }
 }
 
 @media screen and (min-width: 2300px) {
   .hero-container {
-    height: 140vh;
-    margin-top: -30vh;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 125vh, 0% 100%);
+    height: 150vh;
+    margin-top: -40vh;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 135vh, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 135vh, 0% 100%);
   }
 }
 
