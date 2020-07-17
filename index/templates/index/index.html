@@ -5,7 +5,14 @@
 
 {% block content %}
 
-  <div class="hero is-small is-light">
+  <div class="hero-container">
+    <img class="is-hidden-tablet" src="{{MEDIA_URL}}main/herodrone.jpg" alt="waving drones">
+    <strong class="hero-text is-hidden-tablet">FPVision</strong>
+    <img class="is-hidden-mobile" src="{{MEDIA_URL}}main/desktopdrone.jpg" alt="drone in sky">
+  </div>
+
+  <div id="delivery-banner" class="hero is-small is-light">
+    <a href="{% url 'all_products' %}" class="hero-button button is-rounded is-primary is-hidden-tablet"><strong>View All Products</strong></a>
     <div class="hero-body py-2">
       <div class="container">
         <div class="level">
@@ -21,6 +28,11 @@
   </div>
   <section class="section">
     <div class="container">
+      <div class="columns">
+        <div class="column">
+          
+        </div>
+      </div>
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
