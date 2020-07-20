@@ -5,4 +5,4 @@
 [![codecov](https://codecov.io/gh/wrengit/FPVision/branch/master/graph/badge.svg)](https://codecov.io/gh/wrengit/FPVision)
 
 
-https://www.adelaideadvertising.com/free-drone-icon-design-to-download/
+README under construction - 20-07-2020
