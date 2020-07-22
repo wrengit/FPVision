@@ -7,9 +7,6 @@
 {% block head_title %}{% trans "Log In" %}{% endblock %}
 
 {% block inner_content %}
-<div class="columns">
-  <div class="column is-6-desktop is-offset-3-desktop">
-    
     <h1>{% trans "Log In" %}</h1>
     
     {% get_providers as socialaccount_providers %}
@@ -80,8 +77,6 @@
       
       
     </form>
-  </div>
-</div>
 
 
 {% endblock %}
