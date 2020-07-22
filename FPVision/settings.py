@@ -35,6 +35,7 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     "fpvision.herokuapp.com",
+    "127.0.0.1",
     "localhost",
 ]
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    'allauth.socialaccount.providers.github',
     "index",
     "products",
     "search",
@@ -113,7 +115,9 @@ SITE_ID = 1
 
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
@@ -176,7 +180,7 @@ STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, "staticfiles"))
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-if "USE_AWS" in os.environ:
+if "PRODUCTION" in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         "Expires": "Thu, 31 Dec 2099 20:00:00 GMT",
@@ -213,10 +217,7 @@ COUNTRIES_FIRST = ["GB"]
 
 COUNTRIES_FIRST_REPEAT = True
 
-if "DEVELOPMENT" in os.environ:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-    DEFAULT_FROM_EMAIL = "fpvision@example.com"
-else:
+if "PRODUCTION" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_USE_TLS = True
     EMAIL_PORT = 587
@@ -224,3 +225,6 @@ else:
     EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASS")
     DEFAULT_FROM_EMAIL = os.environ.get("EMAIL_HOST_USER")
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "fpvision@example.com"
