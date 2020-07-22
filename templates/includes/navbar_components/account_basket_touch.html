@@ -75,6 +75,9 @@
       >
         <span class="icon">
           <i class="fas fa-shopping-basket"></i>
+          {% if product_count > 0 %}
+          <span class="product-count"><strong>{{product_count}}</strong></span>
+          {% endif %}
         </span>
       </a>
       {% else %}

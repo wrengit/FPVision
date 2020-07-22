@@ -12779,6 +12779,17 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding: 1rem;
 }
 
+.product-count {
+  position: relative;
+  bottom: -0.5rem;
+  left: -0.3rem;
+  border-radius: 50%;
+  padding: 0 .25rem;
+  color: #fff;
+  background-color: #f14668;
+  font-size: 0.5rem;
+}
+
 .js-search {
   width: 70vw;
   max-width: 50rem;
@@ -13134,3 +13145,4 @@ input[type=number] {
 .is-size-8-mobile {
   font-size: 0.6rem;
 }
+/*# sourceMappingURL=main.css.map */

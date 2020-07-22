@@ -69,8 +69,8 @@
         </div>
       </div>
     </a>
-
     {% endif %} 
+
     {% if basket_items %}
     <div class="dropdown is-hoverable is-right">
       <div class="dropdown-trigger">
@@ -80,6 +80,9 @@
           >
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
+              {% if product_count > 0 %}
+              <span class="product-count"><strong>{{product_count}}</strong></span>
+              {% endif %}
             </span>
           </button>
         </a>
@@ -148,9 +151,6 @@
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
           <button class="button has-text-grey is-rounded is-white is-outlined is-hidden-touch is-icon">
-            {% if product_count > 0 %}
-            <span>{{product_count}}</span>
-            {% endif %}
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>
