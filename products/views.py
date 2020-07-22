@@ -12,16 +12,54 @@ def all_products(request, category_slug=None, subcategory_slug=None):
     """
     category = None
     subcategory = None
+    sort = None
+    direction = None
+
     if category_slug is not None:
         if subcategory_slug is not None:
             category = Category.objects.get(slug=category_slug)
             subcategory = SubCategory.objects.get(slug=subcategory_slug)
-            products_list = Product.objects.filter(sub_category=subcategory.name)
+            if "sort" in request.GET:
+                sortkey = request.GET["sort"]
+                sort = sortkey
+                if "direction" in request.GET:
+                    direction = request.GET["direction"]
+                    if direction == "desc":
+                        sortkey = f"-{sortkey}"
+                products_list = Product.objects.filter(
+                    available=True, sub_category=subcategory.name
+                ).order_by(sortkey)
+            else:
+                products_list = Product.objects.filter(
+                    available=True, sub_category=subcategory.name
+                )
         else:
             category = Category.objects.get(slug=category_slug)
-            products_list = Product.objects.filter(category=category.name)
+            if "sort" in request.GET:
+                sortkey = request.GET["sort"]
+                sort = sortkey
+                if "direction" in request.GET:
+                    direction = request.GET["direction"]
+                    if direction == "desc":
+                        sortkey = f"-{sortkey}"
+                products_list = Product.objects.filter(
+                    available=True, category=category.name
+                ).order_by(sortkey)
+            else:
+                products_list = Product.objects.filter(
+                    available=True, category=category.name
+                )
     else:
-        products_list = Product.objects.filter(available=True)
+        if "sort" in request.GET:
+            sortkey = request.GET["sort"]
+            sort = sortkey
+            if "direction" in request.GET:
+                direction = request.GET["direction"]
+                if direction == "desc":
+                    sortkey = f"-{sortkey}"
+            products_list = Product.objects.filter(available=True).order_by(sortkey)
+        else:
+            products_list = Product.objects.filter(available=True)
 
     context = {
         "products": products_list,

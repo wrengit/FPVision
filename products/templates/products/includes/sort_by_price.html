@@ -1,0 +1,102 @@
+{% if not subcategory %} 
+  {% if category %}
+    <div x-data x-ref="activeContainer" class="dropdown is-hoverable">
+      <div class="dropdown-trigger">
+        <button
+          @click="$refs.activeContainer.classList.toggle('is-active')"
+          @click.away="$refs.activeContainer.classList.remove('is-active')"
+          class="button is-rounded is-info is-light is-small"
+          aria-haspopup="true"
+          aria-controls="dropdown-menu"
+        >
+          <strong>Sort by Price</strong>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a
+            class="dropdown-item"
+            href="{% url 'products_by_category' category.slug %}?sort=price&direction=desc"
+          >
+            Price Descending
+          </a>
+          <a
+            class="dropdown-item"
+            href="{% url 'products_by_category' category.slug %}?sort=price&direction=asc"
+          >
+            Price Ascending
+          </a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div x-data x-ref="activeContainer" class="dropdown is-hoverable">
+      <div class="dropdown-trigger">
+        <button
+          @click="$refs.activeContainer.classList.toggle('is-active')"
+          @click.away="$refs.activeContainer.classList.remove('is-active')"
+          class="button is-rounded is-info is-light is-small"
+          aria-haspopup="true"
+          aria-controls="dropdown-menu"
+        >
+          <strong>Sort by Price</strong>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a
+            class="dropdown-item"
+            href="{% url 'all_products' %}?sort=price&direction=desc"
+          >
+            Price Descending
+          </a>
+          <a
+            class="dropdown-item"
+            href="{% url 'all_products' %}?sort=price&direction=asc"
+          >
+            Price Ascending
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endif %} 
+{% else %}
+  <div x-data x-ref="activeContainer" class="dropdown is-hoverable">
+    <div class="dropdown-trigger">
+      <button
+        @click="$refs.activeContainer.classList.toggle('is-active')"
+        @click.away="$refs.activeContainer.classList.remove('is-active')"
+        class="button is-rounded is-info is-light is-small"
+        aria-haspopup="true"
+        aria-controls="dropdown-menu"
+      >
+        <strong>Sort by Price</strong>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        <a
+          class="dropdown-item"
+          href="{% url 'products_by_subcategory' category.slug subcategory.slug %}?sort=price&direction=desc"
+        >
+          Price Descending
+        </a>
+        <a
+          class="dropdown-item"
+          href="{% url 'products_by_category' category.slug subcategory.slug %}?sort=price&direction=asc"
+        >
+          Price Ascending
+        </a>
+      </div>
+    </div>
+  </div>
+{% endif %}
