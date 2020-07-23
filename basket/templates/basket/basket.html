@@ -14,180 +14,182 @@
   </section>
 
 
-  <section class="section columns is-centered">
-    {% if basket_items %}
-    <div class="column is-8-desktop is-7-tablet">
-      <table class="table mt-5">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th class="is-hidden-touch">Price</th>
-            <th>Quantity</th>
-            <th class="is-hidden-touch">Subtotal</th>
-            <th class="is-hidden-touch"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {% for item in basket_items %}
-          <tr>
-            <td class="is-vcentered">
-              <article class="is-flex">
-                <figure class="media-left">
-                  <a href="{% url 'remove_from_basket' item.product.id %}">
-                    <div class="delete delete-basket is-hidden-desktop"></div>
-                  </a>
-                  <p class="image is-96x96">
-                    <img
-                    src="{{item.product.image.url}}"
-                    alt="{{item.product.name}}"
-                    />
-                  </p>
-                </figure>
-                <div class="media-content level-item">
-                  <a href="{{item.product.get_url}}">
-                    <div class="content">
-                      <p class="is-size-7-mobile">{{item.product.name}}</p>
-                      <p class="is-hidden-desktop is-size-7-mobile">{{item.quantity}} x <strong>£{{item.product.price}}</strong></p>
-                    </div>
-                  </a>
-                </div>
-              </article>
-            </td>
-            <td class="is-vcentered is-hidden-touch">
-              <p class="has-text-weight-bold">£{{item.product.price}}</p>
-            </td>
-            <td class="is-vcentered">
-              <form
-                action="{% url 'adjust_basket' item.product.id %}"
-                method="POST"
-                id="basket-quantity-form-{{item.product.id}}"
-                x-data="qtyFormControl()"
-                class="control qty-form"
-                x-init="handleEnableDisable({{item.product.id}})"
-              >
-                {% csrf_token %}
-                <div class="field has-addons">
-                  <div class="control">
-                    <button
-                      @click.prevent="decrementQty({{item.product.id}})"
-                      class="button is-rounded is-icon is-primary is-size-7-mobile"
-                      id="decrement-{{item.product.id}}"
-                    >
-                      <span class="icon is-small">
-                        <i class="fas fa-minus"></i>
-                      </span>
-                    </button>
-                  </div>
-                  <div class="control qty-input">
-                    <input
-                      type="number"
-                      name="quantity"
-                      value="{{item.quantity}}"
-                      min="1"
-                      max="{{item.product.stock}}"
-                      class="input is-primary is-size-7-mobile"
-                      id="qty-{{item.product.id}}"
-                      x-on:keypress="blockAlpha($event)"
-                      x-on:keyup="updateSubmitForm({{item.product.id}})"
-                    />
-                  </div>
-                  <div class="control">
-                    <button
-                      @click.prevent="incrementQty({{item.product.id}})"
-                      class="button is-rounded is-icon is-primary is-size-7-mobile"
-                      id="increment-{{item.product.id}}"
-                    >
-                      <span class="icon is-small">
-                        <i class="fas fa-plus"></i>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </td>
-            <td class="is-vcentered is-hidden-touch">
-              <p class="has-text-weight-bold">
-                £{{item.product.price | calc_subtotal:item.quantity}}
-              </p>
-            </td>
-            <td class="is-vcentered is-hidden-touch">
-              <a href="{% url 'remove_from_basket' item.product.id %}"
-                ><span class="icon"><i class="fas fa-trash"></i></span
-              ></a>
-            </td>
-          </tr>
-
-          {% endfor %}
-        </tbody>
-      </table>
-      {% endif %}
-
-    </div>
-    {% if basket_items %}
-    <div class="column is-4 is-5-tablet">
-      <div class="basket-totals box">
-        <table class="table basket-table">
+  <section class="section">
+    <div class="columns is-centered">
+      {% if basket_items %}
+      <div class="column is-7-tablet">
+        <table class="table mt-5">
           <thead>
             <tr>
-              <th>Basket Totals</th>
+              <th>Product</th>
+              <th class="is-hidden-touch">Price</th>
+              <th>Quantity</th>
+              <th class="is-hidden-touch">Subtotal</th>
+              <th class="is-hidden-touch"></th>
             </tr>
           </thead>
+  
           <tbody>
+            {% for item in basket_items %}
             <tr>
-              <td>
-                <p>Subtotal: <strong>£{{total}}</strong></p>
-                
-                {% if delivery == 0 %}
-                  <p>Delivery: <strong>Free</strong></p>
-                {% else %}
-                  <p>Delivery: <strong>£{{ delivery | floatformat:2 }}</strong></p>
-                {% endif %}
-                <p>Grand Total: <strong>£{{ grand_total | floatformat:2 }}</strong></p>
-                
-                {% if free_delivery_delta > 0 %}
-                  <p>Spend £{{ free_delivery_delta }} for free delivery!</p>
-                {% endif %}
+              <td class="is-vcentered">
+                <article class="is-flex">
+                  <figure class="media-left">
+                    <a href="{% url 'remove_from_basket' item.product.id %}">
+                      <div class="delete delete-basket is-hidden-desktop"></div>
+                    </a>
+                    <p class="image is-96x96">
+                      <img
+                      src="{{item.product.image.url}}"
+                      alt="{{item.product.name}}"
+                      />
+                    </p>
+                  </figure>
+                  <div class="media-content level-item">
+                    <a href="{{item.product.get_url}}">
+                      <div class="content">
+                        <p class="is-size-7-mobile">{{item.product.name}}</p>
+                        <p class="is-hidden-desktop is-size-7-mobile">{{item.quantity}} x <strong>£{{item.product.price}}</strong></p>
+                      </div>
+                    </a>
+                  </div>
+                </article>
+              </td>
+              <td class="is-vcentered is-hidden-touch">
+                <p class="has-text-weight-bold">£{{item.product.price}}</p>
+              </td>
+              <td class="is-vcentered">
+                <form
+                  action="{% url 'adjust_basket' item.product.id %}"
+                  method="POST"
+                  id="basket-quantity-form-{{item.product.id}}"
+                  x-data="qtyFormControl()"
+                  class="control qty-form"
+                  x-init="handleEnableDisable({{item.product.id}})"
+                >
+                  {% csrf_token %}
+                  <div class="field has-addons">
+                    <div class="control">
+                      <button
+                        @click.prevent="decrementQty({{item.product.id}})"
+                        class="button is-rounded is-icon is-primary is-size-7-mobile"
+                        id="decrement-{{item.product.id}}"
+                      >
+                        <span class="icon is-small">
+                          <i class="fas fa-minus"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="control qty-input">
+                      <input
+                        type="number"
+                        name="quantity"
+                        value="{{item.quantity}}"
+                        min="1"
+                        max="{{item.product.stock}}"
+                        class="input is-primary is-size-7-mobile"
+                        id="qty-{{item.product.id}}"
+                        x-on:keypress="blockAlpha($event)"
+                        x-on:keyup="updateSubmitForm({{item.product.id}})"
+                      />
+                    </div>
+                    <div class="control">
+                      <button
+                        @click.prevent="incrementQty({{item.product.id}})"
+                        class="button is-rounded is-icon is-primary is-size-7-mobile"
+                        id="increment-{{item.product.id}}"
+                      >
+                        <span class="icon is-small">
+                          <i class="fas fa-plus"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </td>
+              <td class="is-vcentered is-hidden-touch">
+                <p class="has-text-weight-bold">
+                  £{{item.product.price | calc_subtotal:item.quantity}}
+                </p>
+              </td>
+              <td class="is-vcentered is-hidden-touch">
+                <a href="{% url 'remove_from_basket' item.product.id %}"
+                  ><span class="icon"><i class="fas fa-trash"></i></span
+                ></a>
               </td>
             </tr>
+  
+            {% endfor %}
           </tbody>
         </table>
+        {% endif %}
+  
+      </div>
+      {% if basket_items %}
+      <div class="column is-4 is-5-tablet">
+        <div class="basket-totals box">
+          <table class="table basket-table">
+            <thead>
+              <tr>
+                <th>Basket Totals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p>Subtotal: <strong>£{{total}}</strong></p>
+                  
+                  {% if delivery == 0 %}
+                    <p>Delivery: <strong>Free</strong></p>
+                  {% else %}
+                    <p>Delivery: <strong>£{{ delivery | floatformat:2 }}</strong></p>
+                  {% endif %}
+                  <p>Grand Total: <strong>£{{ grand_total | floatformat:2 }}</strong></p>
+                  
+                  {% if free_delivery_delta > 0 %}
+                    <p>Spend £{{ free_delivery_delta }} more for free delivery!</p>
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="has-text-centered">
+            <a
+              href="{% url 'all_products' %}"
+              class="button is-rounded is-primary is-outlined w-100-mobile"
+            >
+              <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
+              <span class="is-uppercase"><strong>Keep Shopping</strong></span>
+            </a>
+          </div>
+          <div class="divider">OR</div>
+          <div class="has-text-centered">
+            <a href="{% url 'checkout' %}"
+              class="button is-rounded is-success w-100-mobile"
+            >
+              <span class="icon">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span class="is-uppercase"><strong>Checkout</strong></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="column is-6-tablet is-4-desktop">
         <div class="has-text-centered">
+          <p>You have no items in your basket</p>
           <a
             href="{% url 'all_products' %}"
-            class="button is-rounded is-primary is-outlined w-100-mobile"
+            class="button is-rounded is-primary is-outlined w-100-mobile mt-3"
           >
             <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
             <span class="is-uppercase"><strong>Keep Shopping</strong></span>
           </a>
         </div>
-        <div class="divider">OR</div>
-        <div class="has-text-centered">
-          <a href="{% url 'checkout' %}"
-            class="button is-rounded is-success w-100-mobile"
-          >
-            <span class="icon">
-              <i class="fas fa-lock"></i>
-            </span>
-            <span class="is-uppercase"><strong>Checkout</strong></span>
-          </a>
-        </div>
       </div>
+      {% endif %}
     </div>
-    {% else %}
-    <div class="column is-6-tablet is-4-desktop">
-      <div class="has-text-centered">
-        <p>You have no items in your basket</p>
-        <a
-          href="{% url 'all_products' %}"
-          class="button is-rounded is-primary is-outlined w-100-mobile mt-3"
-        >
-          <span class="icon"><i class="fas fa-arrow-circle-left"></i></span>
-          <span class="is-uppercase"><strong>Keep Shopping</strong></span>
-        </a>
-      </div>
-    </div>
-    {% endif %}
   </section>
 </main>
 
