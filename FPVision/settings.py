@@ -15,7 +15,7 @@ import environ
 import dj_database_url
 
 
-env = environ.Env(DEBUG=(bool, True))
+env = environ.Env()
 
 environ.Env.read_env()
 
@@ -31,7 +31,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if "PRODUCTION" in os.environ:
+    DEBUG = False
+if "DEBUG" in os.environ:
+    DEBUG = True
+else:
+    DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
     "fpvision.herokuapp.com",
