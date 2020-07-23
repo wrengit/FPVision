@@ -81,6 +81,26 @@
           </p>
         {% endif %}
         <fieldset>
+
+          {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+              <article class="message is-warning">
+                <div class="message-body">
+                  <p>{{ error|escape }}</p>
+                </div>
+              </article>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <article class="message is-warning">
+              <div class="message-body">
+                <p>{{ error|escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
+        
           <legend class="pb-3 pt-5">Payment</legend>
           <div class="field">
             <div class="control">

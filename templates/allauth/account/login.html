@@ -43,6 +43,24 @@
             </label>
           </div>
         </div>
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+              <article class="message is-warning">
+                <div class="message-body">
+                  <p>{{ error|escape }}</p>
+                </div>
+              </article>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <article class="message is-warning">
+              <div class="message-body">
+                <p>{{ error|escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
         <div class="field is-grouped">
           <div class="control">
             <button class="button is-primary is-rounded primaryAction" type="submit"><span class="icon"><i class="fas fa-sign-in-alt"></i></span><span><strong>{% trans "Login" %}</strong></span></button>
@@ -55,6 +73,11 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
+        
+        
+
+
+
       </form>
       
       {% if socialaccount_providers %}
