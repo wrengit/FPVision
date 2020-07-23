@@ -44,9 +44,16 @@
       </div>
 
       {% else %}
-      <div class="dropdown is-hoverable is-right">
+      <div 
+        class="dropdown is-right"
+        x-bind:class="{ 'is-active': openAccount }"
+        @click.away="openAccount = false"
+      >
         <div class="dropdown-trigger">
-          <button class="button has-text-grey is-white is-outlined is-rounded is-icon">
+          <button 
+            class="button has-text-grey is-white is-outlined is-rounded is-icon"
+            @click="openAccount =!openAccount"
+            >
             <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
