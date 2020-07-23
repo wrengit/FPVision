@@ -4,76 +4,99 @@
 {%block head_title %}{% trans "Signup" %}{% endblock %} 
 
 {% block inner_content %}
-    <h1>{% trans "Sign Up" %}</h1>
-    
-    <p>
-      {% blocktrans %}
-      Already have an account? Then please
-      <a href="{{ login_url }}">log in</a>
-      {% endblocktrans %}
-    </p>
-    
-    <form
-      class="signup form"
-      id="signup_form"
-      method="post"
-      action="{% url 'account_signup' %}"
-      >
-      {% csrf_token %}
-      <div class="field is-horizontal pt-3">
-        <div class="field-body">
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.username|add_class:"input"}}
-            </div>
-            <p class="help">
-              This is how your name will be displayed around the site
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="field is-horizontal pt-3">
-        <div class="field-body">
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.email|add_class:"input"}}
-            </div>
-          </div>
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.email2|add_class:"input"}}
+  <div class="columns is-centered">
+    <div class="column is-6-desktop is-8-tablet">
+
+      <h1>{% trans "Sign Up" %}</h1>
+      
+      <p>
+        {% blocktrans %}
+        Already have an account? Then please
+        <a href="{{ login_url }}">log in</a>
+        {% endblocktrans %}
+      </p>
+      
+      <form
+        class="signup form"
+        id="signup_form"
+        method="post"
+        action="{% url 'account_signup' %}"
+        >
+        {% csrf_token %}
+        <div class="field is-horizontal pt-3">
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.username|add_class:"input"}}
+              </div>
+              <p class="help">
+                This is how your name will be displayed around the site
+              </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="field is-horizontal pt-3">
-        <div class="field-body">
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.password1|add_class:"input"}}
+        <div class="field is-horizontal pt-3">
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.email|add_class:"input"}}
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.password2|add_class:"input"}}
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.email2|add_class:"input"}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    
-      {% if redirect_field_value %}
-      <input
-        type="hidden"
-        name="{{ redirect_field_name }}"
-        value="{{ redirect_field_value }}"
-      />
-      {% endif %}
-      <div class="has-text-centered pt-3">
-        <button class="button is-rounded is-primary" type="submit">
-          <span class="icon pl-1"><i class="fas fa-user-plus"></i></span
-          ><span class="pl-2"><strong>{% trans "Sign Up" %}</strong></span>
-        </button>
-      </div>
-    </form>
+        <div class="field is-horizontal pt-3">
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.password1|add_class:"input"}}
+              </div>
+            </div>
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.password2|add_class:"input"}}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+              <article class="message is-warning">
+                <div class="message-body">
+                  <p>{{ error|escape }}</p>
+                </div>
+              </article>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <article class="message is-warning">
+              <div class="message-body">
+                <p>{{ error|escape }}</p>
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
+      
+        {% if redirect_field_value %}
+        <input
+          type="hidden"
+          name="{{ redirect_field_name }}"
+          value="{{ redirect_field_value }}"
+        />
+        {% endif %}
+        <div class="has-text-centered pt-3">
+          <button class="button is-rounded is-primary" type="submit">
+            <span class="icon pl-1"><i class="fas fa-user-plus"></i></span
+            ><span class="pl-2"><strong>{% trans "Sign Up" %}</strong></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 {% endblock %}
