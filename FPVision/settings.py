@@ -32,9 +32,10 @@ SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if "PRODUCTION" in os.environ:
-    DEBUG = False
-if "DEBUG" in os.environ:
-    DEBUG = True
+    if "DEBUG" in os.environ:
+        DEBUG = True
+    else:
+        DEBUG = False
 else:
     DEBUG = env("DEBUG")
 
@@ -58,7 +59,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    'allauth.socialaccount.providers.github',
+    "allauth.socialaccount.providers.github",
     "index",
     "products",
     "search",
