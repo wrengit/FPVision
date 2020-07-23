@@ -12492,6 +12492,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding-right: 1em;
 }
 
+.button.is-github {
+  background-color: #24292e;
+}
+
 .card {
   -webkit-box-shadow: none;
           box-shadow: none;

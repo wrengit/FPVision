@@ -7,4 +7,3 @@ htmlcov
 .coverage
 .env
 new_user_credentials.csv
-staticfiles/admin

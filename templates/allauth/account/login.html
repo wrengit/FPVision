@@ -6,70 +6,75 @@
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
+
 {% block inner_content %}
-    <h1>{% trans "Login" %}</h1>
-    
-    {% get_providers as socialaccount_providers %}
-    
-    
-    <form class="login" method="POST" action="{% url 'account_login' %}">
-      {% csrf_token %}
-      <div class="field is-horizontal pt-3">
-        <div class="field-body">
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.login|add_class:"input"}}
+  <div class="columns">
+    <div class="column is-6-desktop is-offset-3">
+      <h1>{% trans "Login" %}</h1>
+      
+      {% get_providers as socialaccount_providers %}
+      
+      
+      <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        <div class="field is-horizontal pt-3">
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.login|add_class:"input"}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="field is-horizontal pt-3">
-        <div class="field-body">
-          <div class="field">
-            <div class="control is-expanded">
-              {{form.password|add_class:"input"}}
+        <div class="field is-horizontal pt-3">
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                {{form.password|add_class:"input"}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-            {{form.remember}}
-            {{form.remember.label}}
-          </label>
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              {{form.remember}}
+              {{form.remember.label}}
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="field is-grouped">
-        <div class="control">
-          <button class="button is-primary is-rounded primaryAction" type="submit"><span class="icon"><i class="fas fa-sign-in-alt"></i></span><span><strong>{% trans "Login" %}</strong></span></button>
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-primary is-rounded primaryAction" type="submit"><span class="icon"><i class="fas fa-sign-in-alt"></i></span><span><strong>{% trans "Login" %}</strong></span></button>
+          </div>
+          <div class="control">
+            <a class="button is-rounded is-primary is-light secondaryAction" href="{% url 'account_reset_password' %}"><span class="icon"><i class="fas fa-key"></i></span><span>{% trans "Forgot Password?" %}</span></a>
+          </div>
         </div>
-        <div class="control">
-          <a class="button is-rounded is-primary is-light secondaryAction" href="{% url 'account_reset_password' %}"><span class="icon"><i class="fas fa-key"></i></span><span>{% trans "Forgot Password?" %}</span></a>
-        </div>
+        
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+      </form>
+      
+      {% if socialaccount_providers %}
+
+      <div class="socialaccount_ballot pt-3">
+      
+        <ul class="socialaccount_providers pt-3">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+      
       </div>
       
-      {% if redirect_field_value %}
-      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% include "socialaccount/snippets/login_extra.html" %}
+      
+      {% else %}
+      <p>{% blocktrans %}If you have not created an account yet, then please
+      <a href="{{ signup_url }}">sign up</a> first{% endblocktrans %}</p>
       {% endif %}
-    </form>
-    
-    {% if socialaccount_providers %}
-
-    <div class="socialaccount_ballot pt-3">
-    
-      <ul class="socialaccount_providers pt-3">
-        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-      </ul>
-    
     </div>
-    
-    {% include "socialaccount/snippets/login_extra.html" %}
-    
-    {% else %}
-    <p>{% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">sign up</a> first{% endblocktrans %}</p>
-    {% endif %}
+  </div>
     
     {% endblock %}
     
