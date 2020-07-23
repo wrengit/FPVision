@@ -83,20 +83,26 @@
               </div>
             </div>
 
-            <div class="field is-grouped is-grouped-multiline is-centered">
-              <p class="control">
-                <button class="button is-rounded is-success is-size-7-mobile" type="submit">
-                  <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                  <span><strong>Add to Basket</strong> </span>
-                </button>
-              </p>
-              <p class="control">
-                <button class="button is-rounded is-primary is-light is-size-7-mobile" type="submit" formaction="{% url 'add_to_wishlist' product.id %}">
-                  <span class="icon"><i class="fas fa-gift"></i></span>
-                  <span><strong>Add to Wishlist</strong> </span>
-                </button>
-              </p>
-            </div>
+            
+            {% if product.stock > 0 %}
+              <div class="field is-grouped is-grouped-multiline is-centered">
+                <p class="control">
+                  <button class="button is-rounded is-success is-size-7-mobile" type="submit">
+                    <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                    <span><strong>Add to Basket</strong> </span>
+                  </button>
+                </p>
+                <p class="control">
+                  <button class="button is-rounded is-primary is-light is-size-7-mobile" type="submit" formaction="{% url 'add_to_wishlist' product.id %}">
+                    <span class="icon"><i class="fas fa-gift"></i></span>
+                    <span><strong>Add to Wishlist</strong> </span>
+                  </button>
+                </p>
+              </div>
+            {% else %}
+              <p class="has-text-danger">Product is out of stock. We will be getting more in soon!</p>
+            {% endif %}
+              
             <input type="hidden" name="redirect_url" value="{{ request.path }}" />
           </form>
         <!--Edit/Delete product section for admin users-->
