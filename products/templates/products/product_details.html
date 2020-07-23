@@ -3,9 +3,17 @@
 {% block extra_title %}{{product.name}}{% endblock extra_title %} 
 
 {% block content %}
+<section class="hero is-light is-bold">
+  <div class="hero-body">
+    <div class="container">
+        <h1 class="title">{{product.name}}</h1>
+      {% include 'products/includes/breadcrumbs.html' %}
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    {% include 'products/includes/breadcrumbs.html' %}
     <div class="columns is-multiline">
       <div class="column is-6 is-offset-1">
         <figure class="image">

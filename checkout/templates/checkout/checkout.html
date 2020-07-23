@@ -5,6 +5,15 @@
 {% block extra_title %}Checkout{% endblock extra_title %}
 {% block content %}
 
+<section class="hero is-light is-bold">
+  <div class="hero-body">
+    <div class="container">
+        <h1 class="title is-6">Please enter your details to complete the order</h1>
+      {% include 'products/includes/breadcrumbs.html' %}
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="columns">
     <div class="column is-10-tablet is-8-desktop is-6-widescreen is-offset-1-tablet is-offset-2-desktop is-offset-3-widescreen">
@@ -65,10 +74,11 @@
         </div>
           
         {% else %}
-          <label class="form-check-label" for="id-save-info">
-              <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+          <p class="pt-3">
+              You must 
+              <a class="text-info" href="{% url 'account_signup' %}">create an account</a> or 
               <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-          </label>
+          </p>
         {% endif %}
         <fieldset>
           <legend class="pb-3 pt-5">Payment</legend>
