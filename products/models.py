@@ -58,15 +58,25 @@ class SubCategory(models.Model):
         return " --> ".join(parent_name)
 
     def get_url(self):
-        return reverse("products_by_subcategory", args=[self.category.slug, self.slug])
+        return reverse(
+            "products_by_subcategory", args=[self.category.slug, self.slug]
+        )
 
 
 class Product(models.Model):
     category = models.ForeignKey(
-        "Category", null=True, blank=True, on_delete=models.CASCADE, to_field="name"
+        "Category",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        to_field="name"
     )
     sub_category = models.ForeignKey(
-        "SubCategory", null=True, blank=True, on_delete=models.CASCADE, to_field="name"
+        "SubCategory",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        to_field="name"
     )
     sku = models.CharField(max_length=10, unique=True, blank=True)
     name = models.CharField(max_length=254, unique=True)

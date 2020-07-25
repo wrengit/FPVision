@@ -93,4 +93,3 @@ def customer_messages(request):
         "profiles/messages_list.html",
         context={"customer_messages": customer_messages},
     )
-

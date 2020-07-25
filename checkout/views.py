@@ -88,7 +88,9 @@ def checkout(request):
                     return redirect(reverse("view_basket"))
 
             request.session["save_info"] = "save-info" in request.POST
-            return redirect(reverse("checkout_success", args=[order.order_number]))
+            return redirect(
+                reverse("checkout_success", args=[order.order_number])
+            )
         else:
             messages.error(
                 request,

@@ -9,7 +9,8 @@ class Wishlist(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        null=True, blank=True,
+        null=True,
+        blank=True,
         related_name="Wishlist",
     )
     wishlist_total = models.DecimalField(

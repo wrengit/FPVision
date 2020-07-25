@@ -12,7 +12,6 @@ def all_products(request, category_slug=None, subcategory_slug=None):
     """
     category = None
     subcategory = None
-    sort = None
     direction = None
 
     if category_slug is not None:
@@ -21,7 +20,6 @@ def all_products(request, category_slug=None, subcategory_slug=None):
             subcategory = SubCategory.objects.get(slug=subcategory_slug)
             if "sort" in request.GET:
                 sortkey = request.GET["sort"]
-                sort = sortkey
                 if "direction" in request.GET:
                     direction = request.GET["direction"]
                     if direction == "desc":
@@ -37,7 +35,6 @@ def all_products(request, category_slug=None, subcategory_slug=None):
             category = Category.objects.get(slug=category_slug)
             if "sort" in request.GET:
                 sortkey = request.GET["sort"]
-                sort = sortkey
                 if "direction" in request.GET:
                     direction = request.GET["direction"]
                     if direction == "desc":
@@ -52,12 +49,13 @@ def all_products(request, category_slug=None, subcategory_slug=None):
     else:
         if "sort" in request.GET:
             sortkey = request.GET["sort"]
-            sort = sortkey
             if "direction" in request.GET:
                 direction = request.GET["direction"]
                 if direction == "desc":
                     sortkey = f"-{sortkey}"
-            products_list = Product.objects.filter(available=True).order_by(sortkey)
+            products_list = Product.objects.filter(
+                available=True
+            ).order_by(sortkey)
         else:
             products_list = Product.objects.filter(available=True)
 
@@ -102,7 +100,8 @@ def add_product(request):
                 return redirect(reverse("add_products"))
             else:
                 messages.error(
-                    request, "Failed to add product. Please ensure form is valid"
+                    request,
+                    "Failed to add product. Please ensure form is valid"
                 )
         else:
             form = ProductForm()
@@ -140,7 +139,8 @@ def edit_product(request, product_id):
                 )
             else:
                 messages.error(
-                    request, "Failed to update product. Please ensure form is valid"
+                    request,
+                    "Failed to update product. Please ensure form is valid"
                 )
         else:
             form = ProductForm(instance=product)

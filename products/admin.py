@@ -7,7 +7,9 @@ class CategoryAdmin(admin.ModelAdmin):
         "name",
         "slug",
     ]
-    ordering = ["name",]
+    ordering = [
+        "name",
+    ]
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -16,7 +18,9 @@ admin.site.register(Category, CategoryAdmin)
 
 class SubCategoryAdmin(admin.ModelAdmin):
     list_display = ["name", "slug"]
-    ordering = ["category",]
+    ordering = [
+        "category",
+    ]
     prepopulated_fields = {"slug": ("name",)}
 
 
@@ -33,10 +37,12 @@ class ProductAdmin(admin.ModelAdmin):
         "stock",
         "full_slug",
         "available",
-        "featured"
+        "featured",
     ]
     list_editable = ["price", "stock", "available", "featured"]
-    prepopulated_fields = {"slug": ("name",), }
+    prepopulated_fields = {
+        "slug": ("name",),
+    }
     list_per_page = 20
 
 

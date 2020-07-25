@@ -41,8 +41,12 @@ def subscribe(request):
     if request.method == "POST":
         next = request.POST.get("next", "/")
         sub_form = SubscriptionForm(request.POST)
-        if SubscriptionList.objects.filter(email=request.POST.get("email")).exists():
-            messages.info(request, "You are aleady subscribed to the mailing list")
+        if SubscriptionList.objects.filter(
+            email=request.POST.get("email")
+        ).exists():
+            messages.info(
+                request, "You are aleady subscribed to the mailing list"
+            )
             return HttpResponseRedirect(next)
         else:
             if sub_form.is_valid():

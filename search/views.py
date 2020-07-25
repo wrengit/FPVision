@@ -7,7 +7,7 @@ from django.db.models import Q
 
 def search_result(request):
     """
-    Queries DB for matches based on the search 
+    Queries DB for matches based on the search
     parameters. Category/subcategory/product/description
     are all queried
     """

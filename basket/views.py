@@ -1,4 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponse
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    redirect,
+    reverse,
+    HttpResponse
+)
 from django.contrib import messages
 from products.models import Product
 
@@ -19,13 +25,16 @@ def add_to_basket(request, product_id):
         if product.stock >= quantity + basket[product_id]:
             basket[product_id] += quantity
             messages.success(
-                request, f"Updated {product.name} quantity\
-                     to {basket[product_id]}"
+                request,
+                f"Updated {product.name} quantity\
+                     to {basket[product_id]}",
             )
         else:
             messages.warning(
                 request,
-                f"You cannot add that amount to the basket - we have {product.stock} in stock and you already have {basket[product_id]} in your basket",
+                "You cannot add that amount to the basket" +
+                f"- we have {product.stock} in stock" +
+                f" and you already have {basket[product_id]} in your basket",
             )
     else:
         basket[product_id] = quantity
