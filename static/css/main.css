@@ -12492,10 +12492,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding-right: 1em;
 }
 
-.button.is-github {
-  background-color: #24292e;
-}
-
 .card {
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -12804,7 +12800,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 @media screen and (max-width: 1023px) {
   .js-search {
-    width: 90vw;
+    width: 100%;
   }
 }
 
@@ -12830,6 +12826,12 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 .navbar {
   max-width: 100vw;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar {
+    background: none;
+  }
 }
 
 .navbar-item .navbar-dropdown {
@@ -12863,6 +12865,15 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
           justify-content: space-between;
 }
 
+.nav-background {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: #ffffff;
+  min-height: 3.25rem;
+  z-index: 1;
+}
+
 @media screen and (max-width: 1023px) {
   .navbar-menu.is-active {
     display: block;
@@ -12870,6 +12881,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
             transform-origin: top;
     -webkit-animation: dropdown .2s ease-out;
             animation: dropdown .2s ease-out;
+    max-width: 25rem;
   }
 }
 
@@ -13142,6 +13154,12 @@ input[type=number] {
   }
 }
 
+@media screen and (min-width: 767px), print {
+  .w-100-tablet {
+    width: 100%;
+  }
+}
+
 .is-size-8 {
   font-size: 0.6rem;
 }
@@ -13149,4 +13167,3 @@ input[type=number] {
 .is-size-8-mobile {
   font-size: 0.6rem;
 }
-/*# sourceMappingURL=main.css.map */
