@@ -12582,7 +12582,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .delete-basket {
     position: relative;
     top: 1rem;
-    z-index: 99;
+    z-index: 1;
   }
 }
 
