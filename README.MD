@@ -18,7 +18,7 @@ A link to the project hosted on Heroku can be found [here](https://fpvision.hero
 
 ## DB Schema
 
-![DB Scehma](fpvision_dbschema.png "Database Scheme for FPVision)
+![DB Schema](https://github.com/wrengit/FPVision/blob/master/fpvision_dbschema.png "Database Scheme for FPVision)
 
 ## Features
 
