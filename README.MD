@@ -89,54 +89,39 @@ Screen sizes were testing using the browser devtools, and tested down to iPhone 
 ---
 >As a shopper I want to view a list of products so I can select some to purchase
 >
->>Image for each product
-<br>
->>Clicking image/product to show more details
-<br>
->>Easily add item to cart from main page and detail page
-<br>
->>Search for products
-<br>
+>>Image for each product  
+>>Clicking image/product to show more details  
+>>Easily add item to cart from main page and detail page  
+>>Search for products  
 >>View products by category
 ---
 >As a shopper I want to view my cart to see total and make adjustments
 >
->>View quantities and items in cart
-<br>
->>See total cost before and after shipping
-<br>
->>Remove items
-<br>
->>Adjust quantity of items
-<br>
+>>View quantities and items in cart  
+>>See total cost before and after shipping  
+>>Remove items  
+>>Adjust quantity of items  
 >>Click on item in cart to view details
 ---
 >As a shopper I want to easily checkout and pay for cart
 >
->>Checkout button easily accessible to complete purchase
-<br>
->>Enter a shipping address
-<br>
->>Enter credit card details
-<br>
->>Show total including all extra charges before confirmation
-<br>
+>>Checkout button easily accessible to complete purchase  
+>>Enter a shipping address  
+>>Enter credit card details  
+>>Show total including all extra charges before confirmation  
 >>Show confirmation message when completing transaction
 ---
 >As a shopper I want to view a list of past orders
 >
->>View a list of past orders
-<br>
+>>View a list of past orders  
 >>Include an order number to easily find order
 ---
 >As shop admin I want to easily add products to the site
 >
->>Add or remove products
-<br>
+>>Add or remove products  
 >>Delete products
 
 </details>
-
 
 ### Accessibility
 
