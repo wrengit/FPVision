@@ -12,7 +12,7 @@ class ProductForm(forms.ModelForm):
             "description",
             "stock",
             "price",
-            "available",
+            "featured",
             "image_url",
             "image",
             "sku"
