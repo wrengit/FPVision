@@ -12,6 +12,8 @@ A link to the project hosted on Heroku can be found [here](https://fpvision.hero
 
 The UX was designed to be clean and easy to navigate. The main landing page displays a tile arrangement which allows the store owner/admin to bring immediate attention to specific products, categories or articles. These are attention grabbing, displayed with full sized images or bold colours.
 
+The main/index page has external links to useful resources for drone pilots. The idea is that the site may be bookmarked by the user, knowing that they can access these links, and allowing for potential sales whilst the user is on the site.
+
 A prominent link on the hero image allows users to head straight to the main products view.
 
 The main product view is displayed in a card arrangement and the user has the ability to sort the product by price. There are two ways to navigate to the desired products, with a drop down product menu within the nav bar, and a breadcrumb style links menu at the top of the products page.
@@ -50,13 +52,24 @@ A link to the wireframes can be found [here](FPVision(wireframes).pdf).
 
 ## Code
 
-### Configuration file structure
+### File Structure
 
-#### Comments
+The project is broken down into 'apps', with each app performing a specific function. The app names are clear and self descriptive. Each app is self contained, with models, forms, tests, urls, static files, and views.
+
+Each app uses one of more templates which extend the base.html template found in the project root 'templates' folder.
+
+The site's CSS was written in Sass and compiled to the main 'static' folder.
+
+### Code Source
+
+All code was written by myself, except where comments state otherwise. The basket and checkout app code is predominantly the work of ckz8780, who wrote the Django E-commerce module for the Code Institute.
 
 ## DB Schema
 
 ![DB Schema](fpvision_dbschema.png)
+
+The site uses the Heroku Postgres addon to utilise a Postgres DB.
+The DB schema can be found in the image above, showing the relationships between the models.
 
 ## Features
 
@@ -64,17 +77,34 @@ A link to the wireframes can be found [here](FPVision(wireframes).pdf).
 
 There are two levels of admin accounts. The first is the global super user account which allows access to Django admin panel. This would be reserved for the IT admin and/or store owner. This allows significant changes to the site, including models and so is not suitable for non-tech staff.
 
-A group, 'admin' was created with permissions for CRUD operations on the 'Product' model. This allows non-tech staff to log on the  frontend of the site and easily add products, as well as edit exsisting product directly from the product page. The 'admin' has no way of making mistakes that may affect the stabilty of the site or its DB.
+A group, 'admin' was created with permissions for CRUD operations on the 'Product' model. This allows non-tech staff to log on the  frontend of the site and easily add products, as well as edit existing product directly from the product page. The 'admin' has no way of making mistakes that may affect the stability of the site or its DB.
 
 ### Wishlist
 
-The user has the option to add products to a wishlist if they are logged in. This is saved on the users profile, and can be viewed and ammended from their 'Dashboard'. The user may add all products from their wishlist to their basket. This will remove the items from the wishlist, and retian any items that were previously in the basket.
+The user has the option to add products to a wishlist if they are logged in. This is saved on the users profile, and can be viewed and amended from their 'Dashboard'. The user may add all products from their wishlist to their basket. This will remove the items from the wishlist, and retain any items that were previously in the basket.
 
 ### Search
 
 The user may use the search bar to find a specific product. This searches product names, as well as description and categories. The search is live, filtering results as the user types for instant feedback. The user may either select a product from the live search, or hit enter/return to bring up a search page. The number of results and the search query are presented on both the live search and the search page.
 
+### Checkout
+
+The site uses Stripe as a payment processor. The checkout app currently uses a 'test' key, and as such will not process real payments. To test the payment process, the following card details can be used: `4242 4242 4242 4242`. Any date in the future for the expiry date, and  cvc number can be used. Please note that as this is an American test card, a 5 digit zipcode will be required, this can be any 5 numbers, but is required for the card to authenticate.
+
+A webhook handler has been implemented to receive webhooks from the Stripe API should the user close their browser or lose connection after the payment has been submitted, but before the order has been created on the site DB. This allows creation of the order in the DB to ensure that customer orders are not missed in edge cases.
+
+### Contact and Subscription Lists
+
+The site has a 'contact us' button, allowing users, both guests and logged in users, to send a message to the site owners/admin. The subscription List is simply a list of emails of users that wish to subscribe. No further functionality has been coded.
+
 ### Features Left to Implement
+
+* Each product has a stock level, which currently is not tied in to a stock management system. When a user places an order, this order is not deducted from the stock levels on the product.
+* The ability for a store owner/admin to mark orders as dispatched, and a feed back email/status notification sent to the user.
+* Full unit tests for all apps
+* An option for a user to choose to be notified when an out of stock item is back in stock.
+* Ability for a user to fully checkout as a guest user (not logged in) and then save that information to register an account. Currently if the user wishes to save the shipping info, they must already be logged in a verified.
+* A blog section with useful articles and information
 
 ## Languages
 
@@ -88,14 +118,14 @@ The user may use the search bar to find a specific product. This searches produc
 - [Django](https://www.djangoproject.com/) - A high-level Python Web framework
 - [Sass](https://sass-lang.com/) - CSS extension language
 - [NodeJS](https://nodejs.org/en/) - JavaScript runtime
-- [NPM](https://www.npmjs.com/) - Node packagage manager
+- [NPM](https://www.npmjs.com/) - Node package manager
 - [Bulma](https://bulma.io/) - CSS framework based on Flexbox
-- [AlpineJs](https://github.com/alpinejs/alpine) - Minamalist JS framework
+- [AlpineJs](https://github.com/alpinejs/alpine) - Minimalist JS framework
 - [AWS](https://aws.amazon.com/) - Cloud infrastructure provider
 - [Poetry](https://github.com/python-poetry/poetry) - Package manager with virtual envs
 - [Gunicorn](https://gunicorn.org/) - WSGI HTTP server
 - [Coverage](https://coverage.readthedocs.io/en/coverage-5.2.1/) - A tool for measuring code coverage of Python programs
-- [Codecov](https://codecov.io/) - Tool for assesing code coverage
+- [Codecov](https://codecov.io/) - Tool for assessing code coverage
 - [Pillow](https://python-pillow.org/) - A fork of Python Imaging Library
 - [Django-aullauth](https://django-allauth.readthedocs.io/en/latest/index.html) - Django authentication toolset
 - [Stripe](https://stripe.com/gb) - Payment infrastructure
@@ -114,9 +144,39 @@ The user may use the search bar to find a specific product. This searches produc
 
 ## Testing
 
+### Unit Tests
+
+Unit tests were written for the following apps:
+
+- contact
+- index
+- products
+- profiles
+- search
+
+Coverage was used to determine code coverage and codecov for detailed reports on the coverage. Code coverage is displayed in a badge at the top of this README and currently stands at 61%.
+
+The following apps do not have unit tests written yet:
+
+- basket
+- checkout
+- wishlist
+
+This is purely due to time restraints, with the tests due to be written when time allows.
+
+### CI
+
+Travis was chosen as the CI provider. The `.travis.yaml` file is used to configure Travis, and requires Poetry to be installed and for Poetry to export the dependencies as `requirements.txt`.
+
+The deployment on Heroku is configured to automatically deploy from the master branch, but only if the CI build passes. This ensures that no bugs get deployed to the production server.
+
 ### Functionality
 
+The site was extensively manually tested by myself and a selection of other users to ensure that all functions performed as expected.
+
 ### Usability
+
+Feedback from the user test group was used to make improvements in usability, such as using icons to indicate where horizontal scrolling was used.
 
 #### Interface
 
@@ -127,6 +187,8 @@ The site was developed on a Dell XPS 13 13" 2-in-1 touch screen laptop. Initial 
 Screen sizes were testing using the browser devtools, and tested down to iPhone 6 size to ensure the site stayed responsive.
 
 #### Security
+
+The site has been designed defensively, redirecting users without the correct permissions who may attempt to access parts of the site by manually editing the url string.
 
 ### Issues
 
@@ -193,7 +255,7 @@ The site can be cloned to a local repository by the following steps (GitHub guid
 
 - Type `git clone`, and then paste the URL you previously copied.
 
-\$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+`$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 
 - Press Enter. Your local clone will be created.
 
@@ -207,10 +269,18 @@ The site can be cloned to a local repository by the following steps (GitHub guid
 
 ```
 
-## Node
+### Node
 
 The site has packages that depend on NodeJS. Download Node with `pip install node`.
 Using the terminal, navigate to `/sass/bulma/` (where you will find the package.json file) and run `npm install`. This will install the base Bulma files required.
+
+### Poetry
+
+This repo uses Poetry as the python package manager. Do not install Poetry using pip as this may cause conflicts. Poetry provides a custom installer that is isolated from the rest of your system by vendorizing its dependencies.
+
+Open a terminal and use `curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python` to install.
+
+Once poetry is installed, navigate to the project root in the terminal (same location as the pyproject.toml file) and run `poetry build`. This will install all the required dependencies.
 
 ### Deployment
 
@@ -224,12 +294,31 @@ Further information detailing alternative methods to deploy to Heroku can be fou
 
 ## Credits
 
-### Guides and resources
+This site is intended for education purposes only, and is not a commercial venture.
+
+### Inspiration
+
+The sites design is heavily inspired by [Unmannedtech](https://unmannedtech.co.uk), an online drone shop based in the UK. This was purely visual, and no code was copied from the site's source.
+
+### Media
+
+Product images and descriptions are not my own work. Product images and descriptions were sourced from the manufacturers site where possible, and from the following sites:
+
+* [Unmannedtech](https://unmannedtech.co.uk)
+* [Quadcopter](https://quadcopters.co.uk)
+* [Firstpersonview](http://firstpersonview.co.uk)
+
+The main page hero image was sourced from [Unsplash](https://unsplash.com) and the photo is credited to [asoggetti](https://unsplash.com/@asoggetti)
+
+### Guides and Resources
+
+I used the following resources to learn how to make this project:
+
+* ckz8780's Django module produced for the Code Institute
+* Youtube videos by Dennis Ivy
 
 Comments in the code detail where code snippets have been used, often from Stack Overflow. URL links have been provided to the original content to compare.
 
 ### Content
 
 All code is written by me (wrenna), unless otherwise stated in code comments or in this README.
-
-### Media
