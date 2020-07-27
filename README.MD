@@ -1,14 +1,52 @@
-# FPVision
+# README UNDERCONSTRUCTION - 27-07-20
 
 [![Build Status](https://travis-ci.org/wrengit/FPVision.svg?branch=master)](https://travis-ci.org/wrengit/FPVision)  [![codecov](https://codecov.io/gh/wrengit/FPVision/branch/master/graph/badge.svg)](https://codecov.io/gh/wrengit/FPVision)
 
+A fictional e-commerce store for drone and FPV products. Python/Django backend with a Bulma/Sass/AlpineJS frontend.
+
 ## Demo
 
-A link to the project hosted on Heroku can be found [here](https://fpvision.herokuapp.com)
+A link to the project hosted on Heroku can be found [here](https://fpvision.herokuapp.com).
 
 ## UX
 
+The UX was designed to be clean and easy to navigate. The main landing page displays a tile arrangement which allows the store owner/admin to bring immediate attention to specific products, categories or articles. These are attention grabbing, displayed with full sized images or bold colours.
+
+A prominent link on the hero image allows users to head straight to the main products view.
+
+The main product view is displayed in a card arrangement and the user has the ability to sort the product by price. There are two ways to navigate to the desired products, with a drop down product menu within the nav bar, and a breadcrumb style links menu at the top of the products page.
+
+The colour scheme was chosen to liven up and contrast to the predominantly white backgrounds without distracting or clashing. The primary colour(#8A4D76) and the link colour(#FA7C91) are complimentary.
+
+The entire colour scheme can be changed very easily simply by change a handful of variables in `_custom_bulma.sass`. This allows the store owner/admin to change the look of the site to match promotions or special events.
+
+A fixed navigation bar was chosen to ensure the user always has access to the main product dropdown and the search bar.
+
+A selection of featured products is also found on every page. These are displayed in a horizontally scrolling container, with a clearly indicated clickable arrow on either side on desktop, and swipable for touch devices. On mobile devices, it is becoming more common to find these horizontal scrolling containers, and allows for better user experience when viewing related items.
+
+Each product has its information clearly presented, including availability. 
+Two buttons are displayed allowing the user to add to their basket and add to a wishlist. The basket option is more prominent, with a bolder colour and showing first/left. This encourage the user to buy, rather than save the item for later.
+
+If a product is out of stock, the option to add to basket or wishlist is removed.
+
+Feedback is given to the user on every major action taken in the form of a message 'toast'.
+
+On desktop, the user can hover over the basket icon to quickview the products in contains, with a button link to checkout the order or view the basket.
+The basket icon changes colour when it contains items, and also displays the product count in the familiar red circle.
+
+### Dashboard
+
+In the user profile section, once a user in logged in, there is a dashboard for the user to set or change their personal information. The user may also view their wishlist in this location.
+
+### Pagination
+
+It was a conscious decision to omit pagination on the main product page. Mobile browser usage is increasing year on year, and having to click and load a new page every 'x' amount of displayed items is cumbersome. With lazy-loading on the images, the entire product catalog can be loaded in one view without a large delay in load times. This may increase as the product catalog grows and may need to be evaluated at a later date and based on user feedback.
+
+The live product filter also works better with all product displayed on a single view.
+
 ## Wireframes
+
+A link to the wireframes can be found [here](FPVision(wireframes).pdf).
 
 ## Code
 
@@ -22,7 +60,19 @@ A link to the project hosted on Heroku can be found [here](https://fpvision.hero
 
 ## Features
 
-### Existing Features
+### Admin
+
+There are two levels of admin accounts. The first is the global super user account which allows access to Django admin panel. This would be reserved for the IT admin and/or store owner. This allows significant changes to the site, including models and so is not suitable for non-tech staff.
+
+A group, 'admin' was created with permissions for CRUD operations on the 'Product' model. This allows non-tech staff to log on the  frontend of the site and easily add products, as well as edit exsisting product directly from the product page. The 'admin' has no way of making mistakes that may affect the stabilty of the site or its DB.
+
+### Wishlist
+
+The user has the option to add products to a wishlist if they are logged in. This is saved on the users profile, and can be viewed and ammended from their 'Dashboard'. The user may add all products from their wishlist to their basket. This will remove the items from the wishlist, and retian any items that were previously in the basket.
+
+### Search
+
+The user may use the search bar to find a specific product. This searches product names, as well as description and categories. The search is live, filtering results as the user types for instant feedback. The user may either select a product from the live search, or hit enter/return to bring up a search page. The number of results and the search query are presented on both the live search and the search page.
 
 ### Features Left to Implement
 
@@ -157,6 +207,11 @@ The site can be cloned to a local repository by the following steps (GitHub guid
 
 ```
 
+## Node
+
+The site has packages that depend on NodeJS. Download Node with `pip install node`.
+Using the terminal, navigate to `/sass/bulma/` (where you will find the package.json file) and run `npm install`. This will install the base Bulma files required.
+
 ### Deployment
 
 The site is deployed on Heroku, on the free tier. This has limited dynos and is intended to simply show the site functioning. This free tier is not for production ready use.
@@ -175,6 +230,6 @@ Comments in the code detail where code snippets have been used, often from Stack
 
 ### Content
 
-All code is written by me (wrenna), unless otherwise stated in code comments on in this README. 
+All code is written by me (wrenna), unless otherwise stated in code comments or in this README.
 
 ### Media
