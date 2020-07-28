@@ -4,6 +4,8 @@
 
 A fictional e-commerce store for drone and FPV products. Python/Django backend with a Bulma/Sass/AlpineJS frontend.
 
+![App on multiple screens](multiscreen.png)
+
 ## Demo
 
 A link to the project hosted on Heroku can be found [here](https://fpvision.herokuapp.com).
