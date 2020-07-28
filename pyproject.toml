@@ -2,7 +2,7 @@
 name = "FPVision"
 version = "0.1.0"
 description = ""
-authors = ["Lewis <ljleighfield@gmail.com>"]
+authors = ["Lewis <lewis.leighfield@tuta.io>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
