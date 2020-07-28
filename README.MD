@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/wrengit/FPVision.svg?branch=master)](https://travis-ci.org/wrengit/FPVision)  [![codecov](https://codecov.io/gh/wrengit/FPVision/branch/master/graph/badge.svg)](https://codecov.io/gh/wrengit/FPVision) [![Code style](https://img.shields.io/badge/code%20style-pep8-success)](https://www.python.org/dev/peps/pep-0008/) [![JavaScript](https://img.shields.io/badge/JavaScript-AlpineJS-9cf)](https://github.com/alpinejs/alpine/)
 
-A fictional e-commerce store for drone and FPV products. Python/Django backend with a Bulma/Sass/AlpineJS frontend.
+A fictional e-commerce store for drone and FPV products. Python|Django backend with a Bulma|Sass|AlpineJS frontend.
 
 ![App on multiple screens](multiscreen.png)
 
