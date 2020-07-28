@@ -116,7 +116,7 @@ The site has a 'contact us' button, allowing users, both guests and logged in us
 
 ## Languages
 
-- **Python**
+- **Python** :snake:
 - **JavaScript**
 - **HTML**
 - **CSS**
