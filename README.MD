@@ -1,6 +1,6 @@
-# README UNDERCONSTRUCTION - 27-07-20
+# FPVision
 
-[![Build Status](https://travis-ci.org/wrengit/FPVision.svg?branch=master)](https://travis-ci.org/wrengit/FPVision)  [![codecov](https://codecov.io/gh/wrengit/FPVision/branch/master/graph/badge.svg)](https://codecov.io/gh/wrengit/FPVision)
+[![Build Status](https://travis-ci.org/wrengit/FPVision.svg?branch=master)](https://travis-ci.org/wrengit/FPVision)  [![codecov](https://codecov.io/gh/wrengit/FPVision/branch/master/graph/badge.svg)](https://codecov.io/gh/wrengit/FPVision) [![Code style](https://img.shields.io/badge/code%20style-pep8-success)](https://www.python.org/dev/peps/pep-0008/)
 
 A fictional e-commerce store for drone and FPV products. Python/Django backend with a Bulma/Sass/AlpineJS frontend.
 
@@ -35,6 +35,8 @@ Feedback is given to the user on every major action taken in the form of a messa
 
 On desktop, the user can hover over the basket icon to quickview the products in contains, with a button link to checkout the order or view the basket.
 The basket icon changes colour when it contains items, and also displays the product count in the familiar red circle.
+
+The site uses humans readable urls, to aid in navigation and increase SEO rankings.
 
 ### Dashboard
 
@@ -178,21 +180,19 @@ The site was extensively manually tested by myself and a selection of other user
 
 Feedback from the user test group was used to make improvements in usability, such as using icons to indicate where horizontal scrolling was used.
 
-#### Interface
-
 ### Compatibility
 
 The site was developed on a Dell XPS 13 13" 2-in-1 touch screen laptop. Initial testing was conducted with Brave Browser, Microsoft Edge, and Chrome. Mobile testing used a Huawei P20 pro, using Brave, Chrome, and Firefox. There was no availability of Apple devices, either mobile or desktop to conduct testing.
 
 Screen sizes were testing using the browser devtools, and tested down to iPhone 6 size to ensure the site stayed responsive.
 
-#### Security
+### Security
 
-The site has been designed defensively, redirecting users without the correct permissions who may attempt to access parts of the site by manually editing the url string.
+The site has been designed defensively, redirecting users without the correct permissions who may attempt to access parts of the site by manually editing the url string. Admin functions are only displayed to users with the correct permissions.
 
-### Issues
+### Accessibility
 
-### User stories
+## User stories
 
 <details>
   <summary>Click to expand</summary>
@@ -237,7 +237,6 @@ The site has been designed defensively, redirecting users without the correct pe
 
 </details>
 
-### Accessibility
 
 ## Cloning & Deployment
 
@@ -314,8 +313,8 @@ The main page hero image was sourced from [Unsplash](https://unsplash.com) and t
 
 I used the following resources to learn how to make this project:
 
-* ckz8780's Django module produced for the Code Institute
-* Youtube videos by Dennis Ivy
+* ckz8780's excelent Django module produced for the Code Institute
+* Youtube videos by [Dennis Ivy](https://www.youtube.com/channel/UCTZRcDjjkVajGL6wd76UnGg)
 
 Comments in the code detail where code snippets have been used, often from Stack Overflow. URL links have been provided to the original content to compare.
 
