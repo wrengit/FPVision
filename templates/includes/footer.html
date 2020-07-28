@@ -33,11 +33,14 @@
           Enter your email address to subscribe to our monthly newsletter,
           bringing you all the latest in FPV news and gadgets
         </p>
-        <div class=" has-text-centered pt-5">
-          <form id="subscription_form" action="{% url 'subscribe' %}" method="POST">
-            {% csrf_token %}
-            {{sub_form}}
-            <input type="hidden" name="next" value="{{request.path}}">
+        <div class="has-text-centered pt-5">
+          <form
+            id="subscription_form"
+            action="{% url 'subscribe' %}"
+            method="POST"
+          >
+            {% csrf_token %} {{sub_form}}
+            <input type="hidden" name="next" value="{{request.path}}" />
             <button type="submit" class="button is-rounded is-success mt-3">
               <span class="icon"><i class="fa fa-rss"></i></span>
               <span><strong>Subscribe</strong></span>
@@ -92,8 +95,10 @@
     </div>
   </div>
   <div class="column is-12">
-    <div class="content has-text-centered">
-      Copyright 2020 © | Design by
+    <div class="content has-text-centered pt-6">
+      Copyright
+      <span x-data="{ year:(new Date()).getFullYear()}" x-text="year"></span
+      ><span class="icon"><i class="far fa-copyright"></i></span>| Design by
       <a target="_blank" rel="noopener" href="https://github.com/wrengit"
         >wrenna</a
       >
