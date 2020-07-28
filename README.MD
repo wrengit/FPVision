@@ -66,7 +66,11 @@ The site's CSS was written in Sass and compiled to the main 'static' folder.
 
 ### Code Source
 
-All code was written by myself, except where comments state otherwise. The basket and checkout app code is predominantly the work of ckz8780, who wrote the Django E-commerce module for the Code Institute.
+All code was written by myself, except where comments state otherwise. The basket and checkout app code is predominantly the work of [ckz8780](https://github.com/ckz8780),  who wrote the Django E-commerce module for the Code Institute.
+
+### Static Files
+
+The deployed site has static files hosted on AWS. These include all images, the CSS file, and JS files.
 
 ## DB Schema
 
@@ -136,7 +140,7 @@ The site has a 'contact us' button, allowing users, both guests and logged in us
 - [Django-countries](https://pypi.org/project/django-countries/) - Provide country choices for use in forms
 - [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) - AWS SDK for Python
 - [TravisCI](https://travis-ci.org/) - Continuous integration provider
-- [Heroku](https://heroku.com) - Hosting provider
+- [Heroku](https://heroku.com) - Cloud services provider
 
 ## Services Used
 
