@@ -43,6 +43,8 @@
             </label>
           </div>
         </div>
+
+        <p class="pb-3">Dont have an account? <a href="{% url 'account_signup' %}">Register</a> here</p>
         {% if form.errors %}
           {% for field in form %}
               {% for error in field.errors %}
