@@ -56,6 +56,36 @@ A link to the wireframes can be found [here](FPVision(wireframes).pdf).
 
 ## Code
 
+### Settings
+
+The main application settings are found in the 'FPVison' app as `settings.py`.
+All secret keys and API keys were stored locally in a .env file and as environment variables set in Heroku.
+The custom settings are commented in `settings.py` and are as follows:
+
+#### AllAuth
+
+The Django AllAuth settings specify authentication requirements for the application. These can be tailored to suits the needs of the store owner.
+
+#### AWS
+
+AWS settings look for a variable, `PRODUCTION` in os.environ. This variable is set in Heroku. This switches the app to look for static files on AWS servers.
+
+#### Delivery values
+
+These settings set the free delivery threshold and are used in the checkout app. These settings can be changed to the store owners choice.
+
+#### Stripe settings
+
+Stripe settings are simply the currency choice and secret keys used.
+
+#### Django-countries
+
+Changes how django-countries displays information in the country select box. Current settings show 'GB' at the top of the list for easier selection by the user.
+
+#### Email
+
+If `PRODUCTION` in os.environ, the application uses the smtp backend and Gmail to send live emails
+
 ### File Structure
 
 The project is broken down into 'apps', with each app performing a specific function. The app names are clear and self descriptive. Each app is self contained, with models, forms, tests, urls, static files, and views.
