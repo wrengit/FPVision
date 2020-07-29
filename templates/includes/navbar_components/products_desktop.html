@@ -51,7 +51,11 @@
             <div class="level-item">
               <form action="{% url 'subscribe' %}">
                 {% csrf_token %} {{sub_form.email|add_class:"is-small w-50"}}
-                <button type="submit" class="button is-rounded is-small is-success">
+                <button 
+                  type="submit" 
+                  class="button is-rounded is-small is-success"
+                  aria-label="Subscribe to mailing list button"
+                >
                   <span class="icon is-small">
                     <i class="fa fa-rss"></i>
                   </span>

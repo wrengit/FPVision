@@ -11,6 +11,7 @@
     <a
       href="{% url 'contact' %}"
       class="button is-rounded is-outlined is-info is-small mr-3"
+      aria-label="Contact us button"
       ><strong>CONTACT US</strong></a
     >
   {% endif %}
@@ -20,7 +21,10 @@
     <a href="{% url 'my_account' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button is-rounded has-text-primary is-white is-outlined is-icon">
+          <button 
+            class="button is-rounded has-text-primary is-white is-outlined is-icon"
+            aria-label="User account"
+          >
             <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
@@ -52,7 +56,10 @@
     <a href="{% url 'my_account' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button has-text-grey is-rounded is-white is-outlined is-icon">
+          <button 
+            class="button has-text-grey is-rounded is-white is-outlined is-icon"
+            aria-label="User account"
+          >
             <span class="icon">
               <i class="far fa-user-circle"></i>
             </span>
@@ -60,7 +67,8 @@
         </div>
         <div class="dropdown-menu">
           <div class="dropdown-content">
-            <a href="{% url 'account_login' %}" class="dropdown-item">Log In</a>
+            <a 
+              href="{% url 'account_login' %}" class="dropdown-item">Log In</a>
             <hr class="dropdown-divider" />
             <a href="{% url 'account_signup' %}" class="dropdown-item"
               >Sign Up</a
@@ -77,6 +85,7 @@
         <a href="{% url 'view_basket' %}">
           <button
             class="button is-rounded has-text-primary is-white is-outlined is-hidden-touch is-icon"
+            aria-label="Basket"
           >
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
@@ -150,7 +159,10 @@
     <a href="{% url 'view_basket' %}">
       <div class="dropdown is-hoverable is-right">
         <div class="dropdown-trigger">
-          <button class="button has-text-grey is-rounded is-white is-outlined is-hidden-touch is-icon">
+          <button 
+            class="button has-text-grey is-rounded is-white is-outlined is-hidden-touch is-icon"
+            aria-label="Basket"
+          >
             <span class="icon">
               <i class="fas fa-shopping-basket"></i>
             </span>

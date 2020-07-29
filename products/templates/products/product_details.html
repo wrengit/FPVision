@@ -51,6 +51,7 @@
                   class="button is-rounded is-icon is-primary is-size-7-mobile"
                   @click.prevent="decrementQty({{product.id}})"
                   id="decrement-{{product.id}}"
+                  aria-label="decrement quantity"
                 >
                   <span class="icon is-small">
                     <i class="fas fa-minus"></i>
@@ -75,6 +76,7 @@
                   @click.prevent="incrementQty({{product.id}})"
                   class="button is-rounded is-icon is-primary is-size-7-mobile"
                   id="increment-{{product.id}}"
+                  aria-label="Increment quantity"
                 >
                   <span class="icon is-small">
                     <i class="fas fa-plus"></i>

@@ -11,13 +11,22 @@
   <ul class="menu-list">
     <li>
       <label class="checkbox">
-        <input id="in-stock-check" type="checkbox" @click="stockPriceFilter">
+        <input 
+          id="in-stock-check" 
+          type="checkbox" 
+          @click="stockPriceFilter"
+          aria-label="in stock checkbox">
         In Stock
       </label>
     </li>
     <li>
       <label class="checkbox">
-        <input id="out-stock-check" type="checkbox" @click="stockPriceFilter">
+        <input 
+          id="out-stock-check" 
+          type="checkbox" 
+          @click="stockPriceFilter"
+          aria-label="out of stock checkbox"
+        >
         Out of Stock
       </label>
     </li>
@@ -117,6 +126,7 @@
   x-data="productFilter()" 
   @click="handleShowHideFilter" 
   class="button is-icon is-rounded is-info filter-button is-hidden-desktop"
+  aria-label="Product filter"
 >
   <span class="icon"><i class="fas fa-filter"></i></span>
 </button>

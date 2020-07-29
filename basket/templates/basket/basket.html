@@ -76,6 +76,7 @@
                         @click.prevent="decrementQty({{item.product.id}})"
                         class="button is-rounded is-icon is-primary is-size-7-mobile"
                         id="decrement-{{item.product.id}}"
+                        aria-label="decrement quantity"
                       >
                         <span class="icon is-small">
                           <i class="fas fa-minus"></i>
@@ -100,6 +101,7 @@
                         @click.prevent="incrementQty({{item.product.id}})"
                         class="button is-rounded is-icon is-primary is-size-7-mobile"
                         id="increment-{{item.product.id}}"
+                        aria-label="increment quantity"
                       >
                         <span class="icon is-small">
                           <i class="fas fa-plus"></i>
@@ -115,8 +117,11 @@
                 </p>
               </td>
               <td class="is-vcentered is-hidden-touch">
-                <a href="{% url 'remove_from_basket' item.product.id %}"
-                  ><span class="icon"><i class="fas fa-trash"></i></span
+                <a 
+                  href="{% url 'remove_from_basket' item.product.id %}"
+                  aria-label="remove from basket"
+                >
+                  <span class="icon"><i class="fas fa-trash"></i></span
                 ></a>
               </td>
             </tr>
