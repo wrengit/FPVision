@@ -118,7 +118,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 
-
+# Alluth custom settings
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_EMAIL_REQUIRED = False
@@ -186,6 +186,7 @@ STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, "staticfiles"))
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+#AWS configuration settings
 if "PRODUCTION" in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
@@ -210,19 +211,21 @@ if "PRODUCTION" in os.environ:
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/"
 
-
+# Delivery values
 FREE_DELIVERY_THRESHOLD = 50
 STANDARD_DELIVERY_PERCENTAGE = 10
 
+#Stripe settings
 STRIPE_CURRENCY = "gbp"
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_WH_SECRET = env("STRIPE_WH_SECRET")
 
+#Django-countries settings for forms
 COUNTRIES_FIRST = ["GB"]
-
 COUNTRIES_FIRST_REPEAT = True
 
+# Email settings
 if "PRODUCTION" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_USE_TLS = True
