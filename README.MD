@@ -28,7 +28,7 @@ A fixed navigation bar was chosen to ensure the user always has access to the ma
 
 A selection of featured products is also found on every page. These are displayed in a horizontally scrolling container, with a clearly indicated clickable arrow on either side on desktop, and swipable for touch devices. On mobile devices, it is becoming more common to find these horizontal scrolling containers, and allows for better user experience when viewing related items.
 
-Each product has its information clearly presented, including availability. 
+Each product has its information clearly presented, including availability.
 Two buttons are displayed allowing the user to add to their basket and add to a wishlist. The basket option is more prominent, with a bolder colour and showing first/left. This encourage the user to buy, rather than save the item for later.
 
 If a product is out of stock, the option to add to basket or wishlist is removed.
@@ -116,40 +116,40 @@ The site has a 'contact us' button, allowing users, both guests and logged in us
 
 ## Languages
 
-- **Python** :snake:
-- **JavaScript**
-- **HTML**
-- **CSS**
+* **Python** :snake:
+* **JavaScript**
+* **HTML**
+* **CSS**
 
 ## Technologies Used
 
-- [Django](https://www.djangoproject.com/) - A high-level Python Web framework
-- [Sass](https://sass-lang.com/) - CSS extension language
-- [NodeJS](https://nodejs.org/en/) - JavaScript runtime
-- [NPM](https://www.npmjs.com/) - Node package manager
-- [Bulma](https://bulma.io/) - CSS framework based on Flexbox
-- [AlpineJs](https://github.com/alpinejs/alpine) - Minimalist JS framework
-- [AWS](https://aws.amazon.com/) - Cloud infrastructure provider
-- [Poetry](https://github.com/python-poetry/poetry) - Package manager with virtual envs
-- [Gunicorn](https://gunicorn.org/) - WSGI HTTP server
-- [Coverage](https://coverage.readthedocs.io/en/coverage-5.2.1/) - A tool for measuring code coverage of Python programs
-- [Codecov](https://codecov.io/) - Tool for assessing code coverage
-- [Pillow](https://python-pillow.org/) - A fork of Python Imaging Library
-- [Django-aullauth](https://django-allauth.readthedocs.io/en/latest/index.html) - Django authentication toolset
-- [Stripe](https://stripe.com/gb) - Payment infrastructure
-- [Django-countries](https://pypi.org/project/django-countries/) - Provide country choices for use in forms
-- [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) - AWS SDK for Python
-- [TravisCI](https://travis-ci.org/) - Continuous integration provider
-- [Heroku](https://heroku.com) - Cloud services provider
+* [Django](https://www.djangoproject.com/) - A high-level Python Web framework
+* [Sass](https://sass-lang.com/) - CSS extension language
+* [NodeJS](https://nodejs.org/en/) - JavaScript runtime
+* [NPM](https://www.npmjs.com/) - Node package manager
+* [Bulma](https://bulma.io/) - CSS framework based on Flexbox
+* [AlpineJs](https://github.com/alpinejs/alpine) - Minimalist JS framework
+* [AWS](https://aws.amazon.com/) - Cloud infrastructure provider
+* [Poetry](https://github.com/python-poetry/poetry) - Package manager with virtual envs
+* [Gunicorn](https://gunicorn.org/) - WSGI HTTP server
+* [Coverage](https://coverage.readthedocs.io/en/coverage-5.2.1/) - A tool for measuring code coverage of Python programs
+* [Codecov](https://codecov.io/) - Tool for assessing code coverage
+* [Pillow](https://python-pillow.org/) - A fork of Python Imaging Library
+* [Django-aullauth](https://django-allauth.readthedocs.io/en/latest/index.html) - Django authentication toolset
+* [Stripe](https://stripe.com/gb) - Payment infrastructure
+* [Django-countries](https://pypi.org/project/django-countries/) - Provide country choices for use in forms
+* [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) - AWS SDK for Python
+* [TravisCI](https://travis-ci.org/) - Continuous integration provider
+* [Heroku](https://heroku.com) - Cloud services provider
 
 ## Services Used
 
-- [Compress or Die](https://compress-or-die.com/) - Amazing image compression tool
-- [Unsplash](https://unsplash.com/) - Image repository
-- [favicon.io](https://favicon.io/) - Favicon & logo generator
-- [Font Awesome](https://fontawesome.com/) - Huge selection of icons
-- [Google Fonts](https://fonts.google.com/) - Fonts by Google
-- [Shield.io](https://shields.io/) - Handy shield generator
+* [Compress or Die](https://compress-or-die.com/) - Amazing image compression tool
+* [Unsplash](https://unsplash.com/) - Image repository
+* [favicon.io](https://favicon.io/) - Favicon & logo generator
+* [Font Awesome](https://fontawesome.com/) - Huge selection of icons
+* [Google Fonts](https://fonts.google.com/) - Fonts by Google
+* [Shield.io](https://shields.io/) - Handy shield generator
 
 ## Testing
 
@@ -157,19 +157,19 @@ The site has a 'contact us' button, allowing users, both guests and logged in us
 
 Unit tests were written for the following apps:
 
-- contact
-- index
-- products
-- profiles
-- search
+* contact
+* index
+* products
+* profiles
+* search
 
 Coverage was used to determine code coverage and codecov for detailed reports on the coverage. Code coverage is displayed in a badge at the top of this README and currently stands at 61%.
 
 The following apps do not have unit tests written yet:
 
-- basket
-- checkout
-- wishlist
+* basket
+* checkout
+* wishlist
 
 This is purely due to time restraints, with the tests due to be written when time allows.
 
@@ -198,6 +198,8 @@ Screen sizes were testing using the browser devtools, and tested down to iPhone 
 The site has been designed defensively, redirecting users without the correct permissions who may attempt to access parts of the site by manually editing the url string. Admin functions are only displayed to users with the correct permissions.
 
 ### Accessibility
+
+The site uses suitable aria-labels and alt texts for all images. Site was checked against the WAVE accessabilty checked and recommendations applied where approriate.
 
 ## User stories
 
@@ -244,26 +246,25 @@ The site has been designed defensively, redirecting users without the correct pe
 
 </details>
 
-
 ## Cloning & Deployment
 
 ### Cloning
 
 The site can be cloned to a local repository by the following steps (GitHub guide link [here](https://help.github.com/en/articles/cloning-a-repository)):
 
-- Under the repository name, click Clone or download.
+* Under the repository name, click Clone or download.
 
-- In the Clone with HTTPs section, click the clipboard icon to copy the clone URL for the repository.
+* In the Clone with HTTPs section, click the clipboard icon to copy the clone URL for the repository.
 
-- Open the terminal on your local machine
+* Open the terminal on your local machine
 
-- Change the current working directory to the location where you want the cloned directory to be made.
+* Change the current working directory to the location where you want the cloned directory to be made.
 
-- Type `git clone`, and then paste the URL you previously copied.
+* Type `git clone`, and then paste the URL you previously copied.
 
 `$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 
-- Press Enter. Your local clone will be created.
+* Press Enter. Your local clone will be created.
 
 ```Bash
 
