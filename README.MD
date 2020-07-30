@@ -10,9 +10,56 @@ A fictional e-commerce store for drone and FPV products. Python|Django backend w
 
 A link to the project hosted on Heroku can be found [here](https://fpvision.herokuapp.com).
 
+## Contents
+
+1. [**UX**](#ux)
+    * [**Project Aim**](#project-aim)
+    * [**User Stories](#user-stories)
+    * [**Design Decisions**](#design-decision)
+    * [**Wireframes**](#wireframes)
+
+2. [**Code**](#code)
+    * [**Settings**](#settings)
+    * [**File Structure**](#file-structure)
+    * [**Static Files**](#static-files)
+    * [**DB Schema**](#db-schema)
+
+3. [**Features**](#features)
+    * [**Existing Features**](#existing-features)
+    * [**Features Left to Implement**](#features-left-to-implement)
+
+4. [**Languages**](#languages)
+
+5. [**Technologies Used**](#technologies-used)
+
+6. [**Services Used**](#services-used)
+
+7. [**Testing**](#testing)
+    * [**Unit Tests**](#unit-tests)
+    * [**CI**](#ci)
+    * [**Functionality**](#functionality)
+    * [**Usability**](#usability)
+    * [**Compatability**](#compatibility)
+    * [**Security**](#security)
+    * [**Accessability**](#accessibility)
+
+8. [**Cloning and Deployment**](#cloning-and-deployment)
+    * [**Cloning**](#cloning)
+    * [**NodeJS**](#nodejs)
+    * [**Poetry**](#poetry)
+    * [**Deployment**](#deployment)
+
+9. [**Credits**](#credits)
+    * [**Inspiration**](#inspiration)
+    * [**Media**](#media)
+    * [**Guides and Resources**](#guides-and-resources)
+    * [**Code**]
+
 ## UX
 
-The UX was designed to be clean and easy to navigate. The main landing page displays a tile arrangement which allows the store owner/admin to bring immediate attention to specific products, categories or articles. These are attention grabbing, displayed with full sized images or bold colours.
+### Project Aim
+
+The main focus of this project was do delivery a user friendly e-commerce store that was easy to navigate. The main landing page displays a tile arrangement which allows the store owner/admin to bring immediate attention to specific products, categories or articles. These are attention grabbing, displayed with full sized images or bold colours.
 
 The main/index page has external links to useful resources for drone pilots. The idea is that the site may be bookmarked by the user, knowing that they can access these links, and allowing for potential sales whilst the user is on the site.
 
@@ -40,21 +87,62 @@ The basket icon changes colour when it contains items, and also displays the pro
 
 The site uses humans readable urls, to aid in navigation and increase SEO rankings.
 
-### Dashboard
+### User stories
 
-In the user profile section, once a user in logged in, there is a dashboard for the user to set or change their personal information. The user may also view their wishlist in this location.
+<details>
+  <summary>Click to expand</summary>
+  
+>As a user browsing across the site, I want to immediately understand what the shop is selling
+>
+>>Large, image heavy front page to invite users and show some key products
+---
+>As a shopper I want to view a list of products so I can select some to purchase
+>
+>>Image for each product  
+>>Clicking image/product to show more details  
+>>Easily add item to cart from main page and detail page  
+>>Search for products  
+>>View products by category
+---
+>As a shopper I want to view my cart to see total and make adjustments
+>
+>>View quantities and items in cart  
+>>See total cost before and after shipping  
+>>Remove items  
+>>Adjust quantity of items  
+>>Click on item in cart to view details
+---
+>As a shopper I want to easily checkout and pay for cart
+>
+>>Checkout button easily accessible to complete purchase  
+>>Enter a shipping address  
+>>Enter credit card details  
+>>Show total including all extra charges before confirmation  
+>>Show confirmation message when completing transaction
+---
+>As a shopper I want to view a list of past orders
+>
+>>View a list of past orders  
+>>Include an order number to easily find order
+---
+>As shop admin I want to easily add products to the site
+>
+>>Add or remove products  
+>>Delete products
 
-### Pagination
+</details>
 
-It was a conscious decision to omit pagination on the main product page. Mobile browser usage is increasing year on year, and having to click and load a new page every 'x' amount of displayed items is cumbersome. With lazy-loading on the images, the entire product catalog can be loaded in one view without a large delay in load times. This may increase as the product catalog grows and may need to be evaluated at a later date and based on user feedback.
+### Design Decisions
+
+* In the user profile section, once a user in logged in, there is a dashboard for the user to set or change their personal information. The user may also view their wishlist in this location.
+
+* It was a conscious decision to omit pagination on the main product page. Mobile browser usage is increasing year on year, and having to click and load a new page every 'x' amount of displayed items is cumbersome. With lazy-loading on the images, the entire product catalog can be loaded in one view without a large delay in load times. This may increase as the product catalog grows and may need to be evaluated at a later date and based on user feedback.
 
 The live product filter also works better with all product displayed on a single view.
 
-## Wireframes
+### Wireframes
 
 A link to the wireframes can be found [here](FPVision(wireframes).pdf).
-
-## Code
 
 ### Settings
 
@@ -62,29 +150,17 @@ The main application settings are found in the 'FPVison' app as `settings.py`.
 All secret keys and API keys were stored locally in a .env file and as environment variables set in Heroku.
 The custom settings are commented in `settings.py` and are as follows:
 
-#### AllAuth
+* AllAuth - The Django AllAuth settings specify authentication requirements for the application. These can be tailored to suits the needs of the store owner.
 
-The Django AllAuth settings specify authentication requirements for the application. These can be tailored to suits the needs of the store owner.
+* AWS settings look for a variable, `PRODUCTION` in os.environ. This variable is set in Heroku. This switches the app to look for static files on AWS servers.
 
-#### AWS
+* Delivery Values - These settings set the free delivery threshold and are used in the checkout app. These settings can be changed to the store owners choice.
 
-AWS settings look for a variable, `PRODUCTION` in os.environ. This variable is set in Heroku. This switches the app to look for static files on AWS servers.
+* Stripe settings are simply the currency choice and secret keys used.
 
-#### Delivery values
+* Django-countries - Changes how django-countries displays information in the country select box. Current settings show 'GB' at the top of the list for easier selection by the user.
 
-These settings set the free delivery threshold and are used in the checkout app. These settings can be changed to the store owners choice.
-
-#### Stripe settings
-
-Stripe settings are simply the currency choice and secret keys used.
-
-#### Django-countries
-
-Changes how django-countries displays information in the country select box. Current settings show 'GB' at the top of the list for easier selection by the user.
-
-#### Email
-
-If `PRODUCTION` in os.environ, the application uses the smtp backend and Gmail to send live emails
+* Email settings - If `PRODUCTION` in os.environ, the application uses the smtp backend and Gmail to send live emails
 
 ### File Structure
 
@@ -94,15 +170,11 @@ Each app uses one of more templates which extend the base.html template found in
 
 The site's CSS was written in Sass and compiled to the main 'static' folder.
 
-### Code Source
-
-All code was written by myself, except where comments state otherwise. The basket and checkout app code is predominantly the work of [ckz8780](https://github.com/ckz8780),  who wrote the Django E-commerce module for the Code Institute.
-
 ### Static Files
 
 The deployed site has static files hosted on AWS. These include all images, the CSS file, and JS files.
 
-## DB Schema
+### DB Schema
 
 ![DB Schema](fpvision_dbschema.png)
 
@@ -111,29 +183,19 @@ The DB schema can be found in the image above, showing the relationships between
 
 ## Features
 
-### Admin
+### Exisiting Features
 
-There are two levels of admin accounts. The first is the global super user account which allows access to Django admin panel. This would be reserved for the IT admin and/or store owner. This allows significant changes to the site, including models and so is not suitable for non-tech staff.
+* Admin - There are two levels of admin accounts. The first is the global super user account which allows access to Django admin panel. This would be reserved for the IT admin and/or store owner. This allows significant changes to the site, including models and so is not suitable for non-tech staff. A group, 'admin' was created with permissions for CRUD operations on the 'Product' model. This allows non-tech staff to log on the  frontend of the site and easily add products, as well as edit existing product directly from the product page. The 'admin' has no way of making mistakes that may affect the stability of the site or its DB.
 
-A group, 'admin' was created with permissions for CRUD operations on the 'Product' model. This allows non-tech staff to log on the  frontend of the site and easily add products, as well as edit existing product directly from the product page. The 'admin' has no way of making mistakes that may affect the stability of the site or its DB.
+* Wishlist - The user has the option to add products to a wishlist if they are logged in. This is saved on the users profile, and can be viewed and amended from their 'Dashboard'. The user may add all products from their wishlist to their basket. This will remove the items from the wishlist, and retain any items that were previously in the basket.
 
-### Wishlist
+* Search - The user may use the search bar to find a specific product. This searches product names, as well as description and categories. The search is live, filtering results as the user types for instant feedback. The user may either select a product from the live search, or hit enter/return to bring up a search page. The number of results and the search query are presented on both the live search and the search page.
 
-The user has the option to add products to a wishlist if they are logged in. This is saved on the users profile, and can be viewed and amended from their 'Dashboard'. The user may add all products from their wishlist to their basket. This will remove the items from the wishlist, and retain any items that were previously in the basket.
-
-### Search
-
-The user may use the search bar to find a specific product. This searches product names, as well as description and categories. The search is live, filtering results as the user types for instant feedback. The user may either select a product from the live search, or hit enter/return to bring up a search page. The number of results and the search query are presented on both the live search and the search page.
-
-### Checkout
-
-The site uses Stripe as a payment processor. The checkout app currently uses a 'test' key, and as such will not process real payments. To test the payment process, the following card details can be used: `4242 4242 4242 4242`. Any date in the future for the expiry date, and  cvc number can be used. Please note that as this is an American test card, a 5 digit zipcode will be required, this can be any 5 numbers, but is required for the card to authenticate.
+* Checkout - The site uses Stripe as a payment processor. The checkout app currently uses a 'test' key, and as such will not process real payments. To test the payment process, the following card details can be used: `4242 4242 4242 4242`. Any date in the future for the expiry date, and  cvc number can be used. Please note that as this is an American test card, a 5 digit zipcode will be required, this can be any 5 numbers, but is required for the card to authenticate.
 
 A webhook handler has been implemented to receive webhooks from the Stripe API should the user close their browser or lose connection after the payment has been submitted, but before the order has been created on the site DB. This allows creation of the order in the DB to ensure that customer orders are not missed in edge cases.
 
-### Contact and Subscription Lists
-
-The site has a 'contact us' button, allowing users, both guests and logged in users, to send a message to the site owners/admin. The subscription List is simply a list of emails of users that wish to subscribe. No further functionality has been coded.
+* Contact and Subscription Lists - The site has a 'contact us' button, allowing users, both guests and logged in users, to send a message to the site owners/admin. The subscription List is simply a list of emails of users that wish to subscribe. No further functionality has been coded.
 
 ### Features Left to Implement
 
@@ -183,6 +245,8 @@ The site has a 'contact us' button, allowing users, both guests and logged in us
 
 ## Testing
 
+Code was put through flake8 python linter to conform to pep8 styling.
+
 ### Unit Tests
 
 Unit tests were written for the following apps:
@@ -205,7 +269,7 @@ This is purely due to time restraints, with the tests due to be written when tim
 
 ### CI
 
-Travis was chosen as the CI provider. The `.travis.yaml` file is used to configure Travis, and requires Poetry to be installed and for Poetry to export the dependencies as `requirements.txt`.
+Travis was chosen as the CI provider. Results for the units testing can be found [here](https://travis-ci.org/wrengit/FPVision). The `.travis.yaml` file is used to configure Travis, and requires Poetry to be installed and for Poetry to export the dependencies as `requirements.txt`.
 
 The deployment on Heroku is configured to automatically deploy from the master branch, but only if the CI build passes. This ensures that no bugs get deployed to the production server.
 
@@ -231,54 +295,11 @@ The site has been designed defensively, redirecting users without the correct pe
 
 The site uses suitable aria-labels and alt texts for all images. Site was checked against the WAVE accessabilty checked and recommendations applied where approriate.
 
-## User stories
-
-<details>
-  <summary>Click to expand</summary>
-  
->As a user browsing across the site, I want to immediately understand what the shop is selling
->
->>Large, image heavy front page to invite users and show some key products
----
->As a shopper I want to view a list of products so I can select some to purchase
->
->>Image for each product  
->>Clicking image/product to show more details  
->>Easily add item to cart from main page and detail page  
->>Search for products  
->>View products by category
----
->As a shopper I want to view my cart to see total and make adjustments
->
->>View quantities and items in cart  
->>See total cost before and after shipping  
->>Remove items  
->>Adjust quantity of items  
->>Click on item in cart to view details
----
->As a shopper I want to easily checkout and pay for cart
->
->>Checkout button easily accessible to complete purchase  
->>Enter a shipping address  
->>Enter credit card details  
->>Show total including all extra charges before confirmation  
->>Show confirmation message when completing transaction
----
->As a shopper I want to view a list of past orders
->
->>View a list of past orders  
->>Include an order number to easily find order
----
->As shop admin I want to easily add products to the site
->
->>Add or remove products  
->>Delete products
-
-</details>
-
 ## Cloning & Deployment
 
 ### Cloning
+
+The site was developed using VSCode.
 
 The site can be cloned to a local repository by the following steps (GitHub guide link [here](https://help.github.com/en/articles/cloning-a-repository)):
 
@@ -292,7 +313,7 @@ The site can be cloned to a local repository by the following steps (GitHub guid
 
 * Type `git clone`, and then paste the URL you previously copied.
 
-`$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+`$ git clone https://github.com/wregit/FPVision`
 
 * Press Enter. Your local clone will be created.
 
@@ -306,7 +327,7 @@ The site can be cloned to a local repository by the following steps (GitHub guid
 
 ```
 
-### Node
+### NodeJS
 
 The site has packages that depend on NodeJS. Download Node with `pip install node`.
 Using the terminal, navigate to `/sass/bulma/` (where you will find the package.json file) and run `npm install`. This will install the base Bulma files required.
@@ -321,13 +342,26 @@ Once poetry is installed, navigate to the project root in the terminal (same loc
 
 ### Deployment
 
-The site is deployed on Heroku, on the free tier. This has limited dynos and is intended to simply show the site functioning. This free tier is not for production ready use.
+To deploy this site to Heroku, follow these steps:
 
-Log into Heroku navigate to the dashboard. Here in the top right, select the 'New' button, and navigate to 'Create new app'. Name the app and select a server. Select the app on the dashboard and find the 'deploy' button on the top navigating bar. At the bottom of the deploy section there is the option to link your app to a GitHub repository.
-
-The site is deployed by linking the main GitHub repository master branch to Heroku. The environment variables are entered on the app settings.
-
-Further information detailing alternative methods to deploy to Heroku can be found on the official Heroku documentation [here](https://devcenter.heroku.com/categories/deployment)
+1. Ensure you have signed up to Heroku, and log in
+2. From the Heroku dashboard, find the 'New' button in the top right and give your app a name and select a regional server.
+3. In the 'settings' tab, ensure any environment variables have been set. These can be found in the 'Reveal Config Vars' section. For this application these include:  
+    * `AWS_ACCESS_KEY_ID` - AWS keys generated on the AWS platform
+    * `AWS_SECRET_ACCESS_KEY`
+    * `DATABASE_URL` - Postgres db URL used for the Heroku DB addon
+    * `EMAIL_HOST_PASS` - Gmail keys generated in Gmail
+    * `EMAIL_HOST_USER`
+    * `SECRET_KEY` - The Django Secret Key, found in FPVision/settings.py
+    * `STRIPE_PUBLIC_KEY` - Stripe keys generated in Stripe
+    * `STRIPE_SECRET_KEY`
+    * `STRIPE_WH_SECRET`
+    * `PRODUCTION` - A special variable to tell the server to run in production mode
+  
+4. The site can either be deployed directly from Heroku, if linked with a GitHub repo, or pushed to Heroku from the terminal.
+    * To push from terminal, install the Heroku [CLI](https://devcenter.heroku.com/articles/heroku-command-line)
+    * Login to Heroku `$ heroku login` and enter your Heroku details
+    * `$ git push heroku master`
 
 ## Credits
 
@@ -336,6 +370,10 @@ This site is intended for education purposes only, and is not a commercial ventu
 ### Inspiration
 
 The sites design is heavily inspired by [Unmannedtech](https://unmannedtech.co.uk), an online drone shop based in the UK. This was purely visual, and no code was copied from the site's source.
+
+### Code
+
+The basket and checkout app code is predominantly the work of [ckz8780](https://github.com/ckz8780),  who wrote the Django E-commerce module for the Code Institute. All other work was by me, except where detailed; Comments in the code detail where code snippets have been used, often from Stack Overflow. URL links have been provided to the original content to compare.
 
 ### Media
 
@@ -353,9 +391,3 @@ I used the following resources to learn how to make this project:
 
 * ckz8780's excelent Django module produced for the Code Institute
 * Youtube videos by [Dennis Ivy](https://www.youtube.com/channel/UCTZRcDjjkVajGL6wd76UnGg)
-
-Comments in the code detail where code snippets have been used, often from Stack Overflow. URL links have been provided to the original content to compare.
-
-### Content
-
-All code is written by me (wrenna), unless otherwise stated in code comments or in this README.
