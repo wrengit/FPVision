@@ -14,7 +14,7 @@ A link to the project hosted on Heroku can be found [here](https://fpvision.hero
 
 1. [**UX**](#ux)
     * [**Project Aim**](#project-aim)
-    * [**User Stories](#user-stories)
+    * [**User Stories**](#user-stories)
     * [**Design Decisions**](#design-decision)
     * [**Wireframes**](#wireframes)
 
@@ -51,9 +51,9 @@ A link to the project hosted on Heroku can be found [here](https://fpvision.hero
 
 9. [**Credits**](#credits)
     * [**Inspiration**](#inspiration)
+    * [**Code**](#code)
     * [**Media**](#media)
     * [**Guides and Resources**](#guides-and-resources)
-    * [**Code**]
 
 ## UX
 
