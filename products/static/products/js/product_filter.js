@@ -11,6 +11,8 @@ function productFilter() {
   let catCheckList = document.querySelectorAll("input.catcheck");
   let filterNav = document.querySelector("aside.sticky-filter");
   let overlay = document.querySelector("div.overlay");
+  let stockLevel;
+  let allTrue;
   let i;
 
   return {
