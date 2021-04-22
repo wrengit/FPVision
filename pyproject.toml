@@ -6,7 +6,7 @@ authors = ["Lewis <lewis.leighfield@tuta.io>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-django = "^3.0.12"
+django = "^3.0.14"
 coverage = "^5.1"
 codecov = "^2.1.4"
 pillow = "^8.1.1"
