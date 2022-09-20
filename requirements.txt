@@ -28,4 +28,4 @@ s3transfer==0.3.3
 six==1.15.0
 sqlparse==0.3.1
 stripe==2.49.0
-urllib3==1.25.10; python_version >= "3.0" or python_version != "3.4"
+urllib3==1.26.5; python_version >= "3.0" or python_version != "3.4"
